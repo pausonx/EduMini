@@ -8,19 +8,29 @@
 import SwiftUI
 
 struct ContentView: View {
+    @EnvironmentObject var viewModel: AppViewModel
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        NavigationView {
+            if viewModel.isSignedIn {
+                MainView()
+                    .navigationBarHidden(true)
+            } else {
+                HelloPage()
+            }
         }
-        .padding()
+        .onAppear {
+            viewModel.signedIn = viewModel.isSignedIn
+        }
+        
     }
 }
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+            .environmentObject(AppViewModel())
+
     }
 }
