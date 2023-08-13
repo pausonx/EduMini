@@ -19,7 +19,6 @@ struct RegisterView: View {
     @State private var passwordHint: String = ""
     @State private var ageHint: String = ""
     @State private var pinHint: String = ""
-    
 
     @State private var login: String = "" {
         didSet {
@@ -52,10 +51,12 @@ struct RegisterView: View {
     
     @State private var name: String = ""
     
+    @State var isOn: Bool = false
     
     @State private var showHelpAge = false
     @State private var showHelpPIN = false
     @State private var showHelpEmail = false
+    @State private var showRules = false
 
     @EnvironmentObject var viewModel: AppViewModel
 
@@ -275,6 +276,36 @@ struct RegisterView: View {
                     TextFieldHint(hint: passwordHint)
                 }
                 
+                HStack {
+                    Button(action: {
+                        showRules = true // Pokaż instrukcję
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                            showRules = false // Ukryj regulamin po 5 sekundach
+                        }
+                    }) {
+                        Image(systemName: "exclamationmark.shield.fill")
+                            .font(.system(size: 20, weight: .medium))
+                            .foregroundColor(Color.white.opacity(0.7))
+                    }
+                    Toggle("Zapoznałem/am się z regulaminem i akceptuję jego treść", isOn: $isOn)
+                       .foregroundColor(Color.black.opacity(0.8))
+                }
+                .overlay(
+                        Group {
+                            if showRules {
+                                Text("Wyrażam zgodę na przetwarzanie danych osobowych moich i mojego dziecka na potrzeby korzystania z aplikacji EduMini.")
+                                    .font(.footnote)
+                                    .foregroundColor(.white)
+                                    .padding()
+                                    .background(Color.secondary)
+                                    .cornerRadius(10)
+                                    .transition(.opacity)
+                                    .lineLimit(nil)
+//                                    .multilineTextAlignment(.leading)
+                            }
+                        }
+                    )
+                
                 //MARK: - RegisterButton
                 Button {
                     viewModel.signUp(email: login, password: password, name: name, age: age, pin: pin)
@@ -284,11 +315,11 @@ struct RegisterView: View {
                         .foregroundColor(.white)
                         .frame(width: 200, height: 40, alignment: .center)
                 }
-                .disabled((isValidLogin && isValidPassword && (name != "") && isValidAge && isValidPIN) == false)
-                .background(isValidLogin && isValidPassword && isValidAge && isValidPIN ? Color("BabyBlueColor") : .secondary)
+                .disabled((isValidLogin && isValidPassword && (name != "") && isValidAge && isValidPIN && isOn) == false)
+                .background(isValidLogin && isValidPassword && isValidAge && isValidPIN && isOn ? Color("BabyBlueColor") : .secondary)
                 .cornerRadius(5)
 
-                Spacer()
+//                Spacer()
 
                 HStack{
                     Text("Masz już konto?")
