@@ -21,11 +21,17 @@ struct EduMiniApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
 
     @StateObject private var viewModel = AppViewModel()
-
+    @StateObject private var settings = ParentalControlSettings(
+         isActiveChat: false,
+         isActiveEmail: false,
+         isActiveAge: false
+     )
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .environmentObject(AppViewModel())
+                .environmentObject(settings)
         }
     }
 }

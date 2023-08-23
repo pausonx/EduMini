@@ -11,10 +11,21 @@ struct PINCheck: View {
     @State private var isPinCorrect = false
     @State private var showErrorMessage = false
 
+    @EnvironmentObject var viewModel: AppViewModel
+    @ObservedObject private var NUViewModel = NewAppUsersModel()
+    @EnvironmentObject var settings: ParentalControlSettings
+    
     var body: some View {
         VStack {
             if isPinCorrect {
                 ParentalControl()
+                    .onAppear {
+                        if let appUser = NUViewModel.appUser {
+                            settings.isActiveChat = appUser.chat == "yes"
+                            settings.isActiveEmail = appUser.emailVisible == "yes"
+                            settings.isActiveAge = appUser.ageVisible == "yes"
+                        }
+                    }
             } else {
                 Text("Podaj PIN")
                     .font(.system(size: 25, weight: .light))

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Firebase
 
 class NewAppUsersModel: ObservableObject {
     
@@ -14,17 +15,15 @@ class NewAppUsersModel: ObservableObject {
     @Published var errorMessage = ""
     
     init() {
-        fetchCurrentUser()
+        fetchCurrentUser(settings: nil) 
         fetchAllUsers()
     }
     
-    private func fetchCurrentUser() {
-        
+    internal func fetchCurrentUser(settings: ParentalControlSettings?) {
         guard let uid = FirebaseManager.shared.auth.currentUser?.uid else {
             self.errorMessage = "Could not find firebase uid"
             return
         }
-        
         
         FirebaseManager.shared.firestore.collection("users").document(uid).getDocument { snapshot, error in
             if let error = error {
@@ -40,12 +39,24 @@ class NewAppUsersModel: ObservableObject {
             }
             
             self.appUser = AppUser(data: data)
-            FirebaseManager.shared.currentUser = self.appUser
             
+            if let chatValue = data["chat"] as? String, let settings = settings {
+                settings.isActiveChat = chatValue == "yes"
+            }
+
+            if let emailVisibleValue = data["emailVisible"] as? String, let settings = settings {
+                settings.isActiveEmail = emailVisibleValue == "yes"
+            }
+
+            if let ageVisibleValue = data["ageVisible"] as? String, let settings = settings {
+                settings.isActiveAge = ageVisibleValue == "yes"
+            }
+            
+            FirebaseManager.shared.currentUser = self.appUser
         }
     }
     
-    private func fetchAllUsers() {
+    internal func fetchAllUsers() {
         FirebaseManager.shared.firestore.collection("users")
             .getDocuments { documentsSnapshot, error in
                 if let error = error {
@@ -63,5 +74,25 @@ class NewAppUsersModel: ObservableObject {
                     
                 })
             }
+    }
+    
+    func saveParentalControlSettings(_ settings: ParentalControlSettings) {
+        let db = Firestore.firestore()
+
+        guard let userID = Auth.auth().currentUser?.uid else {
+            return
+        }
+        
+        db.collection("users").document(userID).setData([
+            "chat": settings.isActiveChat ? "yes" : "no",
+            "emailVisible": settings.isActiveEmail ? "yes" : "no",
+            "ageVisible": settings.isActiveAge ? "yes" : "no"
+        ], merge: true) { error in
+            if let error = error {
+                print("Error updating parental control settings: \(error)")
+            } else {
+                print("Parental control settings updated successfully!")
+            }
+        }
     }
 }

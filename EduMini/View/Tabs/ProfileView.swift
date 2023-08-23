@@ -11,47 +11,50 @@ struct ProfileView: View {
     @State var shouldShowLogOutOptions = false
     
     @EnvironmentObject var viewModel: AppViewModel
+    @EnvironmentObject var settings: ParentalControlSettings
+    @ObservedObject private var NUViewModel = NewAppUsersModel()
     
+
     var body: some View {
         NavigationView {
             GeometryReader { geometry in
                 ZStack {
-                    Color.accentColor
-                    
-                    Image("bg") // Ustawienie obrazu jako tło
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: geometry.size.width, height: geometry.size.height)
-                        .ignoresSafeArea()
-                    
+                    Color("LightGrayColor")
+
                     ZStack {
-                        Color.white.opacity(0.7)
+                        Color.white
                             .cornerRadius(15)
-                        
-                        
+
                         VStack(spacing: 12) {
                             ProfileTitle()
-                            
+
                             ProfileInfo()
-                            
+                                .onAppear {
+                                    // Rozpocznij timer przy pojawieniu się widoku
+                                    startRefreshTimer()
+                                }
+                                .onDisappear {
+                                    // Zatrzymaj timer przy zniknięciu widoku
+                                    stopRefreshTimer()
+                                }
+
                             Divider()
-                            
-                            
+
                             NavigationLink(destination: PINCheck()) {
                                 Text("Kontrola rodzicielska")
                                     .font(.system(size: 25, weight: .light))
                                 Image(systemName: "shield.fill")
                                     .font(.system(size: 25, weight: .bold))
                                     .foregroundColor(Color.accentColor)
-                                //Po kliknięciu trzeba sprawdzić PIN poprzez jakiś input i wtedy przejdzie do widoku gdzie te suwaki pokazać z możliwością wprowadzenia zmian
                             }
-                            
+                            .navigationBarBackButtonHidden()
+
                             Divider()
-                            
+
                             HStack {
                                 Text("Wyloguj się")
                                     .font(.system(size: 20, weight: .light))
-                                
+
                                 Button {
                                     shouldShowLogOutOptions.toggle()
                                 } label: {
@@ -59,10 +62,10 @@ struct ProfileView: View {
                                         .font(.system(size: 25, weight: .bold))
                                         .foregroundColor(Color.accentColor)
                                 }
-                                
+
                                 Spacer()
                             }
-                            
+
                             Spacer()
                         }
                         .padding()
@@ -78,23 +81,33 @@ struct ProfileView: View {
                     .padding()
                 }
             }
-            .navigationBarTitle("")
+            .navigationBarTitle("Twój profil")
             .navigationBarTitleDisplayMode(.inline)
+            .modifier(NavigationBarColorModifier(backgroundColor: UIColor(Color.accentColor), tintColor: UIColor.white))
         }
         .tabItem {
             Label("Profil", systemImage: "person.fill")
         }
     }
+
+    // Metoda rozpoczynająca timer odświeżania
+    private func startRefreshTimer() {
+        NUViewModel.fetchCurrentUser(settings: settings)
+        NUViewModel.fetchAllUsers()
+        Timer.scheduledTimer(withTimeInterval: 60.0, repeats: true) { _ in
+            NUViewModel.fetchCurrentUser(settings: settings)
+            NUViewModel.fetchAllUsers()
+        }
+    }
+
+    // Metoda zatrzymująca timer odświeżania
+    private func stopRefreshTimer() {
+        NUViewModel.errorMessage = "" // Wyczyść ewentualne błędy
+    }
 }
 
 struct ProfileTitle: View {
     var body: some View {
-        Text("Twój profil")
-            .font(.system(size: 40, weight: .light))
-            .multilineTextAlignment(.leading)
-            
-        Divider()
-            
         Image(systemName: "person.crop.circle.fill")
             .font(.system(size: 150, weight: .light))
             .foregroundColor(Color.accentColor)
@@ -103,6 +116,7 @@ struct ProfileTitle: View {
 
 struct ProfileInfo: View {
     @ObservedObject private var NUViewModel = NewAppUsersModel()
+    @EnvironmentObject var settings: ParentalControlSettings
 
     var body: some View {
         HStack {
@@ -198,8 +212,9 @@ struct ProfileInfo: View {
     }
 }
 
-struct ProfileView_Previews: PreviewProvider {
-    static var previews: some View {
-        ProfileView()
-    }
-}
+
+//struct ProfileView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ProfileView()
+//    }
+//}
