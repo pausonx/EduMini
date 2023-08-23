@@ -1,20 +1,20 @@
 //
-//  PINCheck.swift
+//  ParentalControl.swift
 //  EduMini
 //
-//  Created by Paulina Wyskiel on 13/08/2023.
+//  Created by Paulina Wyskiel on 23/08/2023.
 //
 
 import SwiftUI
 
-struct PINCheck: View {
+struct ParentalControl: View {
     var body: some View {
         Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
     }
 }
 
-struct PINCheck_Previews: PreviewProvider {
+struct ParentalControl_Previews: PreviewProvider {
     static var previews: some View {
-        PINCheck()
+        ParentalControl()
     }
 }

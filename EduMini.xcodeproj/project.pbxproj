@@ -32,6 +32,7 @@
 		D04CD3AC2A80F3250051296E /* LoginClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04CD3AB2A80F3250051296E /* LoginClass.swift */; };
 		D04CD3AE2A8107460051296E /* NewAppUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04CD3AD2A8107460051296E /* NewAppUserModel.swift */; };
 		D04CD3B02A8109880051296E /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04CD3AF2A8109880051296E /* MainView.swift */; };
+		D0C0676F2A9607930023E127 /* ParentalControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C0676E2A9607930023E127 /* ParentalControl.swift */; };
 		D0E4DD972A82866B0039BAE9 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E4DD962A82866B0039BAE9 /* ProfileView.swift */; };
 		D0E4DD9B2A88C0BC0039BAE9 /* ToDoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E4DD9A2A88C0BC0039BAE9 /* ToDoView.swift */; };
 		D0E4DD9D2A88C1C80039BAE9 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E4DD9C2A88C1C80039BAE9 /* ChatView.swift */; };
@@ -82,6 +83,7 @@
 		D04CD3AB2A80F3250051296E /* LoginClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginClass.swift; sourceTree = "<group>"; };
 		D04CD3AD2A8107460051296E /* NewAppUserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAppUserModel.swift; sourceTree = "<group>"; };
 		D04CD3AF2A8109880051296E /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		D0C0676E2A9607930023E127 /* ParentalControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentalControl.swift; sourceTree = "<group>"; };
 		D0E4DD962A82866B0039BAE9 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		D0E4DD9A2A88C0BC0039BAE9 /* ToDoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoView.swift; sourceTree = "<group>"; };
 		D0E4DD9C2A88C1C80039BAE9 /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
@@ -154,9 +156,6 @@
 				D04CD3592A80D33D0051296E /* ContentView.swift */,
 				D04CD35B2A80D33E0051296E /* Assets.xcassets */,
 				D04CD35D2A80D33E0051296E /* Preview Content */,
-				D04CD38F2A80E2810051296E /* HelloPage.swift */,
-				D04CD3AF2A8109880051296E /* MainView.swift */,
-				D0E4DDA82A88E3B60039BAE9 /* PINCheck.swift */,
 			);
 			path = EduMini;
 			sourceTree = "<group>";
@@ -214,6 +213,9 @@
 		D04CD39D2A80E6D10051296E /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D04CD38F2A80E2810051296E /* HelloPage.swift */,
+				D04CD3AF2A8109880051296E /* MainView.swift */,
+				D0C0676D2A9606CC0023E127 /* InterTabs */,
 				D0E4DDA42A88CE4C0039BAE9 /* Tabs */,
 				D04CD3A02A80E7DA0051296E /* TextFiels */,
 				D04CD39E2A80E6DF0051296E /* LoginView.swift */,
@@ -231,6 +233,15 @@
 				D04CD3A72A80E8E80051296E /* TextFieldHint.swift */,
 			);
 			path = TextFiels;
+			sourceTree = "<group>";
+		};
+		D0C0676D2A9606CC0023E127 /* InterTabs */ = {
+			isa = PBXGroup;
+			children = (
+				D0E4DDA82A88E3B60039BAE9 /* PINCheck.swift */,
+				D0C0676E2A9607930023E127 /* ParentalControl.swift */,
+			);
+			path = InterTabs;
 			sourceTree = "<group>";
 		};
 		D0E4DDA42A88CE4C0039BAE9 /* Tabs */ = {
@@ -396,6 +407,7 @@
 			files = (
 				D04CD3AA2A80F2D90051296E /* RegisterView.swift in Sources */,
 				D04CD3B02A8109880051296E /* MainView.swift in Sources */,
+				D0C0676F2A9607930023E127 /* ParentalControl.swift in Sources */,
 				D04CD3A22A80E7F30051296E /* TextFieldName.swift in Sources */,
 				D04CD3AE2A8107460051296E /* NewAppUserModel.swift in Sources */,
 				D0E4DD9D2A88C1C80039BAE9 /* ChatView.swift in Sources */,
