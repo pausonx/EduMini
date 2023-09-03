@@ -20,11 +20,11 @@ struct PINCheck: View {
             if isPinCorrect {
                 ParentalControl()
                     .onAppear {
-                        if let appUser = NUViewModel.appUser {
-                            settings.isActiveChat = appUser.chat == "yes"
-                            settings.isActiveEmail = appUser.emailVisible == "yes"
-                            settings.isActiveAge = appUser.ageVisible == "yes"
-                        }
+                        startRefreshTimer()
+                    }
+                    .onDisappear {
+                        // Zatrzymaj timer przy zniknięciu widoku
+                        stopRefreshTimer()
                     }
             } else {
                 Text("Podaj PIN")
@@ -40,8 +40,20 @@ struct PINCheck: View {
                 }
             }
         }
-        
-        
+    }
+    // Metoda rozpoczynająca timer odświeżania
+    private func startRefreshTimer() {
+        NUViewModel.fetchCurrentUser(settings: settings)
+        NUViewModel.fetchAllUsers()
+        Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) { _ in
+            NUViewModel.fetchCurrentUser(settings: settings)
+            NUViewModel.fetchAllUsers()
+        }
+    }
+
+    // Metoda zatrzymująca timer odświeżania
+    private func stopRefreshTimer() {
+        NUViewModel.errorMessage = "" // Wyczyść ewentualne błędy
     }
 }
 

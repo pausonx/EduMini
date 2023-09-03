@@ -7,6 +7,7 @@
 
 import Foundation
 import Firebase
+import FirebaseFirestore
 
 class NewAppUsersModel: ObservableObject {
     
@@ -15,7 +16,7 @@ class NewAppUsersModel: ObservableObject {
     @Published var errorMessage = ""
     
     init() {
-        fetchCurrentUser(settings: nil) 
+        fetchCurrentUser(settings: nil)
         fetchAllUsers()
     }
     
@@ -43,17 +44,18 @@ class NewAppUsersModel: ObservableObject {
             if let chatValue = data["chat"] as? String, let settings = settings {
                 settings.isActiveChat = chatValue == "yes"
             }
-
+            
             if let emailVisibleValue = data["emailVisible"] as? String, let settings = settings {
                 settings.isActiveEmail = emailVisibleValue == "yes"
             }
-
+            
             if let ageVisibleValue = data["ageVisible"] as? String, let settings = settings {
                 settings.isActiveAge = ageVisibleValue == "yes"
             }
             
             FirebaseManager.shared.currentUser = self.appUser
         }
+        
     }
     
     internal func fetchAllUsers() {
@@ -76,22 +78,32 @@ class NewAppUsersModel: ObservableObject {
             }
     }
     
-    func saveParentalControlSettings(_ settings: ParentalControlSettings) {
+    func saveChatSetting(_ isActive: Bool) {
+        saveSetting("chat", isActive: isActive)
+    }
+    
+    func saveEmailSetting(_ isActive: Bool) {
+        saveSetting("emailVisible", isActive: isActive)
+    }
+    
+    func saveAgeSetting(_ isActive: Bool) {
+        saveSetting("ageVisible", isActive: isActive)
+    }
+    
+    private func saveSetting(_ settingName: String, isActive: Bool) {
         let db = Firestore.firestore()
-
+        
         guard let userID = Auth.auth().currentUser?.uid else {
             return
         }
         
         db.collection("users").document(userID).setData([
-            "chat": settings.isActiveChat ? "yes" : "no",
-            "emailVisible": settings.isActiveEmail ? "yes" : "no",
-            "ageVisible": settings.isActiveAge ? "yes" : "no"
+            settingName: isActive ? "yes" : "no"
         ], merge: true) { error in
             if let error = error {
-                print("Error updating parental control settings: \(error)")
+                print("Error updating \(settingName) setting: \(error)")
             } else {
-                print("Parental control settings updated successfully!")
+                print("\(settingName) setting updated successfully!")
             }
         }
     }

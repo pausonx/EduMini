@@ -40,7 +40,7 @@ struct ProfileView: View {
 
                             Divider()
 
-                            NavigationLink(destination: PINCheck()) {
+                            NavigationLink(destination: PINCheck().environmentObject(settings)) {
                                 Text("Kontrola rodzicielska")
                                     .font(.system(size: 25, weight: .light))
                                 Image(systemName: "shield.fill")
@@ -127,10 +127,6 @@ struct ProfileInfo: View {
                 .multilineTextAlignment(.leading)
             
             Spacer()
-            
-            Image(systemName: "pencil")
-                .font(.system(size: 25, weight: .medium))
-                .foregroundColor(Color.accentColor)
         }
         
         HStack {
@@ -151,12 +147,7 @@ struct ProfileInfo: View {
                     .italic()
                     .multilineTextAlignment(.leading)
             }
-            
             Spacer()
-            
-            Image(systemName: "pencil")
-                .font(.system(size: 20, weight: .medium))
-                .foregroundColor(Color.accentColor)
         }
         
         
@@ -179,11 +170,6 @@ struct ProfileInfo: View {
                     .multilineTextAlignment(.leading)
             }
             Spacer()
-            
-            Image(systemName: "pencil")
-                .font(.system(size: 25, weight: .medium))
-                .foregroundColor(Color.accentColor)
-            
         }
         
         HStack {
@@ -211,10 +197,3 @@ struct ProfileInfo: View {
         }
     }
 }
-
-
-//struct ProfileView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ProfileView()
-//    }
-//}

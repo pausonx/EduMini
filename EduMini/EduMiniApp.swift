@@ -30,8 +30,8 @@ struct EduMiniApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environmentObject(AppViewModel())
-                .environmentObject(settings)
+                .environmentObject(viewModel)
+                .environmentObject(settings) 
         }
     }
 }
