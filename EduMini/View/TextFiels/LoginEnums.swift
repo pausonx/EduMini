@@ -16,6 +16,7 @@ enum Hint: String {
 
 enum Regex: String {
     case login = "^[a-zA-Z][a-zA-Z0-9]{2,49}$"
+    case name = "^[a-zA-Z]{2,49}$"
     case email = "^[A-Z0-9a-z\\._%+-]+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2,49}$"
     case password = "^[a-zA-Z][a-zA-Z0-9]{7,11}$"
     case age = "^[0-9]{1,2}$"

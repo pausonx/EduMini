@@ -27,52 +27,78 @@ struct ParentalControl: View {
     @State private var isChatActive: Bool = true
     @State private var isEmailActive: Bool = true
     @State private var isAgeActive: Bool = true
-    
-    @State private var shouldRefreshView = false
-    
+        
+    @State private var onOffChat: String = ""
+    @State private var onOffEmail: String = ""
+    @State private var onOffAge: String = ""
+
     init() {
         // Pobierz wartość 'chat' z NUViewModel i ustaw odpowiednią zmienną
         let chat = NUViewModel.appUser?.chat ?? ""
+        onOffChat = chat == "yes" ? " włączony" : " wyłączony"
         isChatActive = chat == "yes"
         
         // Pobierz wartość 'emailVisible' z NUViewModel i ustaw odpowiednią zmienną
         let emailVisible = NUViewModel.appUser?.emailVisible ?? ""
+        onOffEmail = emailVisible == "yes" ? " widoczny" : " ukryty"
         isEmailActive = emailVisible == "yes"
         
         // Pobierz wartość 'ageVisible' z NUViewModel i ustaw odpowiednią zmienną
         let ageVisible = NUViewModel.appUser?.ageVisible ?? ""
+        onOffAge = ageVisible == "yes" ? " widoczny" : " ukryty"
         isAgeActive = ageVisible == "yes"
     }
     
+    @State private var isValidName: Bool = false
+    @State private var isValidAge: Bool = false
+    @State private var nameHint: String = ""
+    @State private var ageHint: String = ""
     
-    @State private var imie: String = ""
+    @State private var name: String = "" {
+        didSet {
+            isValidName = name.isValid(regexes: [Regex.name].compactMap { "\($0.rawValue)" })
+            nameHint = isValidName ? "" : "Imię musi składać się tylko z liter"
+        }
+    }
+    
+    @State private var age: String = "" {
+        didSet {
+            isValidAge = age.isValid(regexes: [Regex.age].compactMap { "\($0.rawValue)" })
+            ageHint = isValidAge ? "" : Hint.age.rawValue
+        }
+    }
+    
+    @State private var showHelpName = false
+    @State private var showHelpAge = false
+
+    @State private var isSaveNameButtonClicked = false
+    @State private var isSaveAgeButtonClicked = false
+    
+    @State private var isSavedName: Bool = false
+    @State private var isSavedAge: Bool = false
     
     var body: some View {
         ZStack {
             List {
                 Section(header: Text("Ustawienia").font(.system(size: 18))){
                     HStack {
-                        let chat = NUViewModel.appUser?.chat ?? ""
-                        
-                        if chat == "yes" {
-                            Text("Chat z innymi użytkownikami")
-                                .font(.system(size: 15, weight: .light)) +
-                                Text(" włączony")
-                                .italic()
-                                .font(.system(size: 15, weight: .semibold))
-                        } else {
-                            Text("Chat z innymi użytkownikami")
-                                .font(.system(size: 15, weight: .light)) +
-                                Text(" wyłączony")
-                                .italic()
-                                .font(.system(size: 15, weight: .semibold))
-                        }
-                        
+                        Text("Chat z innymi użytkownikami")
+                            .font(.system(size: 15, weight: .light)) +
+                            Text(onOffChat)
+                            .italic()
+                            .font(.system(size: 15, weight: .semibold))
+
                         Spacer()
                         
                         Button(action: {
                             isChatActive.toggle()
                             saveChatSetting()
+                            if isChatActive {
+                                onOffChat = " włączony"
+                            }
+                            else {
+                                onOffChat = " wyłączony"
+                            }
                         }) {
                             Text("Zmień")
                         }
@@ -86,27 +112,23 @@ struct ParentalControl: View {
                     }
                     
                     HStack {
-                        let emailVisible = NUViewModel.appUser?.emailVisible ?? ""
-                        
-                        if emailVisible == "yes" {
-                            Text("Adres email na profilu")
-                                .font(.system(size: 15, weight: .light)) +
-                                Text(" widoczny")
-                                .italic()
-                                .font(.system(size: 15, weight: .semibold))
-                        } else {
-                            Text("Adres email na profilu")
-                                .font(.system(size: 15, weight: .light)) +
-                                Text(" ukryty")
-                                .italic()
-                                .font(.system(size: 15, weight: .semibold))
-                        }
+                        Text("Adres email na profilu")
+                            .font(.system(size: 15, weight: .light)) +
+                            Text(onOffEmail)
+                            .italic()
+                            .font(.system(size: 15, weight: .semibold))
                         
                         Spacer()
                         
                         Button(action: {
                             isEmailActive.toggle()
                             saveEmailSetting()
+                            if isEmailActive {
+                                onOffEmail = " widoczny"
+                            }
+                            else {
+                                onOffEmail = " ukryty"
+                            }
                         }) {
                             Text("Zmień")
                         }
@@ -118,27 +140,23 @@ struct ParentalControl: View {
                     }
                     
                     HStack {
-                        let ageVisible = NUViewModel.appUser?.ageVisible ?? ""
-                        
-                        if ageVisible == "yes" {
-                            Text("Wiek dziecka na profilu")
-                                .font(.system(size: 15, weight: .light)) +
-                                Text(" widoczny")
-                                .italic()
-                                .font(.system(size: 15, weight: .semibold))
-                        } else {
-                            Text("Wiek dziecka na profilu")
-                                .font(.system(size: 15, weight: .light)) +
-                                Text(" ukryty")
-                                .italic()
-                                .font(.system(size: 15, weight: .semibold))
-                        }
+                        Text("Wiek dziecka na profilu")
+                            .font(.system(size: 15, weight: .light)) +
+                            Text(onOffAge)
+                            .italic()
+                            .font(.system(size: 15, weight: .semibold))
                         
                         Spacer()
                         
                         Button(action: {
                             isAgeActive.toggle()
                             saveAgeSetting()
+                            if isAgeActive {
+                                onOffAge = " widoczny"
+                            }
+                            else {
+                                onOffAge = " ukryty"
+                            }
                         }) {
                             Text("Zmień")
                         }
@@ -150,27 +168,96 @@ struct ParentalControl: View {
                     }
                 }
                 Section(header: Text("Edycja danych").font(.system(size: 18))){
-//                    VStack{
-//                        Text("Zmiana imienia")
-//                        HStack {
-//                            TextField("Podaj nowe imie", text: $imie)
-//                            Button(action: {}
-//                            ){
-//                                Text("Zapisz")
-//                            }
-//                        }
-//                        Spacer()
-//                    }
-//
+                    VStack{
+                        HStack {
+                            Text("Zmiana imienia")
+                                .font(.system(size: 16, weight: .light))
+                            
+                            Spacer()
+                        }
+                        HStack {
+                            TextField("Podaj nowe imie", text: $name)
+                                .onChange(of: name, perform: { newValue in
+                                    self.name = newValue
+                                })
+                                .font(.system(size: 15, weight: .light))
+                            
+                            Button(action: {
+                                updateName()
+                                isSaveNameButtonClicked = true
+                                isSavedName = true
+                            }) {
+                                Text("Zapisz")
+                                    .foregroundColor(Color.black.opacity(0.8))
+                                    .font(.system(size: 15, weight: .light))
+                                    .padding(11)
+                                    .background(
+                                        RoundedRectangle(cornerRadius: 8)
+                                            .fill(isValidName ? Color.accentColor.opacity(0.9) : (isSaveNameButtonClicked ? Color.gray : Color.accentColor.opacity(0.9)))
+                                    )
+                            }
+                            .disabled(isSaveNameButtonClicked || !isValidName)
+                        }
+                        HStack {
+                            TextFieldHintRed(hint: nameHint)
+                            Spacer()
+                            if isSavedName {
+                                Text("Zapisano")
+                                    .foregroundColor(Color.green)
+                                    .font(.system(size: 15, weight: .light))
+                                    .italic()
+                            }
+                        }
+                    }
+                
+                    VStack {
+                        HStack {
+                            Text("Zmiana wieku")
+                                .font(.system(size: 16, weight: .light))
+                            Spacer()
+                        }
+                        HStack {
+                            TextField("Podaj nowy wiek", text: $age)
+                                .onChange(of: age, perform: { newValue in
+                                    self.age = newValue
+                                })
+                                .font(.system(size: 15, weight: .light))
+                            
+                            Button(action: {
+                                updateAge()
+                                isSaveAgeButtonClicked = true
+                                isSavedAge = true
+                            }) {
+                                Text("Zapisz")
+                                    .foregroundColor(Color.black.opacity(0.8))
+                                    .font(.system(size: 15, weight: .light))
+                                    .padding(11)
+                                    .background(
+                                        RoundedRectangle(cornerRadius: 8)
+                                            .fill(isValidAge ? Color.accentColor.opacity(0.9) : (isSaveAgeButtonClicked ? Color.gray : Color.accentColor.opacity(0.9)))
+                                    )
+                            }
+                            .disabled(isSaveAgeButtonClicked || !isValidAge)
+                            
+                            
+                        }
+                        HStack {
+                            TextFieldHintRed(hint: ageHint)
+                            Spacer()
+                            if isSavedAge {
+                                Text("Zapisano")
+                                    .foregroundColor(Color.green)
+                                    .font(.system(size: 15, weight: .light))
+                                    .italic()
+                            }
+                        }
+                    }
+
 //                    VStack {
-//
-//                    }
-//
-//                    VStack {
-//
+/// Możliwe do dorobienia zmiana adresu email, ale do rostrzygnięcia czy nie narobi problemów z logowaniem itd.
 //                    }
                 }
-                .listStyle(GroupedListStyle())
+                .listStyle(SidebarListStyle())
             }
             
         }
@@ -188,27 +275,38 @@ struct ParentalControl: View {
         }
         .modifier(NavigationBarColorModifier(backgroundColor: UIColor(Color.accentColor), tintColor: UIColor.white))
         .onAppear {
-            if shouldRefreshView {
-                NUViewModel.fetchCurrentUser(settings: nil) // Odśwież widok po zapisaniu ustawienia
-                shouldRefreshView = false // Zresetuj flagę
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                let chat = NUViewModel.appUser?.chat ?? ""
+                onOffChat = chat == "yes" ? " włączony" : " wyłączony"
+                
+                let emailVisible = NUViewModel.appUser?.emailVisible ?? ""
+                onOffEmail = emailVisible == "yes" ? " widoczny" : " ukryty"
+
+                let ageVisible = NUViewModel.appUser?.ageVisible ?? ""
+                onOffAge = ageVisible == "yes" ? " widoczny" : " ukryty"
+
             }
         }
-        
     }
     
     private func saveChatSetting() {
         NUViewModel.saveChatSetting(isChatActive)
-        shouldRefreshView = true
     }
     
     private func saveEmailSetting() {
         NUViewModel.saveEmailSetting(isEmailActive)
-        shouldRefreshView = true
     }
     
     private func saveAgeSetting() {
         NUViewModel.saveAgeSetting(isAgeActive)
-        shouldRefreshView = true
+    }
+    
+    private func updateName() {
+        NUViewModel.updateName(name)
+    }
+    
+    private func updateAge() {
+        NUViewModel.updateAge(age)
     }
 }
 

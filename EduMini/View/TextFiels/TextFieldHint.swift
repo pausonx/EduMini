@@ -18,6 +18,17 @@ struct TextFieldHint: View {
         }
 }
 
+struct TextFieldHintRed: View {
+    let hint: String
+        var body: some View {
+            return Text(hint)
+                .font(.system(size: 12, weight: .light))
+                .foregroundColor(.red)
+                .frame(height: hint.isEmpty ? 0 : 25)
+                .multilineTextAlignment(.leading)
+        }
+}
+
 struct TextFieldHint_Previews: PreviewProvider {
     static var previews: some View {
         TextFieldHint(hint: "Test")

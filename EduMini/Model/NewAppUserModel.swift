@@ -107,4 +107,31 @@ class NewAppUsersModel: ObservableObject {
             }
         }
     }
+    
+    func updateName(_ name: String){
+        updateData("name", dataValue: name)
+    }
+    
+    func updateAge(_ age: String){
+        updateData("age", dataValue: age)
+    }
+    
+    private func updateData(_ dataName: String, dataValue: String) {
+        let db = Firestore.firestore()
+        
+        guard let userID = Auth.auth().currentUser?.uid else {
+            return
+        }
+        
+        db.collection("users").document(userID).setData([
+            dataName: dataValue
+        ], merge: true) { error in
+            if let error = error {
+                print("Error updating \(dataName) setting: \(error)")
+            } else {
+                print("\(dataName) data updated successfully!")
+            }
+        }
+        
+    }
 }

@@ -276,36 +276,38 @@ struct RegisterView: View {
                     TextFieldHint(hint: passwordHint)
                 }
                 
-                HStack {
-                    Button(action: {
-                        showRules = true // Pokaż instrukcję
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-                            showRules = false // Ukryj regulamin po 5 sekundach
+                VStack {
+                    HStack {
+                        Button(action: {
+                            showRules = true // Pokaż instrukcję
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                                showRules = false // Ukryj regulamin po 5 sekundach
+                            }
+                        }) {
+                            Image(systemName: "exclamationmark.shield.fill")
+                                .font(.system(size: 20, weight: .medium))
+                                .foregroundColor(Color.white.opacity(0.7))
                         }
-                    }) {
-                        Image(systemName: "exclamationmark.shield.fill")
-                            .font(.system(size: 20, weight: .medium))
-                            .foregroundColor(Color.white.opacity(0.7))
+                        Toggle("Zapoznałem/am się z regulaminem i akceptuję jego treść", isOn: $isOn)
+                           .foregroundColor(Color.black.opacity(0.8))
                     }
-                    Toggle("Zapoznałem/am się z regulaminem i akceptuję jego treść", isOn: $isOn)
-                       .foregroundColor(Color.black.opacity(0.8))
+                    
+                    Text(" ")
                 }
                 .overlay(
-                        Group {
-                            if showRules {
-                                Text("Wyrażam zgodę na przetwarzanie danych osobowych moich i mojego dziecka na potrzeby korzystania z aplikacji EduMini.")
-                                    .font(.footnote)
-                                    .foregroundColor(.white)
-                                    .padding()
-                                    .background(Color.secondary)
-                                    .cornerRadius(10)
-                                    .transition(.opacity)
-                                    .lineLimit(nil)
-//                                    .multilineTextAlignment(.leading)
-                            }
+                    Group {
+                        if showRules {
+                            Text("Wyrażam zgodę na przetwarzanie danych osobowych moich i mojego dziecka na potrzeby korzystania z aplikacji.")
+                                .font(.footnote)
+                                .foregroundColor(.white)
+                                .padding()
+                                .background(Color.secondary)
+                                .cornerRadius(10)
+                                .transition(.opacity)
                         }
-                    )
-                
+                    }
+                )
+
                 //MARK: - RegisterButton
                 Button {
                     viewModel.signUp(email: login, password: password, name: name, age: age, pin: pin)

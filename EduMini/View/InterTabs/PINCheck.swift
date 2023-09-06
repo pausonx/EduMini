@@ -16,44 +16,23 @@ struct PINCheck: View {
     @EnvironmentObject var settings: ParentalControlSettings
     
     var body: some View {
-        VStack {
-            if isPinCorrect {
-                ParentalControl()
-                    .onAppear {
-                        startRefreshTimer()
+            VStack {
+                if isPinCorrect {
+                    ParentalControl()
+                } else {
+                    Text("Podaj PIN")
+                        .font(.system(size: 25, weight: .light))
+                    PinTextField(numOfFields: 4, isPinCorrect: $isPinCorrect, showErrorMessage: $showErrorMessage)
+                        .onChange(of: isPinCorrect) { newValue in
+                            isPinCorrect = newValue
+                        }
+                    if showErrorMessage {
+                        Text("Podaj poprawny PIN")
+                            .font(.system(size: 14))
+                            .foregroundColor(.red)
                     }
-                    .onDisappear {
-                        // Zatrzymaj timer przy zniknięciu widoku
-                        stopRefreshTimer()
-                    }
-            } else {
-                Text("Podaj PIN")
-                    .font(.system(size: 25, weight: .light))
-                PinTextField(numOfFields: 4, isPinCorrect: $isPinCorrect, showErrorMessage: $showErrorMessage)
-                    .onChange(of: isPinCorrect) { newValue in
-                        isPinCorrect = newValue
-                    }
-                if showErrorMessage {
-                    Text("Podaj poprawny PIN")
-                        .font(.system(size: 14))
-                        .foregroundColor(.red)
                 }
             }
-        }
-    }
-    // Metoda rozpoczynająca timer odświeżania
-    private func startRefreshTimer() {
-        NUViewModel.fetchCurrentUser(settings: settings)
-        NUViewModel.fetchAllUsers()
-        Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) { _ in
-            NUViewModel.fetchCurrentUser(settings: settings)
-            NUViewModel.fetchAllUsers()
-        }
-    }
-
-    // Metoda zatrzymująca timer odświeżania
-    private func stopRefreshTimer() {
-        NUViewModel.errorMessage = "" // Wyczyść ewentualne błędy
     }
 }
 

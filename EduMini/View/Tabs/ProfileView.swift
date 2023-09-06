@@ -94,7 +94,7 @@ struct ProfileView: View {
     private func startRefreshTimer() {
         NUViewModel.fetchCurrentUser(settings: settings)
         NUViewModel.fetchAllUsers()
-        Timer.scheduledTimer(withTimeInterval: 60.0, repeats: true) { _ in
+        Timer.scheduledTimer(withTimeInterval: 120.0, repeats: true) { _ in
             NUViewModel.fetchCurrentUser(settings: settings)
             NUViewModel.fetchAllUsers()
         }
