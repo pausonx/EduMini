@@ -16,6 +16,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
   }
 }
 
+
 @main
 struct EduMiniApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate

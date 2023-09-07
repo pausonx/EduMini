@@ -10,29 +10,30 @@ import SwiftUI
 struct PINCheck: View {
     @State private var isPinCorrect = false
     @State private var showErrorMessage = false
-
+    
     @EnvironmentObject var viewModel: AppViewModel
     @ObservedObject private var NUViewModel = NewAppUsersModel()
     @EnvironmentObject var settings: ParentalControlSettings
     
     var body: some View {
-            VStack {
-                if isPinCorrect {
-                    ParentalControl()
-                } else {
-                    Text("Podaj PIN")
-                        .font(.system(size: 25, weight: .light))
-                    PinTextField(numOfFields: 4, isPinCorrect: $isPinCorrect, showErrorMessage: $showErrorMessage)
-                        .onChange(of: isPinCorrect) { newValue in
-                            isPinCorrect = newValue
-                        }
-                    if showErrorMessage {
-                        Text("Podaj poprawny PIN")
-                            .font(.system(size: 14))
-                            .foregroundColor(.red)
+        VStack {
+            if isPinCorrect {
+                ParentalControl()
+            } else {
+                Text("Podaj PIN")
+                    .font(.system(size: 25, weight: .light))
+                PinTextField(numOfFields: 4, isPinCorrect: $isPinCorrect, showErrorMessage: $showErrorMessage)
+                    .onChange(of: isPinCorrect) { newValue in
+                        isPinCorrect = newValue
                     }
+                if showErrorMessage {
+                    Text("Podaj poprawny PIN")
+                        .font(.system(size: 14))
+                        .foregroundColor(.red)
                 }
             }
+        }
+        .navigationBarBackButtonHidden(true)
     }
 }
 
@@ -41,7 +42,7 @@ struct PinTextField: View {
     let numOfFields: Int
     @Binding var isPinCorrect: Bool
     @Binding var showErrorMessage: Bool
-
+    
     @State var enterValue: [String]
     @FocusState private var fieldFocus: Int?
     @State private var oldValue = ""
@@ -54,7 +55,7 @@ struct PinTextField: View {
     }
     
     @ObservedObject private var NUViewModel = NewAppUsersModel()
-
+    
     
     var body: some View {
         

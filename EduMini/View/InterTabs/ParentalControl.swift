@@ -27,11 +27,11 @@ struct ParentalControl: View {
     @State private var isChatActive: Bool = true
     @State private var isEmailActive: Bool = true
     @State private var isAgeActive: Bool = true
-        
+    
     @State private var onOffChat: String = ""
     @State private var onOffEmail: String = ""
     @State private var onOffAge: String = ""
-
+    
     init() {
         // Pobierz wartość 'chat' z NUViewModel i ustaw odpowiednią zmienną
         let chat = NUViewModel.appUser?.chat ?? ""
@@ -70,7 +70,7 @@ struct ParentalControl: View {
     
     @State private var showHelpName = false
     @State private var showHelpAge = false
-
+    
     @State private var isSaveNameButtonClicked = false
     @State private var isSaveAgeButtonClicked = false
     
@@ -84,10 +84,10 @@ struct ParentalControl: View {
                     HStack {
                         Text("Chat z innymi użytkownikami")
                             .font(.system(size: 15, weight: .light)) +
-                            Text(onOffChat)
+                        Text(onOffChat)
                             .italic()
                             .font(.system(size: 15, weight: .semibold))
-
+                        
                         Spacer()
                         
                         Button(action: {
@@ -114,7 +114,7 @@ struct ParentalControl: View {
                     HStack {
                         Text("Adres email na profilu")
                             .font(.system(size: 15, weight: .light)) +
-                            Text(onOffEmail)
+                        Text(onOffEmail)
                             .italic()
                             .font(.system(size: 15, weight: .semibold))
                         
@@ -142,7 +142,7 @@ struct ParentalControl: View {
                     HStack {
                         Text("Wiek dziecka na profilu")
                             .font(.system(size: 15, weight: .light)) +
-                            Text(onOffAge)
+                        Text(onOffAge)
                             .italic()
                             .font(.system(size: 15, weight: .semibold))
                         
@@ -209,7 +209,7 @@ struct ParentalControl: View {
                             }
                         }
                     }
-                
+                    
                     VStack {
                         HStack {
                             Text("Zmiana wieku")
@@ -252,28 +252,29 @@ struct ParentalControl: View {
                             }
                         }
                     }
-
-//                    VStack {
-/// Możliwe do dorobienia zmiana adresu email, ale do rostrzygnięcia czy nie narobi problemów z logowaniem itd.
-//                    }
+                    
+                    //                    VStack {
+                    /// Możliwe do dorobienia zmiana adresu email, ale do rostrzygnięcia czy nie narobi problemów z logowaniem itd.
+                    //                    }
                 }
                 .listStyle(SidebarListStyle())
             }
             
         }
-        .navigationBarTitle("Kontrola rodzicielska")
-        .navigationBarTitleDisplayMode(.inline)
-        .toolbar {
-            ToolbarItem(placement: .navigationBarLeading) {
-                Button(action: {
-                    presentationMode.wrappedValue.dismiss()
-                }) {
-                    Image(systemName: "arrowshape.turn.up.left.fill")
-                        .foregroundColor(.white)
-                }
-            }
-        }
-        .modifier(NavigationBarColorModifier(backgroundColor: UIColor(Color.accentColor), tintColor: UIColor.white))
+        .navigationBarBackButtonHidden(true)
+//        .navigationBarTitle("Kontrola rodzicielska")
+//        .navigationBarTitleDisplayMode(.inline)
+//        .toolbar {
+//            ToolbarItem(placement: .navigationBarLeading) {
+//                Button(action: {
+//                    presentationMode.wrappedValue.dismiss()
+//                }) {
+//                    Image(systemName: "arrowshape.turn.up.left.fill")
+//                        .foregroundColor(.white)
+//                }
+//            }
+//        }
+//        .modifier(NavigationBarColorModifier(backgroundColor: UIColor(Color.accentColor), tintColor: UIColor.white))
         .onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                 let chat = NUViewModel.appUser?.chat ?? ""
@@ -281,10 +282,10 @@ struct ParentalControl: View {
                 
                 let emailVisible = NUViewModel.appUser?.emailVisible ?? ""
                 onOffEmail = emailVisible == "yes" ? " widoczny" : " ukryty"
-
+                
                 let ageVisible = NUViewModel.appUser?.ageVisible ?? ""
                 onOffAge = ageVisible == "yes" ? " widoczny" : " ukryty"
-
+                
             }
         }
     }

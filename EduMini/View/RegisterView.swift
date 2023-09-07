@@ -318,7 +318,7 @@ struct RegisterView: View {
                         .frame(width: 200, height: 40, alignment: .center)
                 }
                 .disabled((isValidLogin && isValidPassword && (name != "") && isValidAge && isValidPIN && isOn) == false)
-                .background(isValidLogin && isValidPassword && isValidAge && isValidPIN && isOn ? Color("BabyBlueColor") : .secondary)
+                .background(isValidLogin && isValidPassword && isValidAge && isValidPIN && isOn ? Color("DarkBabyBlueColor") : .secondary)
                 .cornerRadius(5)
 
 //                Spacer()

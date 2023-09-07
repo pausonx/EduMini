@@ -14,82 +14,61 @@ struct ProfileView: View {
     @EnvironmentObject var settings: ParentalControlSettings
     @ObservedObject private var NUViewModel = NewAppUsersModel()
     
-
+    
     var body: some View {
         NavigationView {
             GeometryReader { geometry in
                 ZStack {
-                    Color("LightGrayColor")
+                    Image("profileBG")
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+                        .edgesIgnoringSafeArea(.all)
+                        .background(Color.clear)
 
-                    ZStack {
-                        Color.white
-                            .cornerRadius(15)
-
-                        VStack(spacing: 12) {
-                            ProfileTitle()
-
-                            ProfileInfo()
-                                .onAppear {
-                                    // Rozpocznij timer przy pojawieniu się widoku
-                                    startRefreshTimer()
-                                }
-                                .onDisappear {
-                                    // Zatrzymaj timer przy zniknięciu widoku
-                                    stopRefreshTimer()
-                                }
-
-                            Divider()
-
-                            NavigationLink(destination: PINCheck().environmentObject(settings)) {
+                    VStack(spacing: 12) {
+                        ProfileTitle()
+                        ProfileInfo()
+                            .onAppear {
+                                // Rozpocznij timer przy pojawieniu się widoku
+                                startRefreshTimer()
+                            }
+                            .onDisappear {
+                                // Zatrzymaj timer przy zniknięciu widoku
+                                stopRefreshTimer()
+                            }
+                        
+                        Divider()
+                            .padding(.horizontal, 15)
+                        
+                        NavigationLink(destination: PINCheck().environmentObject(settings)) {
+                            HStack {
                                 Text("Kontrola rodzicielska")
-                                    .font(.system(size: 25, weight: .light))
+                                    .font(.system(size: 20, weight: .light))
+                                    .foregroundColor(Color.secondary)
+
                                 Image(systemName: "shield.fill")
                                     .font(.system(size: 25, weight: .bold))
-                                    .foregroundColor(Color.accentColor)
-                            }
-                            .navigationBarBackButtonHidden()
-
-                            Divider()
-
-                            HStack {
-                                Text("Wyloguj się")
-                                    .font(.system(size: 20, weight: .light))
-
-                                Button {
-                                    shouldShowLogOutOptions.toggle()
-                                } label: {
-                                    Image(systemName: "rectangle.portrait.and.arrow.right.fill")
-                                        .font(.system(size: 25, weight: .bold))
-                                        .foregroundColor(Color.accentColor)
-                                }
+                                    .foregroundColor(Color.secondary)
 
                                 Spacer()
                             }
+                            .padding(10)
+                            .navigationBarBackButtonHidden(true)
 
-                            Spacer()
                         }
-                        .padding()
-                        .actionSheet(isPresented: $shouldShowLogOutOptions) {
-                            .init(title: Text("Wylogowywanie"), message: Text("Czy na pewno chcesz to zrobić?"), buttons: [
-                                .destructive(Text("Wyloguj się"), action: {
-                                    viewModel.signOut()
-                                }),
-                                .cancel(Text("Anuluj"))
-                            ])
-                        }
+                        
+                        Spacer()
                     }
                     .padding()
                 }
             }
-            .navigationBarTitle("Twój profil")
-            .navigationBarTitleDisplayMode(.inline)
-            .modifier(NavigationBarColorModifier(backgroundColor: UIColor(Color.accentColor), tintColor: UIColor.white))
         }
         .tabItem {
             Label("Profil", systemImage: "person.fill")
         }
     }
-
+    
     // Metoda rozpoczynająca timer odświeżania
     private func startRefreshTimer() {
         NUViewModel.fetchCurrentUser(settings: settings)
@@ -99,7 +78,7 @@ struct ProfileView: View {
             NUViewModel.fetchAllUsers()
         }
     }
-
+    
     // Metoda zatrzymująca timer odświeżania
     private func stopRefreshTimer() {
         NUViewModel.errorMessage = "" // Wyczyść ewentualne błędy
@@ -107,93 +86,143 @@ struct ProfileView: View {
 }
 
 struct ProfileTitle: View {
+    @EnvironmentObject var viewModel: AppViewModel
+    @ObservedObject private var NUViewModel = NewAppUsersModel()
+    
     var body: some View {
-        Image(systemName: "person.crop.circle.fill")
-            .font(.system(size: 150, weight: .light))
-            .foregroundColor(Color.accentColor)
+        HStack {
+            Image(systemName: "person.crop.circle.fill")
+                .font(.system(size: UIScreen.main.bounds.width * 0.35, weight: .light))
+                .foregroundColor(Color.secondary.opacity(0.9))
+            
+            Spacer()
+        }
+        .padding(.vertical, 10)
+        .padding(.top, -20)
     }
 }
 
 struct ProfileInfo: View {
     @ObservedObject private var NUViewModel = NewAppUsersModel()
     @EnvironmentObject var settings: ParentalControlSettings
-
+    
     var body: some View {
-        HStack {
-            let name = NUViewModel.appUser?.name ?? ""
-            
-            Text(name)
-                .font(.system(size: 35, weight: .light))
-                .multilineTextAlignment(.leading)
-            
-            Spacer()
-        }
+        let name = NUViewModel.appUser?.name ?? "Test"
         
-        HStack {
-            let age = NUViewModel.appUser?.age ?? ""
-            let ageVisible = NUViewModel.appUser?.ageVisible ?? ""
-            
-            Text("Wiek: ")
-                .font(.system(size: 20, weight: .light))
-                .multilineTextAlignment(.leading)
-            
-            if ageVisible == "yes" {
-                Text(age)
-                    .font(.system(size: 20, weight: .light))
-                    .multilineTextAlignment(.leading)
-            } else {
-                Text("ukryty")
-                    .font(.system(size: 20, weight: .light))
-                    .italic()
-                    .multilineTextAlignment(.leading)
-            }
-            Spacer()
-        }
-        
+        Text(name)
+            .font(Font.custom("BalsamiqSans-Regular", size: UIScreen.main.bounds.width * 0.1))
+            .multilineTextAlignment(.leading)
+            .padding(5)
+            .foregroundColor(Color.white)
         
         HStack {
             let email = NUViewModel.appUser?.email ?? ""
             let emailVisible = NUViewModel.appUser?.emailVisible ?? ""
             
-            Text("Adres email: ")
-                .font(.system(size: 20, weight: .light))
-                .multilineTextAlignment(.leading)
+            Spacer()
             
             if emailVisible == "yes" {
                 Text(email)
-                    .font(.system(size: 20, weight: .light))
+                    .font(Font.custom("BalsamiqSans-Regular", size: UIScreen.main.bounds.width * 0.06))
                     .multilineTextAlignment(.leading)
+                    .foregroundColor(Color.white)
             } else {
-                Text("ukryty")
-                    .font(.system(size: 20, weight: .light))
-                    .italic()
+                Text("Adres email jest ukryty")
+                    .font(Font.custom("BalsamiqSans-Regular", size: UIScreen.main.bounds.width * 0.06))
                     .multilineTextAlignment(.leading)
+                    .foregroundColor(Color.white)
             }
+                       
             Spacer()
         }
+        .padding(.bottom, 10)
+        
+        Divider()
+            .padding(.horizontal, 15)
         
         HStack {
-            let chat = NUViewModel.appUser?.chat ?? ""
-            
-            Text("Chat: ")
-                .font(.system(size: 20, weight: .light))
-                .multilineTextAlignment(.leading)
-            
-            if chat == "yes" {
-                Text("włączony")
-                    .font(.system(size: 20, weight: .light))
-                    .italic()
+            VStack {
+                let age = NUViewModel.appUser?.age ?? ""
+                let ageVisible = NUViewModel.appUser?.ageVisible ?? ""
+                
+                if ageVisible == "yes" {
+                    Text(age)
+                        .font(Font.custom("BalsamiqSans-Regular", size: UIScreen.main.bounds.width * 0.05))
+                        .multilineTextAlignment(.leading)
+                        .foregroundColor(Color.white)
+                } else {
+                    Text("ukryty")
+                        .font(Font.custom("BalsamiqSans-Regular", size: UIScreen.main.bounds.width * 0.06))
+                        .multilineTextAlignment(.leading)
+                        .foregroundColor(Color.white)
+
+                }
+                
+                Text("Wiek")
+                    .font(.system(size: 17, weight: .light))
                     .multilineTextAlignment(.leading)
-                    .foregroundColor(Color.green)
-            } else {
-                Text("wyłączony")
-                    .font(.system(size: 20, weight: .light))
-                    .italic()
-                    .multilineTextAlignment(.leading)
-                    .foregroundColor(Color.red)
+                    .foregroundColor(Color.secondary)
 
             }
-            Spacer()
+            .padding(20)
+            .frame(width: UIScreen.main.bounds.width * 0.3, height: UIScreen.main.bounds.height * 0.1)
+            .background(Color.white.opacity(0.2))
+            .cornerRadius(25)
+
+                        
+            VStack {
+                //points z bazy
+                Text("1234")
+                    .font(Font.custom("BalsamiqSans-Regular", size: UIScreen.main.bounds.width * 0.07))
+                    .multilineTextAlignment(.leading)
+                    .foregroundColor(Color.white)
+                
+                Text("Punkty")
+                    .font(.system(size: 17, weight: .light))
+                    .multilineTextAlignment(.leading)
+                    .foregroundColor(Color.secondary)
+            }
+            .padding(20)
+            .frame(width: UIScreen.main.bounds.width * 0.3, height: UIScreen.main.bounds.height * 0.1)
+            .background(Color.white.opacity(0.2))
+            .cornerRadius(25)
+
+
+            VStack {
+                let chat = NUViewModel.appUser?.chat ?? ""
+                
+                if chat == "yes" {
+                    Text("włączony")
+                        .font(Font.custom("BalsamiqSans-Regular", size: UIScreen.main.bounds.width * 0.04))
+                        .multilineTextAlignment(.leading)
+                        .foregroundColor(Color.green)
+                } else {
+                    Text("wyłączony")
+                        .font(Font.custom("BalsamiqSans-Regular", size: UIScreen.main.bounds.width * 0.04))
+                        .multilineTextAlignment(.leading)
+                        .foregroundColor(Color.red)
+                    
+                }
+                
+                Text("Chat")
+                    .font(.system(size: 17, weight: .light))
+                    .multilineTextAlignment(.leading)
+                    .foregroundColor(Color.secondary)
+
+            }
+            .padding(20)
+            .frame(width: UIScreen.main.bounds.width * 0.3, height: UIScreen.main.bounds.height * 0.1)
+            .background(Color.white.opacity(0.3))
+            .cornerRadius(25)
+        
+
         }
     }
 }
+
+
+//struct ProfileView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ProfileView()
+//    }
+//}

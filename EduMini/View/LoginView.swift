@@ -110,7 +110,7 @@ struct LoginView: View {
                         .frame(width: 200, height: 40, alignment: .center)
                 }
                 .disabled((isValidLogin && isValidPassword) == false)
-                .background(isValidLogin && isValidPassword ? Color("BabyBlueColor") : .secondary)
+                .background(isValidLogin && isValidPassword ? Color("DarkBabyBlueColor") : .secondary)
                 .cornerRadius(5)
 
                 Spacer()
