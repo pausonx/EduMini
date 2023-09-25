@@ -23,7 +23,7 @@ struct PINCheck: View {
                 Text("Podaj PIN")
                     .font(.system(size: 25, weight: .light))
                 PinTextField(numOfFields: 4, isPinCorrect: $isPinCorrect, showErrorMessage: $showErrorMessage)
-                    .onChange(of: isPinCorrect) { newValue in
+                    .onChange(of: isPinCorrect) { oldValue, newValue in
                         isPinCorrect = newValue
                     }
                 if showErrorMessage {
@@ -76,7 +76,7 @@ struct PinTextField: View {
                 .multilineTextAlignment(.center)
                 .focused($fieldFocus, equals: index)
                 .tag(index)
-                .onChange(of: enterValue[index]) { newValue in
+                .onChange(of: enterValue[index]) { oldValue, newValue in
                     if enterValue[index].count > 1 {
                         let currValue = Array(enterValue[index])
                         

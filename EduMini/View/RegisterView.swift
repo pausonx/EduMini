@@ -83,9 +83,9 @@ struct RegisterView: View {
                             .shadow(radius: 2)
                         
                         TextField("", text: $name)
-                            .onChange(of: name, perform: { newValue in
+                            .onChange(of: name) { oldValue, newValue in
                                 self.name = newValue
-                            })
+                            }
                             .font(.system(size: 20, weight: .thin))
                             .disableAutocorrection(true)
                             .autocapitalization(.none)
@@ -119,9 +119,9 @@ struct RegisterView: View {
                             .shadow(radius: 2)
                         
                         TextField("", text: $login)
-                            .onChange(of: login, perform: { newValue in
+                            .onChange(of: login) { oldValue, newValue in
                                 self.login = newValue
-                            })
+                            }
                             .font(.system(size: 20, weight: .thin))
                             .disableAutocorrection(true)
                             .autocapitalization(.none)
@@ -171,9 +171,9 @@ struct RegisterView: View {
                             .shadow(radius: 2)
                         
                         TextField("", text: $age)
-                            .onChange(of: age, perform: { newValue in
+                            .onChange(of: age) { oldValue, newValue in
                                 self.age = newValue
-                            })
+                            }
                             .font(.system(size: 20, weight: .thin))
                             .disableAutocorrection(true)
                             .autocapitalization(.none)
@@ -223,9 +223,9 @@ struct RegisterView: View {
                             .shadow(radius: 2)
                         
                         TextField("", text: $pin)
-                            .onChange(of: pin, perform: { newValue in
+                            .onChange(of: pin) { oldValue, newValue in
                                 self.pin = newValue
-                            })
+                            }
                             .font(.system(size: 20, weight: .thin))
                             .disableAutocorrection(true)
                             .autocapitalization(.none)
@@ -262,9 +262,9 @@ struct RegisterView: View {
                             .shadow(radius: 2)
                         
                         SecureField("", text: $password)
-                            .onChange(of: password, perform: { newValue in
+                            .onChange(of: password) { oldValue, newValue in
                                 self.password = newValue
-                            })
+                            }
                             .font(.system(size: 20, weight: .thin))
                             .disableAutocorrection(true)
                             .autocapitalization(.none)

@@ -177,9 +177,9 @@ struct ParentalControl: View {
                         }
                         HStack {
                             TextField("Podaj nowe imie", text: $name)
-                                .onChange(of: name, perform: { newValue in
+                                .onChange(of: name) { oldValue, newValue in
                                     self.name = newValue
-                                })
+                                }
                                 .font(.system(size: 15, weight: .light))
                             
                             Button(action: {
@@ -218,9 +218,9 @@ struct ParentalControl: View {
                         }
                         HStack {
                             TextField("Podaj nowy wiek", text: $age)
-                                .onChange(of: age, perform: { newValue in
+                                .onChange(of: age) { oldValue, newValue in
                                     self.age = newValue
-                                })
+                                }
                                 .font(.system(size: 15, weight: .light))
                             
                             Button(action: {

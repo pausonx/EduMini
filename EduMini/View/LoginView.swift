@@ -56,11 +56,8 @@ struct LoginView: View {
                             .fill(Color.white.opacity(0.9))
                             .frame(height: 45)
                             .shadow(radius: 2)
-                        
+
                         TextField("", text: $login)
-                            .onChange(of: login, perform: { newValue in
-                                self.login = newValue
-                            })
                             .font(.system(size: 20, weight: .thin))
                             .disableAutocorrection(true)
                             .autocapitalization(.none)
@@ -71,6 +68,10 @@ struct LoginView: View {
 
                     TextFieldHint(hint: loginHint)
                 }
+                .onChange(of: login) { oldValue, newValue in
+                    self.login = newValue
+                }
+
 
                 
                 //MARK: - Password
@@ -84,9 +85,6 @@ struct LoginView: View {
                             .shadow(radius: 2)
                         
                         SecureField("", text: $password)
-                            .onChange(of: password, perform: { newValue in
-                                self.password = newValue
-                            })
                             .font(.system(size: 20, weight: .thin))
                             .disableAutocorrection(true)
                             .autocapitalization(.none)
@@ -96,6 +94,9 @@ struct LoginView: View {
                     }
 
                     TextFieldHint(hint: passwordHint)
+                }
+                .onChange(of: password) { oldValue, newValue in
+                    self.password = newValue
                 }
 
 
