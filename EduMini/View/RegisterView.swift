@@ -63,77 +63,62 @@ struct RegisterView: View {
     @ObservedObject private var NUViewModel = NewAppUsersModel()
 
     var body: some View {
-        ScrollView {
+        ZStack {
+            Image("hellopagebg")
+                .resizable()
+                .scaledToFill()
+                .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+                .edgesIgnoringSafeArea(.all)
+                .background(Color.clear)
             
-            VStack(spacing: 20) {
-                Text("Rejestracja")
-                    .font(.system(size: 50, weight: .thin))
-                    .foregroundColor(Color.white)
+            ScrollView {
                 
-                Spacer()
-                
-                //MARK: - Name
-                VStack(alignment: .leading, spacing: 10) {
-                    TextFieldName(name: "Imię")
+                VStack(spacing: 20) {
+                    Text("Rejestracja")
+                        .font(.system(size: 50, weight: .thin))
+                        .frame(width: UIScreen.main.bounds.width * 0.8, height: UIScreen.main.bounds.height * 0.1, alignment: .bottom)
+                        .foregroundColor(Color.white)
+                        .padding()
+                                 
                     
-                    ZStack(alignment: .leading) {
-                        RoundedRectangle(cornerRadius: 10)
-                            .fill(Color.white.opacity(0.9))
-                            .frame(height: 45)
-                            .shadow(radius: 2)
-                        
-                        TextField("", text: $name)
-                            .onChange(of: name) { oldValue, newValue in
-                                self.name = newValue
+                    //MARK: - Email
+                    VStack(alignment: .leading, spacing: 10) {
+                        HStack {
+                            TextFieldName(name: "Email")
+                            Button(action: {
+                                showHelpEmail = true // Pokaż instrukcję
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                                    showHelpEmail = false // Ukryj instrukcję po 3 sekundach
+                                }
+                            }) {
+                                Image(systemName: "questionmark.circle")
+                                    .font(.system(size: 20, weight: .medium))
+                                    .foregroundColor(Color.white.opacity(0.7))
                             }
-                            .font(.system(size: 20, weight: .thin))
-                            .disableAutocorrection(true)
-                            .autocapitalization(.none)
-                            .frame(height: 45)
-                            .padding(.horizontal, 10)
-                            .foregroundColor(.black.opacity(0.8))
-                        
-                    }
-                }
-                
-                //MARK: - Email
-                VStack(alignment: .leading, spacing: 10) {
-                    HStack {
-                        TextFieldName(name: "Email")
-                        Button(action: {
-                            showHelpEmail = true // Pokaż instrukcję
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                                showHelpEmail = false // Ukryj instrukcję po 3 sekundach
-                            }
-                        }) {
-                            Image(systemName: "questionmark.circle")
-                                .font(.system(size: 20, weight: .medium))
-                                .foregroundColor(Color.white.opacity(0.7))
                         }
-                    }
-                    
-                    ZStack(alignment: .leading) {
-                        RoundedRectangle(cornerRadius: 10)
-                            .fill(Color.white.opacity(0.9))
-                            .frame(height: 45)
-                            .shadow(radius: 2)
                         
-                        TextField("", text: $login)
-                            .onChange(of: login) { oldValue, newValue in
-                                self.login = newValue
-                            }
-                            .font(.system(size: 20, weight: .thin))
-                            .disableAutocorrection(true)
-                            .autocapitalization(.none)
-                            .frame(height: 45)
-                            .padding(.horizontal, 10)
-                            .foregroundColor(.black.opacity(0.8))
+                        ZStack(alignment: .leading) {
+                            RoundedRectangle(cornerRadius: 10)
+                                .fill(Color.white.opacity(0.9))
+                                .frame(height: UIScreen.main.bounds.height * 0.05)
+                                .shadow(radius: 2)
+                            
+                            TextField("", text: $login)
+                                .onChange(of: login) { oldValue, newValue in
+                                    self.login = newValue
+                                }
+                                .font(.system(size: 20, weight: .thin))
+                                .disableAutocorrection(true)
+                                .autocapitalization(.none)
+                                .frame(height: 45)
+                                .padding(.horizontal, 10)
+                                .foregroundColor(.black.opacity(0.8))
+                            
+                        }
                         
+                        TextFieldHint(hint: loginHint)
                     }
-                    
-                    TextFieldHint(hint: loginHint)
-                }
-                .overlay(
+                    .overlay(
                         Group {
                             if showHelpEmail {
                                 Text("Widoczność adresu email można zmienić w ustawieniach w zakładce kontrola rodzicielska.")
@@ -146,49 +131,187 @@ struct RegisterView: View {
                             }
                         }
                     )
-                
-                //MARK: - Age
-                VStack(alignment: .leading, spacing: 10) {
-                    HStack {
-                        TextFieldName(name: "Wiek")
-                        Button(action: {
-                            showHelpAge = true // Pokaż instrukcję
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                                showHelpAge = false // Ukryj instrukcję po 3 sekundach
-                            }
-                        }) {
-                            Image(systemName: "questionmark.circle")
-                                .font(.system(size: 20, weight: .medium))
-                                .foregroundColor(Color.white.opacity(0.7))
+                    
+                    //MARK: - Name
+                    VStack(alignment: .leading, spacing: 10) {
+                        TextFieldName(name: "Imię")
+                        
+                        ZStack(alignment: .leading) {
+                            RoundedRectangle(cornerRadius: 10)
+                                .fill(Color.white.opacity(0.9))
+                                .frame(height: UIScreen.main.bounds.height * 0.05)
+                                .shadow(radius: 2)
+                            
+                            TextField("", text: $name)
+                                .onChange(of: name) { oldValue, newValue in
+                                    self.name = newValue
+                                }
+                                .font(.system(size: 20, weight: .thin))
+                                .disableAutocorrection(true)
+                                .autocapitalization(.none)
+                                .frame(height: 45)
+                                .padding(.horizontal, 10)
+                                .foregroundColor(.black.opacity(0.8))
+                            
                         }
                     }
-                                    
                     
-                    ZStack(alignment: .leading) {
-                        RoundedRectangle(cornerRadius: 10)
-                            .fill(Color.white.opacity(0.9))
-                            .frame(height: 45)
-                            .shadow(radius: 2)
+                    HStack {
                         
-                        TextField("", text: $age)
-                            .onChange(of: age) { oldValue, newValue in
-                                self.age = newValue
+                        //MARK: - Age
+                        VStack(alignment: .leading, spacing: 10) {
+                            HStack {
+                                TextFieldName(name: "Wiek")
+                                Button(action: {
+                                    showHelpAge = true // Pokaż instrukcję
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                                        showHelpAge = false // Ukryj instrukcję po 3 sekundach
+                                    }
+                                }) {
+                                    Image(systemName: "questionmark.circle")
+                                        .font(.system(size: 20, weight: .medium))
+                                        .foregroundColor(Color.white.opacity(0.7))
+                                }
                             }
-                            .font(.system(size: 20, weight: .thin))
-                            .disableAutocorrection(true)
-                            .autocapitalization(.none)
-                            .frame(height: 45)
-                            .padding(.horizontal, 10)
-                            .foregroundColor(.black.opacity(0.8))
+                            
+                            
+                            ZStack(alignment: .leading) {
+                                RoundedRectangle(cornerRadius: 10)
+                                    .fill(Color.white.opacity(0.9))
+                                    .frame(height: UIScreen.main.bounds.height * 0.05)
+                                    .shadow(radius: 2)
+                                
+                                TextField("", text: $age)
+                                    .onChange(of: age) { oldValue, newValue in
+                                        self.age = newValue
+                                    }
+                                    .font(.system(size: 20, weight: .thin))
+                                    .disableAutocorrection(true)
+                                    .autocapitalization(.none)
+                                    .frame(height: 45)
+                                    .padding(.horizontal, 10)
+                                    .foregroundColor(.black.opacity(0.8))
+                                
+                            }
+                            
+                            TextFieldHint(hint: ageHint)
+                        }
+                        .overlay(
+                            Group {
+                                if showHelpAge {
+                                    Text("Wprowadź liczbę. Widoczność wieku można zmienić w ustawieniach w zakładce kontrola rodzicielska.")
+                                        .font(.footnote)
+                                        .foregroundColor(.white)
+                                        .padding()
+                                        .background(Color.secondary)
+                                        .cornerRadius(10)
+                                        .transition(.opacity)
+                                }
+                            }
+                        )
                         
+                        //MARK: - PIN
+                        VStack(alignment: .leading, spacing: 10) {
+                            HStack {
+                                TextFieldName(name: "PIN")
+                                Button(action: {
+                                    showHelpPIN = true // Pokaż instrukcję
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                                        showHelpPIN = false // Ukryj instrukcję po 3 sekundach
+                                    }
+                                }) {
+                                    Image(systemName: "questionmark.circle")
+                                        .font(.system(size: 20, weight: .medium))
+                                        .foregroundColor(Color.white.opacity(0.7))
+                                }
+                            }
+                            
+                            ZStack(alignment: .leading) {
+                                RoundedRectangle(cornerRadius: 10)
+                                    .fill(Color.white.opacity(0.9))
+                                    .frame(height: UIScreen.main.bounds.height * 0.05)
+                                    .shadow(radius: 2)
+                                
+                                TextField("", text: $pin)
+                                    .onChange(of: pin) { oldValue, newValue in
+                                        self.pin = newValue
+                                    }
+                                    .font(.system(size: 20, weight: .thin))
+                                    .disableAutocorrection(true)
+                                    .autocapitalization(.none)
+                                    .frame(height: 45)
+                                    .padding(.horizontal, 10)
+                                    .foregroundColor(.black.opacity(0.8))
+                                
+                            }
+                            
+                            TextFieldHint(hint: pinHint)
+                        }
+                        .overlay(
+                            Group {
+                                if showHelpPIN {
+                                    Text("Wprowadź 4-cyfrowy kod. Jest on niezbędny do zarządzania kontem w zakładce kontrola rodzicielska.")
+                                        .font(.footnote)
+                                        .foregroundColor(.white)
+                                        .padding()
+                                        .background(Color.secondary)
+                                        .cornerRadius(10)
+                                        .transition(.opacity)
+                                }
+                            }
+                        )
                     }
                     
-                    TextFieldHint(hint: ageHint)
-                }
-                .overlay(
+                    
+                    //MARK: - Password
+                    VStack(alignment: .leading, spacing: 11) {
+                        TextFieldName(name: "Hasło")
+                        
+                        ZStack(alignment: .leading) {
+                            RoundedRectangle(cornerRadius: 10)
+                                .fill(Color.white.opacity(0.9))
+                                .frame(height: UIScreen.main.bounds.height * 0.05)
+                                .shadow(radius: 2)
+                            
+                            SecureField("", text: $password)
+                                .onChange(of: password) { oldValue, newValue in
+                                    self.password = newValue
+                                }
+                                .font(.system(size: 20, weight: .thin))
+                                .disableAutocorrection(true)
+                                .autocapitalization(.none)
+                                .frame(height: 45)
+                                .padding(.horizontal, 10)
+                                .foregroundColor(.black.opacity(0.8))
+                        }
+                        
+                        TextFieldHint(hint: passwordHint)
+                    }
+                    
+                    VStack {
+                        HStack {
+                            Button(action: {
+                                showRules = true // Pokaż instrukcję
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                                    showRules = false // Ukryj regulamin po 5 sekundach
+                                }
+                            }) {
+                                Image(systemName: "exclamationmark.shield.fill")
+                                    .font(.system(size: 40, weight: .medium))
+                                    .foregroundColor(Color.white.opacity(0.7))
+                            }
+                            Toggle("Zapoznałem/am się z regulaminem i akceptuję jego treść", isOn: $isOn)
+                                .foregroundColor(Color.black.opacity(0.8))
+                                .frame(height: UIScreen.main.bounds.height * 0.1)
+
+                        }
+                        
+                        Text(" ")
+                    }
+                    .overlay(
                         Group {
-                            if showHelpAge {
-                                Text("Wprowadź liczbę. Widoczność wieku można zmienić w ustawieniach w zakładce kontrola rodzicielska.")
+                            if showRules {
+                                Text("Wyrażam zgodę na przetwarzanie danych osobowych moich i mojego dziecka na potrzeby korzystania z aplikacji.")
                                     .font(.footnote)
                                     .foregroundColor(.white)
                                     .padding()
@@ -198,146 +321,37 @@ struct RegisterView: View {
                             }
                         }
                     )
-                
-                
-                //MARK: - PIN
-                VStack(alignment: .leading, spacing: 10) {
-                    HStack {
-                        TextFieldName(name: "PIN")
-                        Button(action: {
-                            showHelpPIN = true // Pokaż instrukcję
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                                showHelpPIN = false // Ukryj instrukcję po 3 sekundach
-                            }
-                        }) {
-                            Image(systemName: "questionmark.circle")
-                                .font(.system(size: 20, weight: .medium))
-                                .foregroundColor(Color.white.opacity(0.7))
-                        }
-                    }
+                    .padding(.trailing)
                     
-                    ZStack(alignment: .leading) {
-                        RoundedRectangle(cornerRadius: 10)
-                            .fill(Color.white.opacity(0.9))
-                            .frame(height: 45)
-                            .shadow(radius: 2)
+                    
+                    //MARK: - RegisterButton
+                    Button {
+                        viewModel.signUp(email: login, password: password, name: name, age: age, pin: pin)
+                    } label: {
+                        Text("Zarejestruj się")
+                            .font(.system(size: 18))
+                            .foregroundColor(.white)
+                            .frame(width: 200, height: 40, alignment: .center)
+                    }
+                    .disabled((isValidLogin && isValidPassword && (name != "") && isValidAge && isValidPIN && isOn) == false)
+                    .background(isValidLogin && isValidPassword && isValidAge && isValidPIN && isOn ? Color("DarkBabyBlueColor") : .secondary)
+                    .cornerRadius(5)
+                    
+                    
+                    HStack{
+                        Text("Masz już konto?")
+                            .foregroundColor(.black.opacity(0.7))
                         
-                        TextField("", text: $pin)
-                            .onChange(of: pin) { oldValue, newValue in
-                                self.pin = newValue
-                            }
-                            .font(.system(size: 20, weight: .thin))
-                            .disableAutocorrection(true)
-                            .autocapitalization(.none)
-                            .frame(height: 45)
-                            .padding(.horizontal, 10)
-                            .foregroundColor(.black.opacity(0.8))
-                       
-                    }
-                    
-                    TextFieldHint(hint: pinHint)
-                }
-                .overlay(
-                        Group {
-                            if showHelpPIN {
-                                Text("Wprowadź 4-cyfrowy kod. Jest on niezbędny do zarządzania kontem w zakładce kontrola rodzicielska.")
-                                    .font(.footnote)
-                                    .foregroundColor(.white)
-                                    .padding()
-                                    .background(Color.secondary)
-                                    .cornerRadius(10)
-                                    .transition(.opacity)
-                            }
-                        }
-                    )
-                
-                //MARK: - Password
-                VStack(alignment: .leading, spacing: 11) {
-                    TextFieldName(name: "Hasło")
-                    
-                    ZStack(alignment: .leading) {
-                        RoundedRectangle(cornerRadius: 10)
-                            .fill(Color.white.opacity(0.9))
-                            .frame(height: 45)
-                            .shadow(radius: 2)
+                        NavigationLink("Zaloguj się", destination: LoginView())
+                            .font(.system(size: 18))
+                            .foregroundColor(Color("DarkBabyBlueColor"))
                         
-                        SecureField("", text: $password)
-                            .onChange(of: password) { oldValue, newValue in
-                                self.password = newValue
-                            }
-                            .font(.system(size: 20, weight: .thin))
-                            .disableAutocorrection(true)
-                            .autocapitalization(.none)
-                            .frame(height: 45)
-                            .padding(.horizontal, 10)
-                            .foregroundColor(.black.opacity(0.8))
                     }
                     
-                    TextFieldHint(hint: passwordHint)
                 }
-                
-                VStack {
-                    HStack {
-                        Button(action: {
-                            showRules = true // Pokaż instrukcję
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-                                showRules = false // Ukryj regulamin po 5 sekundach
-                            }
-                        }) {
-                            Image(systemName: "exclamationmark.shield.fill")
-                                .font(.system(size: 20, weight: .medium))
-                                .foregroundColor(Color.white.opacity(0.7))
-                        }
-                        Toggle("Zapoznałem/am się z regulaminem i akceptuję jego treść", isOn: $isOn)
-                           .foregroundColor(Color.black.opacity(0.8))
-                    }
-                    
-                    Text(" ")
-                }
-                .overlay(
-                    Group {
-                        if showRules {
-                            Text("Wyrażam zgodę na przetwarzanie danych osobowych moich i mojego dziecka na potrzeby korzystania z aplikacji.")
-                                .font(.footnote)
-                                .foregroundColor(.white)
-                                .padding()
-                                .background(Color.secondary)
-                                .cornerRadius(10)
-                                .transition(.opacity)
-                        }
-                    }
-                )
-
-                //MARK: - RegisterButton
-                Button {
-                    viewModel.signUp(email: login, password: password, name: name, age: age, pin: pin)
-                } label: {
-                    Text("Zarejestruj się")
-                        .font(.system(size: 18))
-                        .foregroundColor(.white)
-                        .frame(width: 200, height: 40, alignment: .center)
-                }
-                .disabled((isValidLogin && isValidPassword && (name != "") && isValidAge && isValidPIN && isOn) == false)
-                .background(isValidLogin && isValidPassword && isValidAge && isValidPIN && isOn ? Color("DarkBabyBlueColor") : .secondary)
-                .cornerRadius(5)
-
-//                Spacer()
-
-                HStack{
-                    Text("Masz już konto?")
-                        .foregroundColor(.black.opacity(0.7))
-
-                    NavigationLink("Zaloguj się", destination: LoginView())
-                        .font(.system(size: 18))
-                        .foregroundColor(Color.white)
-                    
-                }
-
+                .padding()
             }
-            .padding()
         }
-        .background(Color.accentColor.ignoresSafeArea())
-        .navigationBarBackButtonHidden()
     }
 }
 

@@ -33,19 +33,25 @@ struct LoginView: View {
     
     var body: some View {
         ZStack {
-            Color.accentColor
-                .ignoresSafeArea()
+            Image("hellopagebg")
+                .resizable()
+                .scaledToFill()
+                .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+                .edgesIgnoringSafeArea(.all)
+                .background(Color.clear)
+            
             
             VStack(spacing: 20) {
                 Text("Logowanie")
                     .font(.system(size: 50, weight: .thin))
-                    .frame(height: 120, alignment: .bottom)
+                    .frame(width: UIScreen.main.bounds.width * 0.8, height: UIScreen.main.bounds.height * 0.1, alignment: .bottom)
                     .foregroundColor(Color.white)
+                    .padding()
                 
                 Text("Podaj adres email i hasło by zalogować")
                     .font(.system(size: 20, weight: .thin))
+                    .padding(.vertical)
                 
-                Spacer()
                 
                 //MARK: - Login
                 VStack(alignment: .leading, spacing: 10) {
@@ -54,14 +60,14 @@ struct LoginView: View {
                     ZStack(alignment: .leading) {
                         RoundedRectangle(cornerRadius: 10)
                             .fill(Color.white.opacity(0.9))
-                            .frame(height: 45)
+                            .frame(height: UIScreen.main.bounds.height * 0.05)
                             .shadow(radius: 2)
 
                         TextField("", text: $login)
                             .font(.system(size: 20, weight: .thin))
                             .disableAutocorrection(true)
                             .autocapitalization(.none)
-                            .frame(height: 45)
+                            .frame(height: UIScreen.main.bounds.height * 0.05)
                             .padding(.horizontal, 10)
                             .foregroundColor(.black.opacity(0.8))
                     }
@@ -81,14 +87,14 @@ struct LoginView: View {
                     ZStack(alignment: .leading) {
                         RoundedRectangle(cornerRadius: 10)
                             .fill(Color.white.opacity(0.9))
-                            .frame(height: 45)
+                            .frame(height: UIScreen.main.bounds.height * 0.05)
                             .shadow(radius: 2)
                         
                         SecureField("", text: $password)
                             .font(.system(size: 20, weight: .thin))
                             .disableAutocorrection(true)
                             .autocapitalization(.none)
-                            .frame(height: 45)
+                            .frame(height: UIScreen.main.bounds.height * 0.05)
                             .padding(.horizontal, 10)
                             .foregroundColor(.black.opacity(0.8))
                     }
@@ -98,7 +104,6 @@ struct LoginView: View {
                 .onChange(of: password) { oldValue, newValue in
                     self.password = newValue
                 }
-
 
                                 
                 //MARK: - SignInButton
@@ -113,17 +118,17 @@ struct LoginView: View {
                 .disabled((isValidLogin && isValidPassword) == false)
                 .background(isValidLogin && isValidPassword ? Color("DarkBabyBlueColor") : .secondary)
                 .cornerRadius(5)
+                .padding(.bottom, UIScreen.main.bounds.height * 0.3)
 
-                Spacer()
-                Spacer()
                 
                 HStack{
                     Text("Nie masz jeszcze konta?")
                         .foregroundColor(.black.opacity(0.7))
                     NavigationLink("Zarejestruj się", destination: RegisterView())
                         .font(.system(size: 18))
-                        .foregroundColor(Color.white)
+                        .foregroundColor(Color("DarkBabyBlueColor"))
                 }
+                .padding()
 
             }
             .padding()

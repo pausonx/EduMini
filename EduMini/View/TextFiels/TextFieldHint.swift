@@ -12,9 +12,12 @@ struct TextFieldHint: View {
         var body: some View {
             return Text(hint)
                 .font(.system(size: 15, weight: .light))
-                .foregroundColor(.white)
-                .frame(height: hint.isEmpty ? 0 : 40)
+                .foregroundColor(.secondary)
+                .padding(5)
+                .frame(height: hint.isEmpty ? 0 : 70)
                 .multilineTextAlignment(.leading)
+                .background(Color.white.opacity(0.5))
+                .cornerRadius(10)
         }
 }
 

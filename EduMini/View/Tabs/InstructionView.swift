@@ -22,7 +22,7 @@ struct InstructionView: View {
                 HStack {
                     Image(systemName: "square.stack.fill")
                         .font(.system(size: 35, weight: .bold))
-                        .foregroundColor(Color.accentColor)
+                        .foregroundColor(Color("BabyBlueColor"))
                         .frame(width: 50, height: 50)
                     
                     Text("Zakładka ta umożliwia przejście do fiszek")
@@ -38,7 +38,7 @@ struct InstructionView: View {
                 HStack {
                     Image(systemName: "checklist")
                         .font(.system(size: 35, weight: .bold))
-                        .foregroundColor(Color.accentColor)
+                        .foregroundColor(Color("BabyBlueColor"))
                         .frame(width: 50, height: 50)
                     
                     Text("Zakładka ta umożliwia przejście do listy ")
@@ -55,7 +55,7 @@ struct InstructionView: View {
                 HStack {
                     Image(systemName: "message.fill")
                         .font(.system(size: 35, weight: .bold))
-                        .foregroundColor(Color.accentColor)
+                        .foregroundColor(Color("BabyBlueColor"))
                         .frame(width: 50, height: 50)
                     
                     Text("Zakładka ta umożliwia przejście do chatu online z innymi użytkownikami ")
@@ -76,7 +76,7 @@ struct InstructionView: View {
                 HStack {
                     Image(systemName: "person.fill")
                         .font(.system(size: 45, weight: .bold))
-                        .foregroundColor(Color.accentColor)
+                        .foregroundColor(Color("BabyBlueColor"))
                         .frame(width: 50, height: 50)
                     
                     Text("Zakładka ta umożliwia przejście do profilu użytkownika, tam znajduje się opcja  ")
@@ -93,7 +93,7 @@ struct InstructionView: View {
                 HStack {
                     Image(systemName: "rectangle.portrait.and.arrow.right.fill")
                         .font(.system(size: 35, weight: .bold))
-                        .foregroundColor(Color.accentColor)
+                        .foregroundColor(Color("BabyBlueColor"))
                         .frame(width: 50, height: 50)
                     
                     Text("Przycisk ten umożliwia szybkie wylogowanie z aplikacji ")

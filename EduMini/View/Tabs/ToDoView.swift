@@ -10,11 +10,19 @@ import SwiftUI
 struct ToDoView: View {
     var body: some View {
         NavigationView {
-            VStack {
-                Text("Tu jest zawartość strony ToDo")
-                // Dodaj inne elementy
+            ZStack {
+                Image("profileBG") // Ustawienie obrazu jako tło
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+                    .edgesIgnoringSafeArea(.all)
+                    .background(Color.clear)
+                
+                VStack {
+                    Text("Tu jest zawartość strony ToDo")
+                    // Dodaj inne elementy
+                }
             }
-            .navigationBarTitle("Do zrobienia")
         }
         .tabItem {
             Label("ToDo", systemImage: "checklist")

@@ -14,23 +14,40 @@ struct HelloPage: View {
     
     var body: some View {
         ZStack {
-            Color.accentColor
-                .ignoresSafeArea()
+            Image("hellopagebg")
+                .resizable()
+                .scaledToFill()
+                .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+                .edgesIgnoringSafeArea(.all)
+                .background(Color.clear)
 
             VStack(spacing: 20) {
             
-                Image(systemName: "graduationcap")
-                    .font(.system(size: 80, weight: .thin))
-                    .frame(height: 120, alignment: .bottom)
-                    .foregroundColor(Color.white)
-                Text("Witaj w EduMini!")
-                    .font(.system(size: 50, weight: .thin))
-                    .foregroundColor(Color.white)
-                    .multilineTextAlignment(.center)
+                VStack {
+                    Image(systemName: "graduationcap")
+                        .font(.system(size: 80, weight: .thin))
+                        .frame(height: 120, alignment: .bottom)
+                        .foregroundColor(Color.white)
+                    
+                    Text("Witaj w EduMini!")
+                        .font(.system(size: UIScreen.main.bounds.width * 0.11, weight: .thin))
+                        .foregroundColor(Color.white)
+                        .multilineTextAlignment(.center)
+                }
+                .frame(width: UIScreen.main.bounds.width * 0.8, height: UIScreen.main.bounds.height * 0.3)
+                .padding()
+                .background(Color.white.opacity(0.1))
+                .cornerRadius(20)
                 
                 Text("Jest to aplikacja stworzona z myślą o wspieraniu nauki dzieci na ich początkowym etapie ich edukacji")
                     .font(.system(size: 20, weight: .thin))
                     .multilineTextAlignment(.center)
+                    .frame(width: UIScreen.main.bounds.width * 0.8, height: UIScreen.main.bounds.height * 0.15)
+                    .padding()
+                    .background(Color.white.opacity(0.75))
+                    .cornerRadius(20)
+
+                
                 
                 Spacer()
                 
@@ -44,7 +61,6 @@ struct HelloPage: View {
                 
                 
                 Spacer()
-                Spacer()
                 
                 VStack(alignment: .leading, spacing: 10){
                     HStack {
@@ -53,10 +69,11 @@ struct HelloPage: View {
                         
                         NavigationLink("Zarejestruj się!", destination: RegisterView())
                             .font(.system(size: 18))
-                            .foregroundColor(Color.white)
+                            .foregroundColor(Color("DarkBabyBlueColor"))
                     }
                 }
-                
+                .padding()
+                                
                 
             }
             .padding()

@@ -105,7 +105,7 @@ struct ParentalControl: View {
                         .foregroundColor(Color.black.opacity(0.8))
                         .font(.system(size: 15, weight: .light))
                         .padding(11)
-                        .background(isChatActive ? Color.accentColor.opacity(0.9) : Color.accentColor.opacity(0.5))
+                        .background(isChatActive ? Color("BabyBlueColor").opacity(0.9) : Color("BabyBlueColor").opacity(0.5))
                         .cornerRadius(8)
                         
                         
@@ -135,7 +135,7 @@ struct ParentalControl: View {
                         .foregroundColor(Color.black.opacity(0.8))
                         .font(.system(size: 15, weight: .light))
                         .padding(11)
-                        .background(isEmailActive ? Color.accentColor.opacity(0.9) : Color.accentColor.opacity(0.5))
+                        .background(isEmailActive ? Color("BabyBlueColor").opacity(0.9) : Color("BabyBlueColor").opacity(0.5))
                         .cornerRadius(8)
                     }
                     
@@ -163,7 +163,7 @@ struct ParentalControl: View {
                         .foregroundColor(Color.black.opacity(0.8))
                         .font(.system(size: 15, weight: .light))
                         .padding(11)
-                        .background(isAgeActive ? Color.accentColor.opacity(0.9) : Color.accentColor.opacity(0.5))
+                        .background(isAgeActive ? Color("BabyBlueColor").opacity(0.9) : Color("BabyBlueColor").opacity(0.5))
                         .cornerRadius(8)
                     }
                 }
@@ -193,7 +193,7 @@ struct ParentalControl: View {
                                     .padding(11)
                                     .background(
                                         RoundedRectangle(cornerRadius: 8)
-                                            .fill(isValidName ? Color.accentColor.opacity(0.9) : (isSaveNameButtonClicked ? Color.gray : Color.accentColor.opacity(0.9)))
+                                            .fill(isValidName ? Color("BabyBlueColor").opacity(0.9) : (isSaveNameButtonClicked ? Color.gray : Color("BabyBlueColor").opacity(0.9)))
                                     )
                             }
                             .disabled(isSaveNameButtonClicked || !isValidName)
@@ -234,7 +234,7 @@ struct ParentalControl: View {
                                     .padding(11)
                                     .background(
                                         RoundedRectangle(cornerRadius: 8)
-                                            .fill(isValidAge ? Color.accentColor.opacity(0.9) : (isSaveAgeButtonClicked ? Color.gray : Color.accentColor.opacity(0.9)))
+                                            .fill(isValidAge ? Color("BabyBlueColor").opacity(0.9) : (isSaveAgeButtonClicked ? Color.gray : Color("BabyBlueColor").opacity(0.9)))
                                     )
                             }
                             .disabled(isSaveAgeButtonClicked || !isValidAge)
@@ -262,19 +262,6 @@ struct ParentalControl: View {
             
         }
         .navigationBarBackButtonHidden(true)
-//        .navigationBarTitle("Kontrola rodzicielska")
-//        .navigationBarTitleDisplayMode(.inline)
-//        .toolbar {
-//            ToolbarItem(placement: .navigationBarLeading) {
-//                Button(action: {
-//                    presentationMode.wrappedValue.dismiss()
-//                }) {
-//                    Image(systemName: "arrowshape.turn.up.left.fill")
-//                        .foregroundColor(.white)
-//                }
-//            }
-//        }
-//        .modifier(NavigationBarColorModifier(backgroundColor: UIColor(Color.accentColor), tintColor: UIColor.white))
         .onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                 let chat = NUViewModel.appUser?.chat ?? ""

@@ -49,13 +49,7 @@ struct ListView: View {
                         Spacer()
                         HStack {
                             let name = NUViewModel.appUser?.name ?? "Test"
-                            //
-                            //                        Image(systemName: "line.3.horizontal")
-                            //                            .font(.system(size: 40, weight: .medium))
-                            //                            .foregroundColor(Color.secondary)
-                            //                            .padding(10)
-                            //SIDE MENU - DO ZASTANOWIENIA SIĘ
-                            
+                        
                             Spacer()
                             HStack {
                                 Text("Hej, ")
@@ -66,11 +60,14 @@ struct ListView: View {
                             .padding(.top, UIScreen.main.bounds.width * 0.1)
                             
                             
-                            Image(systemName: "person.circle.fill")
-                                .font(.system(size: 50, weight: .bold))
-                                .foregroundColor(Color.secondary)
-                                .padding(.horizontal, 15)
-                                .padding(.top, UIScreen.main.bounds.width * 0.1)
+                            NavigationLink(destination: ProfileView()) {
+                                Image(systemName: "person.circle.fill")
+                                    .font(.system(size: 50, weight: .bold))
+                                    .foregroundColor(Color.secondary)
+                                    .padding(.horizontal, 15)
+                                    .padding(.top, UIScreen.main.bounds.width * 0.1)
+                            }
+                           
                         }
                         NavigationLink(destination: InstructionView()) {
                             ZStack {

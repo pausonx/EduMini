@@ -171,8 +171,8 @@ struct ProfileInfo: View {
 
                         
             VStack {
-                //points z bazy
-                Text("1234")
+                let points = NUViewModel.appUser?.points ?? ""
+                Text(points)
                     .font(Font.custom("BalsamiqSans-Regular", size: UIScreen.main.bounds.width * 0.07))
                     .multilineTextAlignment(.leading)
                     .foregroundColor(Color.white)

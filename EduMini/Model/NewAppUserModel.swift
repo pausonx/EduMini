@@ -134,4 +134,37 @@ class NewAppUsersModel: ObservableObject {
         }
         
     }
+
+    
+    ///Do sprawdzenia funkcja dodająca punkty po zakończeniu gry na danym poziomie, pobieramy aktualną ilość punktów i ilość odpowiednią do dodania - sprawdzić czy dobrze działa, nie ma na razie funkcji dodającej punkty bezpośrednio w widoku takiej jak aktualizacja danych w parentalControl - umieścić w części głównej opowiedzialnej za działanie gry
+    func updatePoints(_ points: String, amountToAdd: Int) {
+        guard let currentPoints = Int(points) else {
+            // Jeśli nie można przekonwertować punktów na liczbę całkowitą, przerwij funkcję
+            return
+        }
+        
+        let newPoints = currentPoints + amountToAdd
+        let newPointsString = String(newPoints)
+        
+        addPoints("points", amount: newPointsString)
+    }
+
+    private func addPoints(_ dataName: String, amount: String) {
+        let db = Firestore.firestore()
+        
+        guard let userID = Auth.auth().currentUser?.uid else {
+            return
+        }
+        
+        db.collection("users").document(userID).setData([
+            dataName: amount
+        ], merge: true) { error in
+            if let error = error {
+                print("Błąd podczas aktualizacji ilości punktów: \(error)")
+            } else {
+                print("Dane \(dataName) zostały zaktualizowane pomyślnie!")
+            }
+        }
+    }
+
 }
