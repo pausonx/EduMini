@@ -1,5 +1,5 @@
 //
-//  LoginClass.swift
+//  AppViewModel.swift
 //  EduMini
 //
 //  Created by Paulina Wyskiel on 07/08/2023.

@@ -22,7 +22,8 @@ class ParentalControlSettings: ObservableObject {
 
 struct ParentalControl: View {
     @Environment(\.presentationMode) var presentationMode
-    @ObservedObject var NUViewModel = NewAppUsersModel()
+    @ObservedObject var UserProfileVM = UserProfileViewModel()
+    @ObservedObject var ParentalControlVM = ParentalControlViewModel()
     
     @State private var isChatActive: Bool = true
     @State private var isEmailActive: Bool = true
@@ -33,18 +34,18 @@ struct ParentalControl: View {
     @State private var onOffAge: String = ""
     
     init() {
-        // Pobierz wartość 'chat' z NUViewModel i ustaw odpowiednią zmienną
-        let chat = NUViewModel.appUser?.chat ?? ""
+        // Pobierz wartość 'chat' z UserProfileVM i ustaw odpowiednią zmienną
+        let chat = UserProfileVM.appUser?.chat ?? ""
         onOffChat = chat == "yes" ? " włączony" : " wyłączony"
         isChatActive = chat == "yes"
         
-        // Pobierz wartość 'emailVisible' z NUViewModel i ustaw odpowiednią zmienną
-        let emailVisible = NUViewModel.appUser?.emailVisible ?? ""
+        // Pobierz wartość 'emailVisible' z UserProfileVM i ustaw odpowiednią zmienną
+        let emailVisible = UserProfileVM.appUser?.emailVisible ?? ""
         onOffEmail = emailVisible == "yes" ? " widoczny" : " ukryty"
         isEmailActive = emailVisible == "yes"
         
-        // Pobierz wartość 'ageVisible' z NUViewModel i ustaw odpowiednią zmienną
-        let ageVisible = NUViewModel.appUser?.ageVisible ?? ""
+        // Pobierz wartość 'ageVisible' z UserProfileVM i ustaw odpowiednią zmienną
+        let ageVisible = UserProfileVM.appUser?.ageVisible ?? ""
         onOffAge = ageVisible == "yes" ? " widoczny" : " ukryty"
         isAgeActive = ageVisible == "yes"
     }
@@ -264,13 +265,13 @@ struct ParentalControl: View {
         .navigationBarBackButtonHidden(true)
         .onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                let chat = NUViewModel.appUser?.chat ?? ""
+                let chat = UserProfileVM.appUser?.chat ?? ""
                 onOffChat = chat == "yes" ? " włączony" : " wyłączony"
                 
-                let emailVisible = NUViewModel.appUser?.emailVisible ?? ""
+                let emailVisible = UserProfileVM.appUser?.emailVisible ?? ""
                 onOffEmail = emailVisible == "yes" ? " widoczny" : " ukryty"
                 
-                let ageVisible = NUViewModel.appUser?.ageVisible ?? ""
+                let ageVisible = UserProfileVM.appUser?.ageVisible ?? ""
                 onOffAge = ageVisible == "yes" ? " widoczny" : " ukryty"
                 
             }
@@ -278,23 +279,23 @@ struct ParentalControl: View {
     }
     
     private func saveChatSetting() {
-        NUViewModel.saveChatSetting(isChatActive)
+        ParentalControlVM.saveChatSetting(isChatActive)
     }
     
     private func saveEmailSetting() {
-        NUViewModel.saveEmailSetting(isEmailActive)
+        ParentalControlVM.saveEmailSetting(isEmailActive)
     }
     
     private func saveAgeSetting() {
-        NUViewModel.saveAgeSetting(isAgeActive)
+        ParentalControlVM.saveAgeSetting(isAgeActive)
     }
     
     private func updateName() {
-        NUViewModel.updateName(name)
+        ParentalControlVM.updateName(name)
     }
     
     private func updateAge() {
-        NUViewModel.updateAge(age)
+        ParentalControlVM.updateAge(age)
     }
 }
 

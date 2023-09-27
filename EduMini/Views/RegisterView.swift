@@ -60,7 +60,7 @@ struct RegisterView: View {
 
     @EnvironmentObject var viewModel: AppViewModel
 
-    @ObservedObject private var NUViewModel = NewAppUsersModel()
+    @ObservedObject private var UserProfileVM = UserProfileViewModel()
 
     var body: some View {
         ZStack {

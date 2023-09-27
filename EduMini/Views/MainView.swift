@@ -32,7 +32,7 @@ struct MainView: View {
 struct ListView: View {
     @State var shouldShowLogOutOptions = false
     @EnvironmentObject var viewModel: AppViewModel
-    @ObservedObject private var NUViewModel = NewAppUsersModel()
+    @ObservedObject private var UserProfileVM = UserProfileViewModel()
     
     var body: some View {
         NavigationView {
@@ -48,7 +48,7 @@ struct ListView: View {
                     VStack (spacing: 15) {
                         Spacer()
                         HStack {
-                            let name = NUViewModel.appUser?.name ?? "Test"
+                            let name = UserProfileVM.appUser?.name ?? "Test"
                         
                             Spacer()
                             HStack {

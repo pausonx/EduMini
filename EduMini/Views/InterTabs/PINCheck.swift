@@ -12,7 +12,7 @@ struct PINCheck: View {
     @State private var showErrorMessage = false
     
     @EnvironmentObject var viewModel: AppViewModel
-    @ObservedObject private var NUViewModel = NewAppUsersModel()
+    @ObservedObject private var UserProfileVM = UserProfileViewModel()
     @EnvironmentObject var settings: ParentalControlSettings
     
     var body: some View {
@@ -54,7 +54,7 @@ struct PinTextField: View {
         self.enterValue = Array(repeating: "", count: numOfFields)
     }
     
-    @ObservedObject private var NUViewModel = NewAppUsersModel()
+    @ObservedObject private var UserProfileVM = UserProfileViewModel()
     
     
     var body: some View {
@@ -90,7 +90,7 @@ struct PinTextField: View {
                         if index == numOfFields - 1 {
                             fieldFocus = nil
                             
-                            let pin = NUViewModel.appUser?.pin ?? ""
+                            let pin = UserProfileVM.appUser?.pin ?? ""
                             let enteredPin = enterValue.joined()
                             
                             if pin == enteredPin {

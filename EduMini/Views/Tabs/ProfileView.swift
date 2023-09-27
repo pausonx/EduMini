@@ -12,7 +12,7 @@ struct ProfileView: View {
     
     @EnvironmentObject var viewModel: AppViewModel
     @EnvironmentObject var settings: ParentalControlSettings
-    @ObservedObject private var NUViewModel = NewAppUsersModel()
+    @ObservedObject private var UserProfileVM = UserProfileViewModel()
     
     
     var body: some View {
@@ -71,23 +71,23 @@ struct ProfileView: View {
     
     // Metoda rozpoczynająca timer odświeżania
     private func startRefreshTimer() {
-        NUViewModel.fetchCurrentUser(settings: settings)
-        NUViewModel.fetchAllUsers()
+        UserProfileVM.fetchCurrentUser(settings: settings)
+        UserProfileVM.fetchAllUsers()
         Timer.scheduledTimer(withTimeInterval: 120.0, repeats: true) { _ in
-            NUViewModel.fetchCurrentUser(settings: settings)
-            NUViewModel.fetchAllUsers()
+            UserProfileVM.fetchCurrentUser(settings: settings)
+            UserProfileVM.fetchAllUsers()
         }
     }
     
     // Metoda zatrzymująca timer odświeżania
     private func stopRefreshTimer() {
-        NUViewModel.errorMessage = "" // Wyczyść ewentualne błędy
+        UserProfileVM.errorMessage = "" // Wyczyść ewentualne błędy
     }
 }
 
 struct ProfileTitle: View {
     @EnvironmentObject var viewModel: AppViewModel
-    @ObservedObject private var NUViewModel = NewAppUsersModel()
+    @ObservedObject private var UserProfileVM = UserProfileViewModel()
     
     var body: some View {
         HStack {
@@ -103,11 +103,11 @@ struct ProfileTitle: View {
 }
 
 struct ProfileInfo: View {
-    @ObservedObject private var NUViewModel = NewAppUsersModel()
+    @ObservedObject private var UserProfileVM = UserProfileViewModel()
     @EnvironmentObject var settings: ParentalControlSettings
     
     var body: some View {
-        let name = NUViewModel.appUser?.name ?? "Test"
+        let name = UserProfileVM.appUser?.name ?? "Test"
         
         Text(name)
             .font(Font.custom("BalsamiqSans-Regular", size: UIScreen.main.bounds.width * 0.1))
@@ -116,8 +116,8 @@ struct ProfileInfo: View {
             .foregroundColor(Color.white)
         
         HStack {
-            let email = NUViewModel.appUser?.email ?? ""
-            let emailVisible = NUViewModel.appUser?.emailVisible ?? ""
+            let email = UserProfileVM.appUser?.email ?? ""
+            let emailVisible = UserProfileVM.appUser?.emailVisible ?? ""
             
             Spacer()
             
@@ -142,8 +142,8 @@ struct ProfileInfo: View {
         
         HStack {
             VStack {
-                let age = NUViewModel.appUser?.age ?? ""
-                let ageVisible = NUViewModel.appUser?.ageVisible ?? ""
+                let age = UserProfileVM.appUser?.age ?? ""
+                let ageVisible = UserProfileVM.appUser?.ageVisible ?? ""
                 
                 if ageVisible == "yes" {
                     Text(age)
@@ -171,7 +171,7 @@ struct ProfileInfo: View {
 
                         
             VStack {
-                let points = NUViewModel.appUser?.points ?? ""
+                let points = UserProfileVM.appUser?.points ?? ""
                 Text(points)
                     .font(Font.custom("BalsamiqSans-Regular", size: UIScreen.main.bounds.width * 0.07))
                     .multilineTextAlignment(.leading)
@@ -189,7 +189,7 @@ struct ProfileInfo: View {
 
 
             VStack {
-                let chat = NUViewModel.appUser?.chat ?? ""
+                let chat = UserProfileVM.appUser?.chat ?? ""
                 
                 if chat == "yes" {
                     Text("włączony")
