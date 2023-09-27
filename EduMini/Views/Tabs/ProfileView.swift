@@ -64,9 +64,6 @@ struct ProfileView: View {
                 }
             }
         }
-        .tabItem {
-            Label("Profil", systemImage: "person.fill")
-        }
     }
     
     // Metoda rozpoczynająca timer odświeżania

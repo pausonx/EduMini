@@ -48,14 +48,18 @@ struct ListView: View {
                     VStack (spacing: 15) {
                         Spacer()
                         HStack {
-                            let name = UserProfileVM.appUser?.name ?? "Test"
+//                            let name = UserProfileVM.appUser?.name ?? "Test"
                         
                             Spacer()
                             HStack {
-                                Text("Hej, ")
-                                    .font(Font.custom("BalsamiqSans-Regular", size: UIScreen.main.bounds.width * 0.05)) +
-                                Text(name)
+//                                Text("Hej, ")
+//                                    .font(Font.custom("BalsamiqSans-Regular", size: UIScreen.main.bounds.width * 0.05)) +
+//                                Text(name)
+//                                    .font(Font.custom("BalsamiqSans-Regular", size: UIScreen.main.bounds.width * 0.05))
+                                Text("Miło cię widzieć!")
                                     .font(Font.custom("BalsamiqSans-Regular", size: UIScreen.main.bounds.width * 0.05))
+                                    .foregroundColor(Color.white)
+                                    .shadow(radius: 2)
                             }
                             .padding(.top, UIScreen.main.bounds.width * 0.1)
                             
@@ -63,9 +67,10 @@ struct ListView: View {
                             NavigationLink(destination: ProfileView()) {
                                 Image(systemName: "person.circle.fill")
                                     .font(.system(size: 50, weight: .bold))
-                                    .foregroundColor(Color.secondary)
+                                    .foregroundColor(Color.white.opacity(0.9))
                                     .padding(.horizontal, 15)
                                     .padding(.top, UIScreen.main.bounds.width * 0.1)
+                                    .shadow(radius: 2)
                             }
                            
                         }
@@ -118,7 +123,7 @@ struct ListView: View {
                             .navigationBarBackButtonHidden(true)
 
                             
-                            NavigationLink(destination: ToDoView()) {
+                            NavigationLink(destination: TaskListView()) {
                                 ZStack {
                                     VStack {
                                         Image(systemName: "checklist")

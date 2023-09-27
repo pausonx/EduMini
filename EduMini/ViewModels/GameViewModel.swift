@@ -27,6 +27,7 @@ class GameViewModel: ObservableObject {
         
         firebaseRepository.updateUserData("points", dataValue: newPointsString) { error in
             if let error = error {
+                self.errorMessage = "Error updating points: \(error)"
                 print("Error updating points: \(error)")
             } else {
                 print("Points updated successfully!")

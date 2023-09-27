@@ -27,9 +27,6 @@ struct FlashcardsView: View {
                 }
             }
         }
-        .tabItem {
-            Label("Fiszki", systemImage: "square.stack.fill")
-        }
     }
 }
 
