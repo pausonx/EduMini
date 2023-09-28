@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import FirebaseFirestoreSwift
 
 struct TaskListView: View {
     @ObservedObject var taskListVM = TaskListViewModel()
@@ -20,8 +21,21 @@ struct TaskListView: View {
                 VStack(alignment: .leading) {
                     List {
                         Section {
-                            ForEach(taskListVM.taskCellViewModels) { taskCellVM in
+                            ForEach(taskListVM.taskCellViewModels.indices, id: \.self) { index in
+                                let taskCellVM = taskListVM.taskCellViewModels[index]
                                 TaskCell(taskCellVM: taskCellVM)
+                                    .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                                        Button(action: {
+                                            if index < taskListVM.taskCellViewModels.count {
+                                                let taskToDelete = taskListVM.taskCellViewModels[index].task
+                                                self.taskListVM.deleteTask(task: taskToDelete)
+                                            }
+                                        }) {
+                                            Image(systemName: "trash.fill")
+                                        }
+                                        .tint(.red)
+                                        
+                                    }
                             }
                             .listRowSeparatorTint(Color("DarkBabyBlueColor"))
                             
@@ -86,19 +100,20 @@ struct TaskCell: View {
     
     var body: some View {
         HStack {
-            Image(systemName: taskCellVM.task.completed ? "square.fill" : "square")
+            Image(systemName: taskCellVM.task.completed ? "checkmark.circle.fill" : "circle")
                 .resizable()
                 .frame(width: 25, height: 25)
                 .onTapGesture {
                     self.taskCellVM.task.completed.toggle()
                 }
-                .foregroundColor(Color("EmeraldColor"))
+                .foregroundColor(Color("DarkBabyBlueColor"))
             
             TextField("Wprowadź nazwę zadania", text: $taskCellVM.task.title, onCommit: {
                 self.onCommit(self.taskCellVM.task)
             })
             .foregroundColor(Color.black.opacity(0.8))
             .font(Font.custom("BalsamiqSans-Regular", size: UIScreen.main.bounds.width * 0.04))
+            .autocorrectionDisabled()
         }
     }
 }

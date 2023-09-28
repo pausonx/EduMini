@@ -63,18 +63,15 @@ class TaskRepository: ObservableObject {
         }
     }
     
-//    func deleteTask(at indexSet: IndexSet) {
-//        indexSet.forEach { index in
-//            let task = self.tasks[index]
-//            
-//            db.collection("tasks").document(task["id"]!).delete() { error in
-//                if let error = error {
-//                    print(error.localizedDescription)
-//                } else {
-//
-//                }
-//            }
-//            )
-//        }
-//    }
+    func deleteTask(_ task: Task) {
+        if let taskID = task.id {
+            db.collection("tasks").document(taskID).delete { error in
+                if let error = error {
+                    print("Unable to delete task: \(error.localizedDescription)")
+                } else {
+                    print("Task deleted successfully.")
+                }
+            }
+        }
+    }
 }
