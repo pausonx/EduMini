@@ -43,4 +43,15 @@ class TaskCellViewModel: ObservableObject, Identifiable {
             }
             .store(in: &cancellables)
     }
+    
+    
+    func deleteTaskAfterDelay(_ task: Task) {
+        // Opóźnienie usunięcia zadania o 2.5 sekundy
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
+            if task.completed {
+                self.taskRepository.deleteTask(task)
+            }
+        }
+    }
+
 }

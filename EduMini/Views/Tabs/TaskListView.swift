@@ -14,7 +14,8 @@ struct TaskListView: View {
     let tasks = testDataTask
     
     @State var presentAddNewItem = false
-    
+    @State private var showHelpDelete = false
+
     var body: some View {
         NavigationView {
             ZStack {
@@ -24,18 +25,6 @@ struct TaskListView: View {
                             ForEach(taskListVM.taskCellViewModels.indices, id: \.self) { index in
                                 let taskCellVM = taskListVM.taskCellViewModels[index]
                                 TaskCell(taskCellVM: taskCellVM)
-                                    .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-                                        Button(action: {
-                                            if index < taskListVM.taskCellViewModels.count {
-                                                let taskToDelete = taskListVM.taskCellViewModels[index].task
-                                                self.taskListVM.deleteTask(task: taskToDelete)
-                                            }
-                                        }) {
-                                            Image(systemName: "trash.fill")
-                                        }
-                                        .tint(.red)
-                                        
-                                    }
                             }
                             .listRowSeparatorTint(Color("DarkBabyBlueColor"))
                             
@@ -66,21 +55,46 @@ struct TaskListView: View {
 
                     
                     
-                    Button(action: { self.presentAddNewItem.toggle() }) {
+                    HStack {
+                        Button(action: { self.presentAddNewItem.toggle() }) {
+                            HStack {
+                                Image(systemName: "plus.app.fill")
+                                    .font(.system(size: UIScreen.main.bounds.width * 0.1, weight: .medium))
+                                    .foregroundColor(Color.secondary)
+                                    .shadow(radius: 2)
+                                
+                            }
+                        }
+                        Spacer()
                         HStack {
-                            Image(systemName: "plus.app.fill")
-                                .resizable()
-                                .frame(width: UIScreen.main.bounds.width * 0.1, height: UIScreen.main.bounds.width * 0.1)
-                                .foregroundColor(Color.secondary)
-                                .shadow(radius: 2)
-                            
-                            Text("Dodaj nowe zadanie")
-                                .font(Font.custom("BalsamiqSans-Regular", size: UIScreen.main.bounds.width * 0.06))
-                                .foregroundColor(Color.secondary)
-                                .shadow(radius: 1)
+                            Button(action: {
+                                showHelpDelete = true
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                                    showHelpDelete = false
+                                }
+                            }) {
+                                Image(systemName: "trash.square.fill")
+                                    .font(.system(size: UIScreen.main.bounds.width * 0.1, weight: .medium))
+                                    .foregroundColor(Color.secondary)
+                                    .shadow(radius: 2)
+                            }
                         }
                     }
                     .padding()
+                    .overlay(
+                        Group {
+                            if showHelpDelete {
+                                Text("Aby usunąć zadanie, odznacz je jako zrobione!")
+                                    .font(.footnote)
+                                    .foregroundColor(.white)
+                                    .padding()
+                                    .background(Color("DarkBabyBlueColor").opacity(0.9))
+                                    .cornerRadius(10)
+                                    .transition(.opacity)
+                            }
+                        }
+                    )
+                    
                 }
             }
         }
@@ -105,6 +119,7 @@ struct TaskCell: View {
                 .frame(width: 25, height: 25)
                 .onTapGesture {
                     self.taskCellVM.task.completed.toggle()
+                    self.taskCellVM.deleteTaskAfterDelay(self.taskCellVM.task)
                 }
                 .foregroundColor(Color("DarkBabyBlueColor"))
             
