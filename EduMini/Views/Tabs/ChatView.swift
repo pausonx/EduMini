@@ -9,7 +9,10 @@ import SwiftUI
 
 struct ChatView: View {
     @ObservedObject private var UserProfileVM = UserProfileViewModel()
-
+    @State private var lastRefreshDate = Date()
+    @EnvironmentObject var settings: ParentalControlSettings
+    
+    
     func stringToAge(_ ageString: String) -> Int {
         return Int(ageString) ?? 0
     }
@@ -25,11 +28,11 @@ struct ChatView: View {
                     .background(Color.clear)
                 
                 let age = UserProfileVM.appUser?.age ?? ""
-
+                
                 let ageInt = stringToAge(age)
                 if ageInt > 6 {
                     VStack{
-                        Text("Tu bedzie czat")
+                        MainMessageView()
                     }
                 } else {
                     VStack{
@@ -48,6 +51,28 @@ struct ChatView: View {
         .tabItem {
             Label("Chat", systemImage: "message.fill")
         }
+        .onAppear {
+            // Rozpocznij timer przy pojawieniu się widoku
+            startRefreshTimer()
+        }
+        .onDisappear {
+            // Zatrzymaj timer przy zniknięciu widoku
+            stopRefreshTimer()
+        }
+    }
+    // Metoda rozpoczynająca timer odświeżania
+    private func startRefreshTimer() {
+        UserProfileVM.fetchCurrentUser(settings: settings)
+        UserProfileVM.fetchAllUsers()
+        Timer.scheduledTimer(withTimeInterval: 120.0, repeats: true) { _ in
+            UserProfileVM.fetchCurrentUser(settings: settings)
+            UserProfileVM.fetchAllUsers()
+        }
+    }
+    
+    // Metoda zatrzymująca timer odświeżania
+    private func stopRefreshTimer() {
+        UserProfileVM.errorMessage = "" // Wyczyść ewentualne błędy
     }
 }
 

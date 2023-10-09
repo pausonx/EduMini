@@ -4,7 +4,8 @@ struct MainView: View {
     @State private var selectedTab: Int = 0
     @State private var shouldShowLogOutOptions = false
     @EnvironmentObject var viewModel: AppViewModel
-    
+    @State private var lastRefreshDate = Date()
+
     var body: some View {
         TabView(selection: $selectedTab) {
             ListView()
@@ -129,7 +130,7 @@ struct ListView: View {
                                         
                                         
                                         Text("Do zrobienia")
-                                            .font(Font.custom("BalsamiqSans-Bold", size: UIScreen.main.bounds.width * 0.07))
+                                            .font(Font.custom("BalsamiqSans-Bold", size: UIScreen.main.bounds.width * 0.06))
                                             .foregroundColor(Color.white)
                                             .padding(5)
                                         

@@ -71,7 +71,7 @@ struct PinTextField: View {
                 .keyboardType(.numberPad)
                 .frame(width: 68, height: 68)
                 .font(.system(size: 25, weight: .light))
-                .background(Color.secondary.opacity(0.1))
+                .background(Color.gray.opacity(0.1))
                 .cornerRadius(5)
                 .multilineTextAlignment(.center)
                 .focused($fieldFocus, equals: index)

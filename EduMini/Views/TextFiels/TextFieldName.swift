@@ -13,7 +13,7 @@ struct TextFieldName: View {
     
     var body: some View {
         Text(name)
-            .foregroundColor(.secondary)
+            .foregroundColor(Color("DarkGrayColor"))
             .frame(height: 15, alignment: .leading)
     }
 }

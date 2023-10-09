@@ -116,7 +116,7 @@ struct LoginView: View {
                         .frame(width: 200, height: 40, alignment: .center)
                 }
                 .disabled((isValidLogin && isValidPassword) == false)
-                .background(isValidLogin && isValidPassword ? Color("DarkBabyBlueColor") : .secondary)
+                .background(isValidLogin && isValidPassword ? Color("DarkBabyBlueColor") : .gray)
                 .cornerRadius(5)
                 .padding(.bottom, UIScreen.main.bounds.height * 0.3)
 

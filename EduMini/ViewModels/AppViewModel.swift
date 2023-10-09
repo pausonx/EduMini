@@ -13,9 +13,9 @@ class AppViewModel: ObservableObject {
     let auth = Auth.auth()
     static let shared = FirebaseManager()
         
-    @Published var signedIn = false // Zmienna instancji
+    @Published var signedIn = false
         
-    var isSignedIn: Bool { // Zmienna instancji
+    var isSignedIn: Bool {
         return auth.currentUser != nil
     }
     
@@ -33,14 +33,14 @@ class AppViewModel: ObservableObject {
         }
     }
     
-    func signUp(email: String, password: String, name: String, age: String, pin: String) {
+    func signUp(email: String, password: String, name: String, nick: String, age: String, pin: String) {
         auth.createUser(withEmail: email, password: password)  { [weak self] result, error in
             guard result != nil, error == nil else {
                 return
             }
             
             guard (FirebaseManager.shared.auth.currentUser?.uid) != nil else { return }
-            self?.storeUserInformation(email: email, name: name, age: age, pin: pin)
+            self?.storeUserInformation(email: email, name: name, nick: nick, age: age, pin: pin)
                         
             DispatchQueue.main.async {
                 //Success
@@ -50,11 +50,11 @@ class AppViewModel: ObservableObject {
     }
 
     
-    private func storeUserInformation(email: String, name: String, age: String, pin: String){
+    private func storeUserInformation(email: String, name: String, nick: String, age: String, pin: String){
         guard let uid = FirebaseManager.shared.auth.currentUser?.uid else {
             return
         }
-        let userData = ["email": email, "uid": uid, "name" : name, "age": age, "pin": pin, "emailVisible": "yes", "ageVisible": "yes", "points": "0"] as [String : Any]
+        let userData = ["email": email, "uid": uid, "name" : name, "nick" : nick, "age": age, "pin": pin, "emailVisible": "yes", "ageVisible": "yes", "points": "0"] as [String : Any]
         FirebaseManager.shared.firestore.collection("users")
                 .document(uid).setData(userData) { err in
                     if let err = err {

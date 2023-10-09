@@ -37,11 +37,11 @@ struct ProfileView: View {
                             HStack {
                                 Text("Kontrola rodzicielska")
                                     .font(.system(size: 20, weight: .light))
-                                    .foregroundColor(Color.secondary)
+                                    .foregroundColor(Color("DarkGrayColor"))
 
                                 Image(systemName: "shield.fill")
                                     .font(.system(size: 25, weight: .bold))
-                                    .foregroundColor(Color.secondary)
+                                    .foregroundColor(Color("DarkGrayColor"))
 
                                 Spacer()
                             }
@@ -67,7 +67,7 @@ struct ProfileTitle: View {
         HStack {
             Image(systemName: "person.crop.circle.fill")
                 .font(.system(size: UIScreen.main.bounds.width * 0.35, weight: .light))
-                .foregroundColor(Color.secondary.opacity(0.9))
+                .foregroundColor(Color("DarkGrayColor").opacity(0.8).opacity(0.9))
             
             Spacer()
         }
@@ -88,6 +88,7 @@ struct ProfileInfo: View {
     
     var body: some View {
         let name = UserProfileVM.appUser?.name ?? "Test"
+        let nick = UserProfileVM.appUser?.nick ?? "Test"
         
         Text(name)
             .font(Font.custom("BalsamiqSans-Regular", size: UIScreen.main.bounds.width * 0.1))
@@ -95,27 +96,11 @@ struct ProfileInfo: View {
             .padding(5)
             .foregroundColor(Color.white)
         
-        HStack {
-            let email = UserProfileVM.appUser?.email ?? ""
-            let emailVisible = UserProfileVM.appUser?.emailVisible ?? ""
-            
-            Spacer()
-            
-            if emailVisible == "yes" {
-                Text(email)
-                    .font(Font.custom("BalsamiqSans-Regular", size: UIScreen.main.bounds.width * 0.06))
-                    .multilineTextAlignment(.leading)
-                    .foregroundColor(Color.white)
-            } else {
-                Text("Adres email jest ukryty")
-                    .font(Font.custom("BalsamiqSans-Regular", size: UIScreen.main.bounds.width * 0.06))
-                    .multilineTextAlignment(.leading)
-                    .foregroundColor(Color.white)
-            }
-                       
-            Spacer()
-        }
-        .padding(.bottom, 10)
+        Text(nick)
+            .font(Font.custom("BalsamiqSans-Regular", size: UIScreen.main.bounds.width * 0.06))
+            .multilineTextAlignment(.leading)
+            .padding(5)
+            .foregroundColor(Color.white)
         
         Divider()
             .padding(.horizontal, 15)
@@ -142,7 +127,7 @@ struct ProfileInfo: View {
                 Text("Wiek")
                     .font(.system(size: 17, weight: .light))
                     .multilineTextAlignment(.leading)
-                    .foregroundColor(Color.secondary)
+                    .foregroundColor(Color("DarkGrayColor"))
 
             }
             .padding(20)
@@ -161,7 +146,7 @@ struct ProfileInfo: View {
                 Text("Punkty")
                     .font(.system(size: 17, weight: .light))
                     .multilineTextAlignment(.leading)
-                    .foregroundColor(Color.secondary)
+                    .foregroundColor(Color("DarkGrayColor"))
             }
             .padding(20)
             .frame(width: UIScreen.main.bounds.width * 0.3, height: UIScreen.main.bounds.height * 0.1)
@@ -187,16 +172,40 @@ struct ProfileInfo: View {
                 Text("Chat")
                     .font(.system(size: 17, weight: .light))
                     .multilineTextAlignment(.leading)
-                    .foregroundColor(Color.secondary)
+                    .foregroundColor(Color("DarkGrayColor"))
 
             }
             .padding(20)
             .frame(width: UIScreen.main.bounds.width * 0.3, height: UIScreen.main.bounds.height * 0.1)
             .background(Color.white.opacity(0.3))
             .cornerRadius(25)
-        
 
         }
+        
+        Divider()
+            .padding(.horizontal, 15)
+        
+        HStack {
+            let email = UserProfileVM.appUser?.email ?? ""
+            let emailVisible = UserProfileVM.appUser?.emailVisible ?? ""
+            
+            Spacer()
+            
+            if emailVisible == "yes" {
+                Text(email)
+                    .font(Font.custom("BalsamiqSans-Regular", size: UIScreen.main.bounds.width * 0.05))
+                    .multilineTextAlignment(.leading)
+                    .foregroundColor(Color.white)
+            } else {
+                Text("Adres email jest ukryty")
+                    .font(Font.custom("BalsamiqSans-Regular", size: UIScreen.main.bounds.width * 0.05))
+                    .multilineTextAlignment(.leading)
+                    .foregroundColor(Color.white)
+            }
+                       
+            Spacer()
+        }
+        .padding(.bottom, 10)
 
     }
 }

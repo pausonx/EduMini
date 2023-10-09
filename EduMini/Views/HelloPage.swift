@@ -86,7 +86,7 @@ struct BStyle1: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .padding()
-            .background(configuration.isPressed ? Color.secondary.opacity(0.7) : Color.secondary)
+            .background(configuration.isPressed ? Color.gray.opacity(0.7) : Color.gray)
             .cornerRadius(5)
     }
 }

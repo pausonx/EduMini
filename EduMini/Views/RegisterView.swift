@@ -50,6 +50,7 @@ struct RegisterView: View {
     }
     
     @State private var name: String = ""
+    @State private var nick: String = ""
     
     @State var isOn: Bool = false
     
@@ -61,7 +62,52 @@ struct RegisterView: View {
     @EnvironmentObject var viewModel: AppViewModel
 
     @ObservedObject private var UserProfileVM = UserProfileViewModel()
-
+    
+    @State private var emailInUse = false
+    @State private var nickInUse = false
+    
+    func isEmailUnique(_ email: String, completion: @escaping (Bool) -> Void) {
+        let db = Firestore.firestore()
+        let usersCollection = db.collection("users")
+        
+        usersCollection.whereField("email", isEqualTo: email).getDocuments { (querySnapshot, error) in
+            if let error = error {
+                print("Błąd podczas sprawdzania unikalności e-maila: \(error.localizedDescription)")
+                completion(false)
+                return
+            }
+            
+            if let documents = querySnapshot?.documents, !documents.isEmpty {
+                // E-mail jest już w użyciu
+                completion(false)
+            } else {
+                // E-mail jest unikalny
+                completion(true)
+            }
+        }
+    }
+    
+    func isNickUnique(_ nick: String, completion: @escaping (Bool) -> Void) {
+        let db = Firestore.firestore()
+        let usersCollection = db.collection("users")
+        
+        usersCollection.whereField("nick", isEqualTo: nick).getDocuments { (querySnapshot, error) in
+            if let error = error {
+                print("Błąd podczas sprawdzania unikalności nicku: \(error.localizedDescription)")
+                completion(false)
+                return
+            }
+            
+            if let documents = querySnapshot?.documents, !documents.isEmpty {
+                // Nick jest już w użyciu
+                completion(false)
+            } else {
+                // Nick jest unikalny
+                completion(true)
+            }
+        }
+    }
+    
     var body: some View {
         ZStack {
             Image("hellopagebg")
@@ -73,7 +119,7 @@ struct RegisterView: View {
             
             ScrollView {
                 
-                VStack(spacing: 20) {
+                VStack(spacing: 10) {
                     Text("Rejestracja")
                         .font(.system(size: 50, weight: .thin))
                         .frame(width: UIScreen.main.bounds.width * 0.8, height: UIScreen.main.bounds.height * 0.1, alignment: .bottom)
@@ -125,7 +171,7 @@ struct RegisterView: View {
                                     .font(.footnote)
                                     .foregroundColor(.white)
                                     .padding()
-                                    .background(Color.secondary)
+                                    .background(Color("DarkBabyBlueColor"))
                                     .cornerRadius(10)
                                     .transition(.opacity)
                             }
@@ -145,6 +191,30 @@ struct RegisterView: View {
                             TextField("", text: $name)
                                 .onChange(of: name) { oldValue, newValue in
                                     self.name = newValue
+                                }
+                                .font(.system(size: 20, weight: .thin))
+                                .disableAutocorrection(true)
+                                .autocapitalization(.none)
+                                .frame(height: 45)
+                                .padding(.horizontal, 10)
+                                .foregroundColor(.black.opacity(0.8))
+                            
+                        }
+                    }
+                    
+                    //MARK: - Nick
+                    VStack(alignment: .leading, spacing: 10) {
+                        TextFieldName(name: "Nick")
+                        
+                        ZStack(alignment: .leading) {
+                            RoundedRectangle(cornerRadius: 10)
+                                .fill(Color.white.opacity(0.9))
+                                .frame(height: UIScreen.main.bounds.height * 0.05)
+                                .shadow(radius: 2)
+                            
+                            TextField("", text: $nick)
+                                .onChange(of: nick) { oldValue, newValue in
+                                    self.nick = newValue
                                 }
                                 .font(.system(size: 20, weight: .thin))
                                 .disableAutocorrection(true)
@@ -199,11 +269,11 @@ struct RegisterView: View {
                         .overlay(
                             Group {
                                 if showHelpAge {
-                                    Text("Wprowadź liczbę. Widoczność wieku można zmienić w ustawieniach w zakładce kontrola rodzicielska.")
+                                    Text("Wprowadź liczbę.")
                                         .font(.footnote)
                                         .foregroundColor(.white)
                                         .padding()
-                                        .background(Color.secondary)
+                                        .background(Color("DarkBabyBlueColor"))
                                         .cornerRadius(10)
                                         .transition(.opacity)
                                 }
@@ -250,11 +320,11 @@ struct RegisterView: View {
                         .overlay(
                             Group {
                                 if showHelpPIN {
-                                    Text("Wprowadź 4-cyfrowy kod. Jest on niezbędny do zarządzania kontem w zakładce kontrola rodzicielska.")
+                                    Text("Wprowadź 4-cyfrowy kod.")
                                         .font(.footnote)
                                         .foregroundColor(.white)
                                         .padding()
-                                        .background(Color.secondary)
+                                        .background(Color("DarkBabyBlueColor"))
                                         .cornerRadius(10)
                                         .transition(.opacity)
                                 }
@@ -298,45 +368,66 @@ struct RegisterView: View {
                             }) {
                                 Image(systemName: "exclamationmark.shield.fill")
                                     .font(.system(size: 40, weight: .medium))
-                                    .foregroundColor(Color.white.opacity(0.7))
+                                    .foregroundColor(Color("DarkBabyBlueColor").opacity(0.7))
                             }
                             Toggle("Zapoznałem/am się z regulaminem i akceptuję jego treść", isOn: $isOn)
                                 .foregroundColor(Color.black.opacity(0.8))
                                 .frame(height: UIScreen.main.bounds.height * 0.1)
 
                         }
-                        
-                        Text(" ")
                     }
                     .overlay(
                         Group {
                             if showRules {
-                                Text("Wyrażam zgodę na przetwarzanie danych osobowych moich i mojego dziecka na potrzeby korzystania z aplikacji.")
+                                Text("Wyrażam zgodę na przetwarzanie danych osobowych na potrzeby korzystania z aplikacji.")
                                     .font(.footnote)
                                     .foregroundColor(.white)
                                     .padding()
-                                    .background(Color.secondary)
+                                    .background(Color("DarkBabyBlueColor"))
                                     .cornerRadius(10)
                                     .transition(.opacity)
                             }
                         }
                     )
-                    .padding(.trailing)
-                    
                     
                     //MARK: - RegisterButton
                     Button {
-                        viewModel.signUp(email: login, password: password, name: name, age: age, pin: pin)
+                        isEmailUnique(login) { isUniqueEmail in
+                            if isUniqueEmail {
+                                isNickUnique(nick) { isUniqueNick in
+                                    if isUniqueNick {
+                                        viewModel.signUp(email: login, password: password, name: name, nick: nick, age: age, pin: pin)
+                                    } else {
+                                        nickInUse = true
+                                    }
+                                }
+                            } else {
+                                emailInUse = true
+                            }
+                        }
                     } label: {
                         Text("Zarejestruj się")
                             .font(.system(size: 18))
                             .foregroundColor(.white)
                             .frame(width: 200, height: 40, alignment: .center)
                     }
-                    .disabled((isValidLogin && isValidPassword && (name != "") && isValidAge && isValidPIN && isOn) == false)
-                    .background(isValidLogin && isValidPassword && isValidAge && isValidPIN && isOn ? Color("DarkBabyBlueColor") : .secondary)
+                    .disabled(!(isValidLogin && isValidPassword && !name.isEmpty && !nick.isEmpty && isValidAge && isValidPIN && isOn))
+                    .background(isValidLogin && isValidPassword && isValidAge && isValidPIN && isOn ? Color("DarkBabyBlueColor") : .gray)
                     .cornerRadius(5)
                     
+                    if emailInUse {
+                        Text("Adres e-mail jest już w użyciu. Wybierz inny adres e-mail.")
+                            .foregroundColor(.red)
+                            .font(.footnote)
+                            .padding(.top, 5)
+                    }
+
+                    if nickInUse {
+                        Text("Nick jest już zajęty. Wybierz inny nick.")
+                            .foregroundColor(.red)
+                            .font(.footnote)
+                            .padding(.top, 5)
+                    }
                     
                     HStack{
                         Text("Masz już konto?")

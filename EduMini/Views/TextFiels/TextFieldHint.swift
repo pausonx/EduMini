@@ -12,7 +12,7 @@ struct TextFieldHint: View {
         var body: some View {
             return Text(hint)
                 .font(.system(size: 15, weight: .light))
-                .foregroundColor(.secondary)
+                .foregroundColor(.gray)
                 .padding(5)
                 .frame(height: hint.isEmpty ? 0 : 70)
                 .multilineTextAlignment(.leading)
