@@ -26,6 +26,7 @@ struct MainView: View {
                 .tag(2)
         }
         .font(Font.custom("BalsamiqSans-Regular", size: 20))
+        .navigationBarBackButtonHidden(true)
     }
 }
 
@@ -48,14 +49,8 @@ struct ListView: View {
                     VStack (spacing: 15) {
                         Spacer()
                         HStack {
-//                            let name = UserProfileVM.appUser?.name ?? "Test"
-                        
                             Spacer()
                             HStack {
-//                                Text("Hej, ")
-//                                    .font(Font.custom("BalsamiqSans-Regular", size: UIScreen.main.bounds.width * 0.05)) +
-//                                Text(name)
-//                                    .font(Font.custom("BalsamiqSans-Regular", size: UIScreen.main.bounds.width * 0.05))
                                 Text("Miło cię widzieć!")
                                     .font(Font.custom("BalsamiqSans-Regular", size: UIScreen.main.bounds.width * 0.05))
                                     .foregroundColor(Color.white)
@@ -215,11 +210,10 @@ struct ListView: View {
                 }
             .navigationBarHidden(true)
             }
-            
         }
         .navigationBarBackButtonHidden(true)
-        
     }
+    
     
 }
 

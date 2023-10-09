@@ -54,7 +54,7 @@ class AppViewModel: ObservableObject {
         guard let uid = FirebaseManager.shared.auth.currentUser?.uid else {
             return
         }
-        let userData = ["email": email, "uid": uid, "name" : name, "age": age, "pin": pin, "chat": "yes", "emailVisible": "yes", "ageVisible": "yes", "points": "0"] as [String : Any]
+        let userData = ["email": email, "uid": uid, "name" : name, "age": age, "pin": pin, "emailVisible": "yes", "ageVisible": "yes", "points": "0"] as [String : Any]
         FirebaseManager.shared.firestore.collection("users")
                 .document(uid).setData(userData) { err in
                     if let err = err {

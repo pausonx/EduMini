@@ -8,12 +8,10 @@
 import SwiftUI
 
 class ParentalControlSettings: ObservableObject {
-    @Published var isActiveChat: Bool
     @Published var isActiveEmail: Bool
     @Published var isActiveAge: Bool
     
-    init(isActiveChat: Bool, isActiveEmail: Bool, isActiveAge: Bool) {
-        self.isActiveChat = isActiveChat
+    init(isActiveEmail: Bool, isActiveAge: Bool) {
         self.isActiveEmail = isActiveEmail
         self.isActiveAge = isActiveAge
     }
@@ -25,19 +23,13 @@ struct ParentalControl: View {
     @ObservedObject var UserProfileVM = UserProfileViewModel()
     @ObservedObject var ParentalControlVM = ParentalControlViewModel()
     
-    @State private var isChatActive: Bool = true
     @State private var isEmailActive: Bool = true
     @State private var isAgeActive: Bool = true
     
-    @State private var onOffChat: String = ""
     @State private var onOffEmail: String = ""
     @State private var onOffAge: String = ""
     
     init() {
-        // Pobierz wartość 'chat' z UserProfileVM i ustaw odpowiednią zmienną
-        let chat = UserProfileVM.appUser?.chat ?? ""
-        onOffChat = chat == "yes" ? " włączony" : " wyłączony"
-        isChatActive = chat == "yes"
         
         // Pobierz wartość 'emailVisible' z UserProfileVM i ustaw odpowiednią zmienną
         let emailVisible = UserProfileVM.appUser?.emailVisible ?? ""
@@ -83,36 +75,6 @@ struct ParentalControl: View {
             List {
                 Section(header: Text("Ustawienia").font(.system(size: 18))){
                     HStack {
-                        Text("Chat z innymi użytkownikami")
-                            .font(.system(size: 15, weight: .light)) +
-                        Text(onOffChat)
-                            .italic()
-                            .font(.system(size: 15, weight: .semibold))
-                        
-                        Spacer()
-                        
-                        Button(action: {
-                            isChatActive.toggle()
-                            saveChatSetting()
-                            if isChatActive {
-                                onOffChat = " włączony"
-                            }
-                            else {
-                                onOffChat = " wyłączony"
-                            }
-                        }) {
-                            Text("Zmień")
-                        }
-                        .foregroundColor(Color.black.opacity(0.8))
-                        .font(.system(size: 15, weight: .light))
-                        .padding(11)
-                        .background(isChatActive ? Color("BabyBlueColor").opacity(0.9) : Color("BabyBlueColor").opacity(0.5))
-                        .cornerRadius(8)
-                        
-                        
-                    }
-                    
-                    HStack {
                         Text("Adres email na profilu")
                             .font(.system(size: 15, weight: .light)) +
                         Text(onOffEmail)
@@ -146,7 +108,7 @@ struct ParentalControl: View {
                         Text(onOffAge)
                             .italic()
                             .font(.system(size: 15, weight: .semibold))
-                        
+                            
                         Spacer()
                         
                         Button(action: {
@@ -167,6 +129,10 @@ struct ParentalControl: View {
                         .background(isAgeActive ? Color("BabyBlueColor").opacity(0.9) : Color("BabyBlueColor").opacity(0.5))
                         .cornerRadius(8)
                     }
+                    
+                    Text("Chat jest niedostępny dla dzieci poniżej 7 r.ż.!")
+                        .font(.system(size: 15, weight: .light))
+                        .padding(2)
                 }
                 Section(header: Text("Edycja danych").font(.system(size: 18))){
                     VStack{
@@ -265,9 +231,6 @@ struct ParentalControl: View {
         .navigationBarBackButtonHidden(true)
         .onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                let chat = UserProfileVM.appUser?.chat ?? ""
-                onOffChat = chat == "yes" ? " włączony" : " wyłączony"
-                
                 let emailVisible = UserProfileVM.appUser?.emailVisible ?? ""
                 onOffEmail = emailVisible == "yes" ? " widoczny" : " ukryty"
                 
@@ -276,10 +239,6 @@ struct ParentalControl: View {
                 
             }
         }
-    }
-    
-    private func saveChatSetting() {
-        ParentalControlVM.saveChatSetting(isChatActive)
     }
     
     private func saveEmailSetting() {

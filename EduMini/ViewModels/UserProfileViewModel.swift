@@ -6,6 +6,7 @@
 //
 import Firebase
 import FirebaseFirestore
+import SwiftUI
 
 class UserProfileViewModel: ObservableObject {
     
@@ -41,10 +42,6 @@ class UserProfileViewModel: ObservableObject {
             
             self.appUser = AppUser(data: data)
             
-            if let chatValue = data["chat"] as? String, let settings = settings {
-                settings.isActiveChat = chatValue == "yes"
-            }
-            
             if let emailVisibleValue = data["emailVisible"] as? String, let settings = settings {
                 settings.isActiveEmail = emailVisibleValue == "yes"
             }
@@ -77,5 +74,4 @@ class UserProfileViewModel: ObservableObject {
                 })
             }
     }
-    
 }

@@ -62,11 +62,8 @@ struct InstructionView: View {
                         .font(.system(size: 16, weight: .light)) +
                     Text("\n\nUwaga! ")
                         .font(.system(size: 14, weight: .bold)) +
-                    Text("\nTa opcja może zostać wyłączona w ustawieniach w opcji ")
-                        .font(.system(size: 14, weight: .light)) +
-                    Text("kontrola rodzicielska ")
-                        .font(.system(size: 14, weight: .medium))
-                        .italic()
+                    Text("\nChat jest dostępny dla dzieci powyżej 7 roku życia.")
+                        .font(.system(size: 14, weight: .light))
                 }
                 .frame(width: UIScreen.main.bounds.width * 0.8, height: UIScreen.main.bounds.height * 0.17)
                 .padding()

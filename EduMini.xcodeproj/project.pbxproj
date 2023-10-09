@@ -53,7 +53,6 @@
 		D0E4DD9D2A88C1C80039BAE9 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E4DD9C2A88C1C80039BAE9 /* ChatView.swift */; };
 		D0E4DD9F2A88C3110039BAE9 /* FlashcardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E4DD9E2A88C3110039BAE9 /* FlashcardsView.swift */; };
 		D0E4DDA12A88C3890039BAE9 /* InstructionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E4DDA02A88C3890039BAE9 /* InstructionView.swift */; };
-		D0E4DDA72A88CF6B0039BAE9 /* CustomNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E4DDA62A88CF6B0039BAE9 /* CustomNavBar.swift */; };
 		D0E4DDA92A88E3B60039BAE9 /* PINCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E4DDA82A88E3B60039BAE9 /* PINCheck.swift */; };
 /* End PBXBuildFile section */
 
@@ -119,7 +118,6 @@
 		D0E4DD9C2A88C1C80039BAE9 /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
 		D0E4DD9E2A88C3110039BAE9 /* FlashcardsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashcardsView.swift; sourceTree = "<group>"; };
 		D0E4DDA02A88C3890039BAE9 /* InstructionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionView.swift; sourceTree = "<group>"; };
-		D0E4DDA62A88CF6B0039BAE9 /* CustomNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavBar.swift; sourceTree = "<group>"; };
 		D0E4DDA82A88E3B60039BAE9 /* PINCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PINCheck.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -240,7 +238,6 @@
 			isa = PBXGroup;
 			children = (
 				D04CD3592A80D33D0051296E /* ContentView.swift */,
-				D0E4DDA52A88CF390039BAE9 /* Modifiers */,
 				D04CD38F2A80E2810051296E /* HelloPage.swift */,
 				D04CD3AF2A8109880051296E /* MainView.swift */,
 				D0C0676D2A9606CC0023E127 /* InterTabs */,
@@ -324,14 +321,6 @@
 				D0E4DD962A82866B0039BAE9 /* ProfileView.swift */,
 			);
 			path = Tabs;
-			sourceTree = "<group>";
-		};
-		D0E4DDA52A88CF390039BAE9 /* Modifiers */ = {
-			isa = PBXGroup;
-			children = (
-				D0E4DDA62A88CF6B0039BAE9 /* CustomNavBar.swift */,
-			);
-			path = Modifiers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -490,7 +479,6 @@
 				D0E4DD9D2A88C1C80039BAE9 /* ChatView.swift in Sources */,
 				D04CD3AC2A80F3250051296E /* AppViewModel.swift in Sources */,
 				D06543DD2AC4491200072EBA /* TaskRepository.swift in Sources */,
-				D0E4DDA72A88CF6B0039BAE9 /* CustomNavBar.swift in Sources */,
 				D06543D72AC408A200072EBA /* GameViewModel.swift in Sources */,
 				D04CD39F2A80E6DF0051296E /* LoginView.swift in Sources */,
 				D04CD3992A80E40F0051296E /* FirebaseManager.swift in Sources */,

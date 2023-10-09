@@ -15,17 +15,6 @@ class ParentalControlViewModel: ObservableObject {
     
     private let firebaseRepository = FirebaseRepository.shared
     
-    func saveChatSetting(_ isActive: Bool) {
-        firebaseRepository.saveSetting("chat", isActive: isActive) { error in
-            if let error = error {
-                self.errorMessage = "Error saving chat setting: \(error)"
-                print("Error saving chat setting: \(error)")
-            } else {
-                print("Chat setting saved successfully!")
-            }
-        }
-    }
-    
     func saveEmailSetting(_ isActive: Bool) {
         firebaseRepository.saveSetting("emailVisible", isActive: isActive) { error in
             if let error = error {

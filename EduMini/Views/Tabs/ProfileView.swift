@@ -29,14 +29,6 @@ struct ProfileView: View {
                     VStack(spacing: 12) {
                         ProfileTitle()
                         ProfileInfo()
-                            .onAppear {
-                                // Rozpocznij timer przy pojawieniu się widoku
-                                startRefreshTimer()
-                            }
-                            .onDisappear {
-                                // Zatrzymaj timer przy zniknięciu widoku
-                                stopRefreshTimer()
-                            }
                         
                         Divider()
                             .padding(.horizontal, 15)
@@ -65,21 +57,6 @@ struct ProfileView: View {
             }
         }
     }
-    
-    // Metoda rozpoczynająca timer odświeżania
-    private func startRefreshTimer() {
-        UserProfileVM.fetchCurrentUser(settings: settings)
-        UserProfileVM.fetchAllUsers()
-        Timer.scheduledTimer(withTimeInterval: 120.0, repeats: true) { _ in
-            UserProfileVM.fetchCurrentUser(settings: settings)
-            UserProfileVM.fetchAllUsers()
-        }
-    }
-    
-    // Metoda zatrzymująca timer odświeżania
-    private func stopRefreshTimer() {
-        UserProfileVM.errorMessage = "" // Wyczyść ewentualne błędy
-    }
 }
 
 struct ProfileTitle: View {
@@ -102,6 +79,12 @@ struct ProfileTitle: View {
 struct ProfileInfo: View {
     @ObservedObject private var UserProfileVM = UserProfileViewModel()
     @EnvironmentObject var settings: ParentalControlSettings
+    
+    func stringToAge(_ ageString: String) -> Int {
+        // Używamy Int.init(_:), który zwraca opcjonalną liczbę (Int?)
+        // Jeśli konwersja nie powiedzie się, zostanie zwrócone nil
+        return Int(ageString) ?? 0
+    }
     
     var body: some View {
         let name = UserProfileVM.appUser?.name ?? "Test"
@@ -138,8 +121,9 @@ struct ProfileInfo: View {
             .padding(.horizontal, 15)
         
         HStack {
+            let age = UserProfileVM.appUser?.age ?? ""
+
             VStack {
-                let age = UserProfileVM.appUser?.age ?? ""
                 let ageVisible = UserProfileVM.appUser?.ageVisible ?? ""
                 
                 if ageVisible == "yes" {
@@ -186,9 +170,8 @@ struct ProfileInfo: View {
 
 
             VStack {
-                let chat = UserProfileVM.appUser?.chat ?? ""
-                
-                if chat == "yes" {
+                let ageInt = stringToAge(age)
+                if ageInt > 6 {
                     Text("włączony")
                         .font(Font.custom("BalsamiqSans-Regular", size: UIScreen.main.bounds.width * 0.04))
                         .multilineTextAlignment(.leading)
@@ -214,12 +197,6 @@ struct ProfileInfo: View {
         
 
         }
+
     }
 }
-
-
-//struct ProfileView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ProfileView()
-//    }
-//}
