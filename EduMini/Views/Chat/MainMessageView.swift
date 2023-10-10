@@ -59,7 +59,7 @@ struct MainMessageView: View {
             .frame(width: UIScreen.main.bounds.width * 0.85)
             .foregroundColor(.white)
             .background(Color("BabyBlueColor"))
-            .cornerRadius(25)
+            .cornerRadius(10)
             .padding(.bottom, UIScreen.main.bounds.height * 0.03)
             .shadow(radius: 15)
         }

@@ -17,12 +17,14 @@ struct EduMiniApp: App {
          isActiveEmail: false,
          isActiveAge: false
      )
+    @StateObject private var flashcardVM = FlashcardViewModel()
     
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .environmentObject(viewModel)
                 .environmentObject(settings) 
+                .environmentObject(flashcardVM) 
         }
     }
 }

@@ -56,6 +56,8 @@ struct ProfileView: View {
                 }
             }
         }
+        .navigationBarTitleDisplayMode(.inline)
+        .navigationTitle("")
     }
 }
 

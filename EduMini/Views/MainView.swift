@@ -35,6 +35,9 @@ struct ListView: View {
     @State var shouldShowLogOutOptions = false
     @EnvironmentObject var viewModel: AppViewModel
     @ObservedObject private var UserProfileVM = UserProfileViewModel()
+    @ObservedObject var FlashcardVM = FlashcardViewModel()
+    @EnvironmentObject var flashcardVM: FlashcardViewModel
+
     
     var body: some View {
         NavigationView {

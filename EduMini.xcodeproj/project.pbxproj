@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D03749952AD5625700EAE96A /* Flashcard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03749942AD5625700EAE96A /* Flashcard.swift */; };
+		D03749972AD5627700EAE96A /* FlashcardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03749962AD5627700EAE96A /* FlashcardViewModel.swift */; };
+		D037499A2AD584D100EAE96A /* AddNewCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D03749992AD584D100EAE96A /* AddNewCardView.swift */; };
+		D037499C2AD5932A00EAE96A /* UpdateCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D037499B2AD5932A00EAE96A /* UpdateCardView.swift */; };
 		D04CD3582A80D33D0051296E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04CD3572A80D33D0051296E /* SceneDelegate.swift */; };
 		D04CD35A2A80D33D0051296E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D04CD3592A80D33D0051296E /* ContentView.swift */; };
 		D04CD35C2A80D33E0051296E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D04CD35B2A80D33E0051296E /* Assets.xcassets */; };
@@ -50,7 +54,6 @@
 		D0661A152AD4065C00D21759 /* AllMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0661A142AD4065C00D21759 /* AllMessages.swift */; };
 		D0661A172AD4069600D21759 /* ChatLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0661A162AD4069600D21759 /* ChatLogView.swift */; };
 		D0661A192AD406B800D21759 /* MainMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0661A182AD406B800D21759 /* MainMessageView.swift */; };
-		D0661A1B2AD4075D00D21759 /* ChatMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0661A1A2AD4075D00D21759 /* ChatMessageView.swift */; };
 		D0661A1D2AD407A700D21759 /* NewMessageUsers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0661A1C2AD407A700D21759 /* NewMessageUsers.swift */; };
 		D06757AA2AA9BF9B00FDA559 /* BalsamiqSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D06757A72AA9BF2E00FDA559 /* BalsamiqSans-Bold.ttf */; };
 		D06757AB2AA9BF9B00FDA559 /* BalsamiqSans-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D06757A92AA9BF2E00FDA559 /* BalsamiqSans-BoldItalic.ttf */; };
@@ -85,6 +88,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D03749942AD5625700EAE96A /* Flashcard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flashcard.swift; sourceTree = "<group>"; };
+		D03749962AD5627700EAE96A /* FlashcardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashcardViewModel.swift; sourceTree = "<group>"; };
+		D03749992AD584D100EAE96A /* AddNewCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewCardView.swift; sourceTree = "<group>"; };
+		D037499B2AD5932A00EAE96A /* UpdateCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateCardView.swift; sourceTree = "<group>"; };
 		D04CD3542A80D33D0051296E /* EduMini.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EduMini.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D04CD3572A80D33D0051296E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		D04CD3592A80D33D0051296E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -125,7 +132,6 @@
 		D0661A142AD4065C00D21759 /* AllMessages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllMessages.swift; sourceTree = "<group>"; };
 		D0661A162AD4069600D21759 /* ChatLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatLogView.swift; sourceTree = "<group>"; };
 		D0661A182AD406B800D21759 /* MainMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMessageView.swift; sourceTree = "<group>"; };
-		D0661A1A2AD4075D00D21759 /* ChatMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageView.swift; sourceTree = "<group>"; };
 		D0661A1C2AD407A700D21759 /* NewMessageUsers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMessageUsers.swift; sourceTree = "<group>"; };
 		D067579D2AA9B7C300FDA559 /* BalsamiqSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BalsamiqSans-Regular.ttf"; sourceTree = "<group>"; };
 		D06757A12AA9B8B800FDA559 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -174,6 +180,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D03749982AD584B900EAE96A /* Flashcards */ = {
+			isa = PBXGroup;
+			children = (
+				D03749992AD584D100EAE96A /* AddNewCardView.swift */,
+				D037499B2AD5932A00EAE96A /* UpdateCardView.swift */,
+			);
+			path = Flashcards;
+			sourceTree = "<group>";
+		};
 		D04CD34B2A80D33D0051296E = {
 			isa = PBXGroup;
 			children = (
@@ -255,6 +270,7 @@
 				D0661A072AD4028A00D21759 /* ChatMessage.swift */,
 				D0661A092AD402A100D21759 /* RecentMessage.swift */,
 				D0661A0B2AD402EA00D21759 /* FirebaseConstants.swift */,
+				D03749942AD5625700EAE96A /* Flashcard.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -262,6 +278,7 @@
 		D04CD39D2A80E6D10051296E /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				D03749982AD584B900EAE96A /* Flashcards */,
 				D0661A112AD404AB00D21759 /* Chat */,
 				D04CD3592A80D33D0051296E /* ContentView.swift */,
 				D04CD38F2A80E2810051296E /* HelloPage.swift */,
@@ -307,6 +324,7 @@
 				D06543E02AC44B7000072EBA /* TaskCellViewModel.swift */,
 				D0661A0D2AD403CA00D21759 /* MainMessagesViewModel.swift */,
 				D0661A0F2AD4041700D21759 /* ChatLogViewModel.swift */,
+				D03749962AD5627700EAE96A /* FlashcardViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -325,7 +343,6 @@
 				D0661A142AD4065C00D21759 /* AllMessages.swift */,
 				D0661A162AD4069600D21759 /* ChatLogView.swift */,
 				D0661A182AD406B800D21759 /* MainMessageView.swift */,
-				D0661A1A2AD4075D00D21759 /* ChatMessageView.swift */,
 				D0661A1C2AD407A700D21759 /* NewMessageUsers.swift */,
 			);
 			path = Chat;
@@ -511,12 +528,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D0661A1B2AD4075D00D21759 /* ChatMessageView.swift in Sources */,
 				D06543D12AC4071A00072EBA /* AppDelegate.swift in Sources */,
 				D04CD3AA2A80F2D90051296E /* RegisterView.swift in Sources */,
+				D03749972AD5627700EAE96A /* FlashcardViewModel.swift in Sources */,
 				D0661A192AD406B800D21759 /* MainMessageView.swift in Sources */,
 				D04CD3B02A8109880051296E /* MainView.swift in Sources */,
 				D06543E12AC44B7000072EBA /* TaskCellViewModel.swift in Sources */,
+				D03749952AD5625700EAE96A /* Flashcard.swift in Sources */,
 				D0661A082AD4028A00D21759 /* ChatMessage.swift in Sources */,
 				D0C0676F2A9607930023E127 /* ParentalControl.swift in Sources */,
 				D04CD3A22A80E7F30051296E /* TextFieldName.swift in Sources */,
@@ -532,6 +550,7 @@
 				D06543DB2AC4433500072EBA /* Task.swift in Sources */,
 				D06543D32AC4088600072EBA /* UserProfileViewModel.swift in Sources */,
 				D0661A1D2AD407A700D21759 /* NewMessageUsers.swift in Sources */,
+				D037499A2AD584D100EAE96A /* AddNewCardView.swift in Sources */,
 				D0E4DDA12A88C3890039BAE9 /* InstructionView.swift in Sources */,
 				D0E4DD9F2A88C3110039BAE9 /* FlashcardsView.swift in Sources */,
 				D06543DF2AC44B6200072EBA /* TaskListViewModel.swift in Sources */,
@@ -544,6 +563,7 @@
 				D04CD39C2A80E54C0051296E /* AppUser.swift in Sources */,
 				D0661A152AD4065C00D21759 /* AllMessages.swift in Sources */,
 				D04CD3902A80E2810051296E /* HelloPage.swift in Sources */,
+				D037499C2AD5932A00EAE96A /* UpdateCardView.swift in Sources */,
 				D04CD3582A80D33D0051296E /* SceneDelegate.swift in Sources */,
 				D0E4DD9B2A88C0BC0039BAE9 /* TaskListView.swift in Sources */,
 				D06543D92AC424EC00072EBA /* FirebaseRepository.swift in Sources */,

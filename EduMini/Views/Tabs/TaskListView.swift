@@ -60,8 +60,7 @@ struct TaskListView: View {
                             HStack {
                                 Image(systemName: "plus.app.fill")
                                     .font(.system(size: UIScreen.main.bounds.width * 0.1, weight: .medium))
-                                    .foregroundColor(Color("DarkGrayColor"))
-                                    .shadow(radius: 2)
+                                    .foregroundColor(Color("DarkBabyBlueColor"))
                                 
                             }
                         }
@@ -75,8 +74,7 @@ struct TaskListView: View {
                             }) {
                                 Image(systemName: "trash.square.fill")
                                     .font(.system(size: UIScreen.main.bounds.width * 0.1, weight: .medium))
-                                    .foregroundColor(Color("DarkGrayColor"))
-                                    .shadow(radius: 2)
+                                    .foregroundColor(Color("DarkBabyBlueColor"))
                             }
                         }
                     }
@@ -98,6 +96,8 @@ struct TaskListView: View {
                 }
             }
         }
+        .navigationBarTitleDisplayMode(.inline)
+        .navigationTitle("")
     }
 }
 
