@@ -11,7 +11,7 @@ struct GamesView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                Image("backgroundNoLogo")
+                Image("hellopagebg")
                     .resizable()
                     .scaledToFill()
                     .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
@@ -27,6 +27,7 @@ struct GamesView: View {
                                 .padding(.top,UIScreen.main.bounds.height * 0.05)
                                 .padding(.horizontal, UIScreen.main.bounds.height * 0.03)
                                 .foregroundColor(Color.white)
+                                .shadow(radius: 2)
                             
                             Spacer()
                         }
@@ -51,7 +52,7 @@ struct GamesView: View {
                         }
                         
                         HStack {
-                            NavigationLink(destination: EmptyView()) {
+                            NavigationLink(destination: MathGamesView()) {
                                 ZStack {
                                     VStack {
                                         Image(systemName: "puzzlepiece.fill")

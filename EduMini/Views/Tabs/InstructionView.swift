@@ -103,6 +103,8 @@ struct InstructionView: View {
                 
             }
         }
+        .navigationBarTitleDisplayMode(.inline)
+        .navigationTitle("")
     }
 }
 
