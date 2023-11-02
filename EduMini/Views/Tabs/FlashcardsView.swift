@@ -15,12 +15,7 @@ struct FlashcardsView: View {
         NavigationView {
             GeometryReader { geometry in
                 ZStack {
-                    Image("profileBG")
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: geometry.size.width, height: geometry.size.height)
-                        .edgesIgnoringSafeArea(.all)
-                        .background(Color.clear)
+                    Background(title: "profileBG")
                     
                     VStack {
                         TabView {

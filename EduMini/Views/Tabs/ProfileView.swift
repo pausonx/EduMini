@@ -19,12 +19,7 @@ struct ProfileView: View {
         NavigationView {
             GeometryReader { geometry in
                 ZStack {
-                    Image("profileBG")
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
-                        .edgesIgnoringSafeArea(.all)
-                        .background(Color.clear)
+                    Background(title: "profileBG")
 
                     VStack(spacing: 12) {
                         ProfileTitle()

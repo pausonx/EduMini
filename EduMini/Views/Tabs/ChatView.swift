@@ -20,12 +20,7 @@ struct ChatView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                Image("hellopagebg") // Ustawienie obrazu jako tło
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
-                    .edgesIgnoringSafeArea(.all)
-                    .background(Color.clear)
+                Background(title: "hellopagebg")
                 
                 let age = UserProfileVM.appUser?.age ?? ""
                 
@@ -73,11 +68,5 @@ struct ChatView: View {
     // Metoda zatrzymująca timer odświeżania
     private func stopRefreshTimer() {
         UserProfileVM.errorMessage = "" // Wyczyść ewentualne błędy
-    }
-}
-
-struct ChatView_Previews: PreviewProvider {
-    static var previews: some View {
-        ChatView()
     }
 }

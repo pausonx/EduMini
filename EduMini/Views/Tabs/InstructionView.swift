@@ -10,12 +10,7 @@ import SwiftUI
 struct InstructionView: View {
     var body: some View {
         ZStack {
-            Image("profileBG")
-                .resizable()
-                .scaledToFill()
-                .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
-                .edgesIgnoringSafeArea(.all)
-                .background(Color.clear)
+            Background(title: "profileBG")
             
             VStack {
                 

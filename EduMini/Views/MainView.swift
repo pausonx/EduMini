@@ -42,12 +42,7 @@ struct ListView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                Image("background") // Ustawienie obrazu jako tło
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
-                    .edgesIgnoringSafeArea(.all)
-                    .background(Color.clear)
+                Background(title: "background")
                 
                 ScrollView {
                     VStack (spacing: 15) {

@@ -33,13 +33,7 @@ struct LoginView: View {
     
     var body: some View {
         ZStack {
-            Image("hellopagebg")
-                .resizable()
-                .scaledToFill()
-                .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
-                .edgesIgnoringSafeArea(.all)
-                .background(Color.clear)
-            
+            Background(title: "hellopagebg")
             
             VStack(spacing: 20) {
                 Text("Logowanie")

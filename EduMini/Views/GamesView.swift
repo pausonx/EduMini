@@ -11,12 +11,7 @@ struct GamesView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                Image("hellopagebg")
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
-                    .edgesIgnoringSafeArea(.all)
-                    .background(Color.clear)
+                Background(title: "hellopagebg")
                 
                 ScrollView {
                     VStack (spacing: 15) {
@@ -77,7 +72,7 @@ struct GamesView: View {
                                 
                             }
                             
-                            NavigationLink(destination: EmptyView()) {
+                            NavigationLink(destination: PolishGamesView()) {
                                 ZStack {
                                     VStack {
                                         Image(systemName: "textformat.abc.dottedunderline")
@@ -106,7 +101,7 @@ struct GamesView: View {
                         }
                         
                         HStack {
-                            NavigationLink(destination: EmptyView()) {
+                            NavigationLink(destination: EnglishGamesView()) {
                                 ZStack {
                                     VStack {
                                         Image(systemName: "brain.head.profile")

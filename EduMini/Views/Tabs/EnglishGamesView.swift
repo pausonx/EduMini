@@ -1,16 +1,16 @@
 //
-//  MathGamesView.swift
+//  EnglishGamesView.swift
 //  EduMini
 //
-//  Created by Paulina Wyskiel on 31/10/2023.
+//  Created by Paulina Wyskiel on 02/11/2023.
 //
 
 import SwiftUI
 
-struct MathGamesView: View {
+struct EnglishGamesView: View {
     
     @State var show = false
-    @State var set = "math_quiz"
+    @State var set = "english_quiz"
     @State var level = "L1"
     
     @State var correct = 0
@@ -25,29 +25,29 @@ struct MathGamesView: View {
                 ScrollView {
                     VStack (spacing: 15) {
                         Spacer()
-                        QuizTitle(title: "Gry matematyczne")
+                        QuizTitle(title: "Gry z j.angielskiego")
                         
                         LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 20), count: 2), content: {
                             
-                            LevelBox(color: "BlueGradient1", name: "POZIOM ŁATWY", image: "1.circle.fill")
+                            LevelBox(color: "GreenGradient1", name: "POZIOM ŁATWY", image: "1.circle.fill")
                                 .onTapGesture {
                                     level = "L1"
                                     show.toggle()
                                 }
                             
-                            LevelBox(color: "BlueGradient2", name: "POZIOM ŚREDNI", image: "2.circle.fill")
+                            LevelBox(color: "GreenGradient2", name: "POZIOM ŚREDNI", image: "2.circle.fill")
                                 .onTapGesture {
                                     level = "L2"
                                     show.toggle()
                                 }
                             
-                            LevelBox(color: "BlueGradient3", name: "POZIOM TRUDNY", image: "3.circle.fill")
+                            LevelBox(color: "GreenGradient3", name: "POZIOM TRUDNY", image: "3.circle.fill")
                                 .onTapGesture {
                                     level = "L3"
                                     show.toggle()
                                 }
                             
-                            LevelBox(color: "CelestialBlueColor", name: "TRYB MIESZANY", image: "4.circle.fill")
+                            LevelBox(color: "EmeraldColor", name: "TRYB MIESZANY", image: "4.circle.fill")
                                 .onTapGesture {
                                     level = "L4"
                                     show.toggle()
@@ -71,5 +71,5 @@ struct MathGamesView: View {
 }
 
 #Preview {
-    MathGamesView()
+    EnglishGamesView()
 }

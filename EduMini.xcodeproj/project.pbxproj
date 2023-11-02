@@ -72,6 +72,12 @@
 		D0E4DD9F2A88C3110039BAE9 /* FlashcardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E4DD9E2A88C3110039BAE9 /* FlashcardsView.swift */; };
 		D0E4DDA12A88C3890039BAE9 /* InstructionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E4DDA02A88C3890039BAE9 /* InstructionView.swift */; };
 		D0E4DDA92A88E3B60039BAE9 /* PINCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E4DDA82A88E3B60039BAE9 /* PINCheck.swift */; };
+		D0F9D8A92AF3A30900225BF5 /* LevelBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F9D8A82AF3A30900225BF5 /* LevelBox.swift */; };
+		D0F9D8AB2AF3A36300225BF5 /* QuizTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F9D8AA2AF3A36300225BF5 /* QuizTitle.swift */; };
+		D0F9D8AE2AF3A41000225BF5 /* Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F9D8AD2AF3A41000225BF5 /* Background.swift */; };
+		D0F9D8B02AF3A55000225BF5 /* PolishGamesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F9D8AF2AF3A55000225BF5 /* PolishGamesView.swift */; };
+		D0F9D8B22AF3A72800225BF5 /* EnglishGamesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F9D8B12AF3A72800225BF5 /* EnglishGamesView.swift */; };
+		D0F9D8B42AF3A87F00225BF5 /* OnlyQuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F9D8B32AF3A87F00225BF5 /* OnlyQuestionView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -155,6 +161,12 @@
 		D0E4DD9E2A88C3110039BAE9 /* FlashcardsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashcardsView.swift; sourceTree = "<group>"; };
 		D0E4DDA02A88C3890039BAE9 /* InstructionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionView.swift; sourceTree = "<group>"; };
 		D0E4DDA82A88E3B60039BAE9 /* PINCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PINCheck.swift; sourceTree = "<group>"; };
+		D0F9D8A82AF3A30900225BF5 /* LevelBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelBox.swift; sourceTree = "<group>"; };
+		D0F9D8AA2AF3A36300225BF5 /* QuizTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizTitle.swift; sourceTree = "<group>"; };
+		D0F9D8AD2AF3A41000225BF5 /* Background.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Background.swift; sourceTree = "<group>"; };
+		D0F9D8AF2AF3A55000225BF5 /* PolishGamesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PolishGamesView.swift; sourceTree = "<group>"; };
+		D0F9D8B12AF3A72800225BF5 /* EnglishGamesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnglishGamesView.swift; sourceTree = "<group>"; };
+		D0F9D8B32AF3A87F00225BF5 /* OnlyQuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlyQuestionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -287,6 +299,7 @@
 		D04CD39D2A80E6D10051296E /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				D0F9D8AC2AF3A3E300225BF5 /* ViewElements */,
 				D061993C2AF125CC00A90444 /* Quiz */,
 				D03749982AD584B900EAE96A /* Flashcards */,
 				D0661A112AD404AB00D21759 /* Chat */,
@@ -318,6 +331,9 @@
 			isa = PBXGroup;
 			children = (
 				D061993F2AF1368A00A90444 /* QuestionView.swift */,
+				D0F9D8A82AF3A30900225BF5 /* LevelBox.swift */,
+				D0F9D8AA2AF3A36300225BF5 /* QuizTitle.swift */,
+				D0F9D8B32AF3A87F00225BF5 /* OnlyQuestionView.swift */,
 			);
 			path = Quiz;
 			sourceTree = "<group>";
@@ -397,8 +413,18 @@
 				D0E4DD9C2A88C1C80039BAE9 /* ChatView.swift */,
 				D0E4DD962A82866B0039BAE9 /* ProfileView.swift */,
 				D061993D2AF1266300A90444 /* MathGamesView.swift */,
+				D0F9D8AF2AF3A55000225BF5 /* PolishGamesView.swift */,
+				D0F9D8B12AF3A72800225BF5 /* EnglishGamesView.swift */,
 			);
 			path = Tabs;
+			sourceTree = "<group>";
+		};
+		D0F9D8AC2AF3A3E300225BF5 /* ViewElements */ = {
+			isa = PBXGroup;
+			children = (
+				D0F9D8AD2AF3A41000225BF5 /* Background.swift */,
+			);
+			path = ViewElements;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -551,6 +577,7 @@
 				D06543D12AC4071A00072EBA /* AppDelegate.swift in Sources */,
 				D04CD3AA2A80F2D90051296E /* RegisterView.swift in Sources */,
 				D03749972AD5627700EAE96A /* FlashcardViewModel.swift in Sources */,
+				D0F9D8B22AF3A72800225BF5 /* EnglishGamesView.swift in Sources */,
 				D0661A192AD406B800D21759 /* MainMessageView.swift in Sources */,
 				D04CD3B02A8109880051296E /* MainView.swift in Sources */,
 				D06543E12AC44B7000072EBA /* TaskCellViewModel.swift in Sources */,
@@ -559,6 +586,7 @@
 				D0C0676F2A9607930023E127 /* ParentalControl.swift in Sources */,
 				D04CD3A22A80E7F30051296E /* TextFieldName.swift in Sources */,
 				D0E4DD9D2A88C1C80039BAE9 /* ChatView.swift in Sources */,
+				D0F9D8B42AF3A87F00225BF5 /* OnlyQuestionView.swift in Sources */,
 				D04CD3AC2A80F3250051296E /* AppViewModel.swift in Sources */,
 				D06543DD2AC4491200072EBA /* TaskRepository.swift in Sources */,
 				D06543D72AC408A200072EBA /* GameViewModel.swift in Sources */,
@@ -571,19 +599,23 @@
 				D06543D32AC4088600072EBA /* UserProfileViewModel.swift in Sources */,
 				D0661A1D2AD407A700D21759 /* NewMessageUsers.swift in Sources */,
 				D06199442AF13FDB00A90444 /* QuestionViewModel.swift in Sources */,
+				D0F9D8B02AF3A55000225BF5 /* PolishGamesView.swift in Sources */,
 				D06199422AF13E7400A90444 /* Question.swift in Sources */,
 				D06199402AF1368A00A90444 /* QuestionView.swift in Sources */,
 				D037499A2AD584D100EAE96A /* AddNewCardView.swift in Sources */,
 				D0E4DDA12A88C3890039BAE9 /* InstructionView.swift in Sources */,
 				D0E4DD9F2A88C3110039BAE9 /* FlashcardsView.swift in Sources */,
 				D061993E2AF1266300A90444 /* MathGamesView.swift in Sources */,
+				D0F9D8AB2AF3A36300225BF5 /* QuizTitle.swift in Sources */,
 				D06543DF2AC44B6200072EBA /* TaskListViewModel.swift in Sources */,
 				D0E4DD972A82866B0039BAE9 /* ProfileView.swift in Sources */,
 				D0661A0C2AD402EA00D21759 /* FirebaseConstants.swift in Sources */,
+				D0F9D8A92AF3A30900225BF5 /* LevelBox.swift in Sources */,
 				D0661A0A2AD402A100D21759 /* RecentMessage.swift in Sources */,
 				D04CD35A2A80D33D0051296E /* ContentView.swift in Sources */,
 				D06543D52AC4089600072EBA /* ParentalControlViewModel.swift in Sources */,
 				D04CD3A42A80E89D0051296E /* LoginEnums.swift in Sources */,
+				D0F9D8AE2AF3A41000225BF5 /* Background.swift in Sources */,
 				D04CD39C2A80E54C0051296E /* AppUser.swift in Sources */,
 				D0661A152AD4065C00D21759 /* AllMessages.swift in Sources */,
 				D04CD3902A80E2810051296E /* HelloPage.swift in Sources */,

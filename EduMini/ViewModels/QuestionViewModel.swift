@@ -40,8 +40,8 @@ class QuestionViewModel: ObservableObject {
                 
                 allQuestions.shuffle()
                 
-                // Ogranicz ilość pytań do 10
-                let limitedQuestions = Array(allQuestions.prefix(10))
+                // Ogranicz ilość pytań do 5
+                let limitedQuestions = Array(allQuestions.prefix(5))
                 
                 self.questions = limitedQuestions
             }
