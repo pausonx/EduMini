@@ -27,7 +27,7 @@ struct GamesView: View {
                             Spacer()
                         }
                         
-                        NavigationLink(destination: EmptyView()) {
+                        NavigationLink(destination: RankView()) {
                             ZStack {
                                 HStack {
                                     Image(systemName: "medal.fill")

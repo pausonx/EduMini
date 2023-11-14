@@ -15,7 +15,9 @@ struct QuestionView: View {
     var level: String
     @StateObject var data = QuestionViewModel()
     @Environment(\.presentationMode) var present
-    
+
+    @StateObject private var firebaseRepository = FirebaseRepository.shared
+
     var body: some View {
         ZStack{
             if data.questions.isEmpty {
@@ -29,12 +31,11 @@ struct QuestionView: View {
                             .frame(width: 250, height: 250)
                             .foregroundColor(Color("SunglowColor"))
                             .shadow(radius: 10)
-                        
+
                         Text("Dobra robota!")
                             .font(Font.custom("BalsamiqSans-Regular", size: UIScreen.main.bounds.width * 0.1))
                             .foregroundColor(Color.white)
-                        
-                        
+
                         HStack(spacing: 15){
                             Image(systemName: "checkmark")
                                 .font(.largeTitle)
@@ -44,20 +45,22 @@ struct QuestionView: View {
                             Text("\(correct)")
                                 .font(Font.custom("BalsamiqSans-Regular", size: UIScreen.main.bounds.width * 0.1))
                                 .foregroundColor(.white)
-                            
+
                             Image(systemName: "xmark")
                                 .font(.largeTitle)
                                 .foregroundColor(.red)
                                 .padding(.leading)
                                 .shadow(radius: 2)
 
-                            
+
                             Text("\(wrong)")
                                 .font(Font.custom("BalsamiqSans-Regular", size: UIScreen.main.bounds.width * 0.1))
                                 .foregroundColor(.white)
                         }
-                        
+
                         Button(action: {
+                            updatePointsForCurrentUser()
+
                             present.wrappedValue.dismiss()
                             answered = 0
                             correct = 0
@@ -79,13 +82,13 @@ struct QuestionView: View {
                             Capsule()
                                 .fill(Color.gray.opacity(0.7))
                                 .frame(height: 6)
-                            
+
                             Capsule()
                                 .fill(Color.green)
                                 .frame(width: progess(), height: 6)
                         }
                         .padding()
-                        
+
                         HStack {
                             Label(title: {
                                 Text(correct == 0 ? "" : "\(correct)")
@@ -97,9 +100,9 @@ struct QuestionView: View {
                                     .font(.largeTitle)
                                     .foregroundColor(.green)
                             })
-                            
+
                             Spacer()
-                            
+
                             Label(title: {
                                 Text(wrong == 0 ? "" : "\(wrong)")
                                     .font(Font.custom("BalsamiqSans-Regular", size: UIScreen.main.bounds.width * 0.1))
@@ -112,8 +115,7 @@ struct QuestionView: View {
                             })
                         }
                         .padding()
-                        
-                        
+
                         ZStack {
                             ForEach(data.questions.reversed().indices){ index in
                                 OnlyQuestionView(question: $data.questions[index], correct: $correct, wrong: $wrong, answered: $answered)
@@ -123,8 +125,8 @@ struct QuestionView: View {
                         }
                     }
                 }
-                
-                
+
+
             }
         }
         .onAppear(perform: {
@@ -138,13 +140,22 @@ struct QuestionView: View {
                 .edgesIgnoringSafeArea(.all)
                 .background(Color.clear)
         )
-        
-        
     }
-    
+
     func progess()->CGFloat {
-        let fraction = CGFloat(answered)/CGFloat(data.questions.count) //zmienić na 10 jak będzie baza uzupełniona i działająca
+        let fraction = CGFloat(answered)/CGFloat(data.questions.count)
         let width = UIScreen.main.bounds.width - 30
         return fraction * width
+    }
+
+    private func updatePointsForCurrentUser() {
+        let totalPoints = correct
+        firebaseRepository.updatePoints(totalPoints) { error in
+            if let error = error {
+                print("Failed to update points: \(error)")
+            } else {
+                print("Points updated successfully!")
+            }
+        }
     }
 }
