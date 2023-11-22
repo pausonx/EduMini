@@ -42,7 +42,7 @@ class RankViewModel: ObservableObject {
         let sortedUsers = users.sorted { Int($0.points) ?? 0 > Int($1.points) ?? 0 }
 
         // Sprawdź, czy zalogowany użytkownik jest już na liście
-        if let currentUserIndex = sortedUsers.firstIndex(where: { $0.uid == FirebaseManager.shared.currentUser?.uid }) {
+        if sortedUsers.firstIndex(where: { $0.uid == FirebaseManager.shared.currentUser?.uid }) != nil {
             self.users = sortedUsers
             self.loggedInUserID = FirebaseManager.shared.currentUser?.uid
             // Zalogowany użytkownik jest już na liście, więc nie dodawaj go ponownie

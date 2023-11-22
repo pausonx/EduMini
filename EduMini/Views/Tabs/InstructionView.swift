@@ -12,7 +12,27 @@ struct InstructionView: View {
         ZStack {
             Background(title: "profileBG")
             
-            VStack {
+            ScrollView {
+                Text("")
+                    .padding(.vertical, 40)
+                
+                NavigationLink(destination: AuthorView()) {
+                    ZStack {
+                        HStack {
+                            Image(systemName: "book.fill")
+                                .font(.system(size: 35, weight: .bold))
+                                .foregroundColor(Color.white)
+                                .frame(width: 50, height: 50)
+                            
+                            Text("Informacje o autorze")
+                                .font(.system(size: 24, weight: .bold))
+                                .foregroundColor(Color.white)
+                        }
+                    }
+                    .frame(width: UIScreen.main.bounds.width * 0.9, height: UIScreen.main.bounds.height * 0.1)
+                    .background(Color("BabyBlueColor"))
+                    .cornerRadius(20)
+                }
                 
                 HStack {
                     Image(systemName: "square.stack.fill")

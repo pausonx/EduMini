@@ -68,6 +68,9 @@
 		D06757AE2AA9BF9B00FDA559 /* BalsamiqSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D067579D2AA9B7C300FDA559 /* BalsamiqSans-Regular.ttf */; };
 		D06757B02AA9E84200FDA559 /* GamesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06757AF2AA9E84200FDA559 /* GamesView.swift */; };
 		D0C0676F2A9607930023E127 /* ParentalControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C0676E2A9607930023E127 /* ParentalControl.swift */; };
+		D0D3E2422B0E06AE00BFA116 /* AddNewQuestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D3E2412B0E06AE00BFA116 /* AddNewQuestion.swift */; };
+		D0D3E2442B0E11A800BFA116 /* AllUserQuestions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D3E2432B0E11A800BFA116 /* AllUserQuestions.swift */; };
+		D0D3E2462B0E2FA200BFA116 /* AuthorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D3E2452B0E2FA200BFA116 /* AuthorView.swift */; };
 		D0E4DD972A82866B0039BAE9 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E4DD962A82866B0039BAE9 /* ProfileView.swift */; };
 		D0E4DD9B2A88C0BC0039BAE9 /* TaskListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E4DD9A2A88C0BC0039BAE9 /* TaskListView.swift */; };
 		D0E4DD9D2A88C1C80039BAE9 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E4DD9C2A88C1C80039BAE9 /* ChatView.swift */; };
@@ -161,6 +164,9 @@
 		D06757A92AA9BF2E00FDA559 /* BalsamiqSans-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BalsamiqSans-BoldItalic.ttf"; sourceTree = "<group>"; };
 		D06757AF2AA9E84200FDA559 /* GamesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesView.swift; sourceTree = "<group>"; };
 		D0C0676E2A9607930023E127 /* ParentalControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentalControl.swift; sourceTree = "<group>"; };
+		D0D3E2412B0E06AE00BFA116 /* AddNewQuestion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewQuestion.swift; sourceTree = "<group>"; };
+		D0D3E2432B0E11A800BFA116 /* AllUserQuestions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllUserQuestions.swift; sourceTree = "<group>"; };
+		D0D3E2452B0E2FA200BFA116 /* AuthorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorView.swift; sourceTree = "<group>"; };
 		D0E4DD962A82866B0039BAE9 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		D0E4DD9A2A88C0BC0039BAE9 /* TaskListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListView.swift; sourceTree = "<group>"; };
 		D0E4DD9C2A88C1C80039BAE9 /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
@@ -344,6 +350,8 @@
 				D0F9D8A82AF3A30900225BF5 /* LevelBox.swift */,
 				D0F9D8AA2AF3A36300225BF5 /* QuizTitle.swift */,
 				D0F9D8B32AF3A87F00225BF5 /* OnlyQuestionView.swift */,
+				D0D3E2412B0E06AE00BFA116 /* AddNewQuestion.swift */,
+				D0D3E2432B0E11A800BFA116 /* AllUserQuestions.swift */,
 			);
 			path = Quiz;
 			sourceTree = "<group>";
@@ -427,6 +435,7 @@
 				D0F9D8AF2AF3A55000225BF5 /* PolishGamesView.swift */,
 				D0F9D8B12AF3A72800225BF5 /* EnglishGamesView.swift */,
 				D0F9BDC92B0365C3003F6996 /* RankView.swift */,
+				D0D3E2452B0E2FA200BFA116 /* AuthorView.swift */,
 			);
 			path = Tabs;
 			sourceTree = "<group>";
@@ -598,6 +607,7 @@
 				D03749952AD5625700EAE96A /* Flashcard.swift in Sources */,
 				D0661A082AD4028A00D21759 /* ChatMessage.swift in Sources */,
 				D0C0676F2A9607930023E127 /* ParentalControl.swift in Sources */,
+				D0D3E2442B0E11A800BFA116 /* AllUserQuestions.swift in Sources */,
 				D04CD3A22A80E7F30051296E /* TextFieldName.swift in Sources */,
 				D0E4DD9D2A88C1C80039BAE9 /* ChatView.swift in Sources */,
 				D0F9D8B42AF3A87F00225BF5 /* OnlyQuestionView.swift in Sources */,
@@ -606,6 +616,7 @@
 				D06543D72AC408A200072EBA /* GameViewModel.swift in Sources */,
 				D0661A102AD4041700D21759 /* ChatLogViewModel.swift in Sources */,
 				D0661A132AD404BB00D21759 /* MessageView.swift in Sources */,
+				D0D3E2422B0E06AE00BFA116 /* AddNewQuestion.swift in Sources */,
 				D04CD39F2A80E6DF0051296E /* LoginView.swift in Sources */,
 				D04CD3992A80E40F0051296E /* FirebaseManager.swift in Sources */,
 				D06757B02AA9E84200FDA559 /* GamesView.swift in Sources */,
@@ -634,6 +645,7 @@
 				D04CD39C2A80E54C0051296E /* AppUser.swift in Sources */,
 				D0661A152AD4065C00D21759 /* AllMessages.swift in Sources */,
 				D04CD3902A80E2810051296E /* HelloPage.swift in Sources */,
+				D0D3E2462B0E2FA200BFA116 /* AuthorView.swift in Sources */,
 				D037499C2AD5932A00EAE96A /* UpdateCardView.swift in Sources */,
 				D04CD3582A80D33D0051296E /* SceneDelegate.swift in Sources */,
 				D0E4DD9B2A88C0BC0039BAE9 /* TaskListView.swift in Sources */,

@@ -10,6 +10,8 @@ import SwiftUI
 struct MathGamesView: View {
     
     @State var show = false
+    @State var showAdd = false
+    @State var showQuestions = false
     @State var set = "math_quiz"
     @State var level = "L1"
     
@@ -17,6 +19,8 @@ struct MathGamesView: View {
     @State var wrong = 0
     @State var answered = 0
     
+    @StateObject var questionVM = QuestionViewModel()
+
     var body: some View {
         NavigationView {
             ZStack {
@@ -27,6 +31,61 @@ struct MathGamesView: View {
                         Spacer()
                         QuizTitle(title: "Gry matematyczne")
                         
+                        LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 20), count: 3), content: {
+                            
+                            ZStack {
+                                Text("TWÓJ QUIZ")
+                                    .multilineTextAlignment(.center)
+                                    .font(Font.custom("BalsamiqSans-Bold", size: UIScreen.main.bounds.width * 0.04))
+                                    .foregroundColor(Color("DarkGrayColor"))
+                                    .padding(5)
+                            }
+                            .padding()
+                            .frame(maxWidth: .infinity)
+                            .background(Color.white.opacity(0.95))
+                            .cornerRadius(15)
+                            .shadow(radius: 10)
+                            .onTapGesture {
+                                level = "L0"
+                                questionVM.loadUserQuestion(set)
+                                show.toggle()
+                            }
+                            
+                            ZStack {
+                                Text("DODAJ PYTANIA")
+                                    .multilineTextAlignment(.center)
+                                    .font(Font.custom("BalsamiqSans-Bold", size: UIScreen.main.bounds.width * 0.04))
+                                    .foregroundColor(Color("DarkGrayColor"))
+                                    .padding(5)
+                            }
+                            .padding()
+                            .frame(maxWidth: .infinity)
+                            .background(Color.white.opacity(0.95))
+                            .cornerRadius(15)
+                            .shadow(radius: 10)
+                            .onTapGesture {                                
+                                showAdd.toggle()
+                            }
+                            
+                            ZStack {
+                                Text("POKAŻ PYTANIA")
+                                    .multilineTextAlignment(.center)
+                                    .font(Font.custom("BalsamiqSans-Bold", size: UIScreen.main.bounds.width * 0.04))
+                                    .foregroundColor(Color("DarkGrayColor"))
+                                    .padding(5)
+                            }
+                            .padding()
+                            .frame(maxWidth: .infinity)
+                            .background(Color.white.opacity(0.95))
+                            .cornerRadius(15)
+                            .shadow(radius: 10)
+                            .onTapGesture {
+                                showQuestions.toggle()
+                            }
+                            
+                        })
+                        .padding()
+                            
                         LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 20), count: 2), content: {
                             
                             LevelBox(color: "BlueGradient1", name: "POZIOM ŁATWY", image: "1.circle.fill")
@@ -62,7 +121,15 @@ struct MathGamesView: View {
                     .sheet(isPresented: $show, content: {
                         QuestionView(correct: $correct, wrong: $wrong, answered: $answered, set: set, level: level)
                     })
-                    
+                    .sheet(isPresented: $showAdd, content: {
+                        AddNewQuestion(set: set)
+                    })
+                    .sheet(isPresented: $showQuestions, content: {
+                        AllUserQuestions(set: set)
+                    })
+                    .onAppear {
+                        questionVM.loadUserQuestion(set)
+                    }
                 }
             }
             

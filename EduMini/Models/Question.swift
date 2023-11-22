@@ -10,7 +10,7 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift
 
 struct Question: Codable,Identifiable  {
-    @DocumentID var id: String?
+    var id: String?
     var question: String?
     var optionA: String?
     var optionB: String?
@@ -18,11 +18,13 @@ struct Question: Codable,Identifiable  {
     var optionD: String?
     var answer: String?
     var level: String?
+    var userId: String?
     
     var isSubmitted = false
     var completed = false
     
     enum CodingKeys: String, CodingKey {
+        case id
         case question
         case optionA = "a"
         case optionB = "b"
@@ -30,5 +32,6 @@ struct Question: Codable,Identifiable  {
         case optionD = "d"
         case answer
         case level
+        case userId
     }
 }
