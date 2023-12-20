@@ -34,7 +34,7 @@ struct HelloPage: View {
                 .background(Color.white.opacity(0.1))
                 .cornerRadius(20)
                 
-                Text("Jest to aplikacja stworzona z myślą o wspieraniu nauki dzieci na ich początkowym etapie ich edukacji")
+                Text("Jest to aplikacja stworzona z myślą o wspieraniu nauki dzieci na początkowym etapie ich edukacji")
                     .font(.system(size: 20, weight: .thin))
                     .multilineTextAlignment(.center)
                     .frame(width: UIScreen.main.bounds.width * 0.8, height: UIScreen.main.bounds.height * 0.15)

@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+import FirebaseFirestore
 import FirebaseAuth
 
 class AppViewModel: ObservableObject {
@@ -14,22 +14,25 @@ class AppViewModel: ObservableObject {
     static let shared = FirebaseManager()
         
     @Published var signedIn = false
+    @Published var loginError = ""
         
     var isSignedIn: Bool {
         return auth.currentUser != nil
     }
     
-    func signIn(email: String, password: String){
+    func signIn(email: String, password: String) {
         auth.signIn(withEmail: email, password: password) { [weak self] result, error in
-            guard result != nil, error == nil else {
+            guard let self = self else { return }
+            
+            if let error = error {
+                self.loginError = "Nieprawidłowy email lub hasło"
+                print("Error signing in: \(error.localizedDescription)")
                 return
             }
             
             DispatchQueue.main.async {
-                //Success
-                self?.signedIn = true
+                self.signedIn = true
             }
-            
         }
     }
     
@@ -71,5 +74,47 @@ class AppViewModel: ObservableObject {
         try? auth.signOut()
         
         self.signedIn = false
+    }
+    
+    func isEmailUnique(_ email: String, completion: @escaping (Bool) -> Void) {
+        let db = Firestore.firestore()
+        let usersCollection = db.collection("users")
+        
+        usersCollection.whereField("email", isEqualTo: email).getDocuments { (querySnapshot, error) in
+            if let error = error {
+                print("Błąd podczas sprawdzania unikalności e-maila: \(error.localizedDescription)")
+                completion(false)
+                return
+            }
+            
+            if let documents = querySnapshot?.documents, !documents.isEmpty {
+                // E-mail jest już w użyciu
+                completion(false)
+            } else {
+                // E-mail jest unikalny
+                completion(true)
+            }
+        }
+    }
+    
+    func isNickUnique(_ nick: String, completion: @escaping (Bool) -> Void) {
+        let db = Firestore.firestore()
+        let usersCollection = db.collection("users")
+        
+        usersCollection.whereField("nick", isEqualTo: nick).getDocuments { (querySnapshot, error) in
+            if let error = error {
+                print("Błąd podczas sprawdzania unikalności nicku: \(error.localizedDescription)")
+                completion(false)
+                return
+            }
+            
+            if let documents = querySnapshot?.documents, !documents.isEmpty {
+                // Nick jest już w użyciu
+                completion(false)
+            } else {
+                // Nick jest unikalny
+                completion(true)
+            }
+        }
     }
 }

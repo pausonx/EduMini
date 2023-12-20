@@ -68,8 +68,8 @@ struct LoginView: View {
 
                     TextFieldHint(hint: loginHint)
                 }
-                .onChange(of: login) { oldValue, newValue in
-                    self.login = newValue
+                .onChange(of: login) { i,_ in
+                    validateLogin()
                 }
 
 
@@ -95,24 +95,32 @@ struct LoginView: View {
 
                     TextFieldHint(hint: passwordHint)
                 }
-                .onChange(of: password) { oldValue, newValue in
-                    self.password = newValue
+                .onChange(of: password) { i, _ in
+                    validatePassword()
                 }
 
-                                
+                if !viewModel.loginError.isEmpty {
+                    Text(viewModel.loginError)
+                        .foregroundColor(.red)
+                        .font(.footnote)
+                        .padding(.top, 5)
+                }
+                
                 //MARK: - SignInButton
                 Button {
-                    viewModel.signIn(email: login, password: password)
+                    if isValidLogin && isValidPassword {
+                        viewModel.signIn(email: login, password: password)
+                    }
                 } label: {
                     Text("Zaloguj się")
                         .font(.system(size: 18))
                         .foregroundColor(.white)
                         .frame(width: 200, height: 40, alignment: .center)
                 }
-                .disabled((isValidLogin && isValidPassword) == false)
-                .background(isValidLogin && isValidPassword ? Color("DarkBabyBlueColor") : .gray)
+                .background((isValidLogin && isValidPassword) ? Color("DarkBabyBlueColor") : .gray)
                 .cornerRadius(5)
                 .padding(.bottom, UIScreen.main.bounds.height * 0.3)
+
 
                 
                 HStack{
@@ -128,6 +136,16 @@ struct LoginView: View {
             .padding()
         }
     }
+    
+    private func validateLogin() {
+            isValidLogin = login.isValid(regexes: [Regex.login, Regex.email].compactMap { "\($0.rawValue)" })
+            loginHint = isValidLogin ? "" : Hint.email.rawValue
+        }
+
+        private func validatePassword() {
+            isValidPassword = password.isValid(regexes: [Regex.password].compactMap { "\($0.rawValue)" })
+            passwordHint = isValidPassword ? "" : Hint.password.rawValue
+        }
 }
 
 struct LoginView_Previews: PreviewProvider {

@@ -66,47 +66,6 @@ struct RegisterView: View {
     @State private var emailInUse = false
     @State private var nickInUse = false
     
-    func isEmailUnique(_ email: String, completion: @escaping (Bool) -> Void) {
-        let db = Firestore.firestore()
-        let usersCollection = db.collection("users")
-        
-        usersCollection.whereField("email", isEqualTo: email).getDocuments { (querySnapshot, error) in
-            if let error = error {
-                print("Błąd podczas sprawdzania unikalności e-maila: \(error.localizedDescription)")
-                completion(false)
-                return
-            }
-            
-            if let documents = querySnapshot?.documents, !documents.isEmpty {
-                // E-mail jest już w użyciu
-                completion(false)
-            } else {
-                // E-mail jest unikalny
-                completion(true)
-            }
-        }
-    }
-    
-    func isNickUnique(_ nick: String, completion: @escaping (Bool) -> Void) {
-        let db = Firestore.firestore()
-        let usersCollection = db.collection("users")
-        
-        usersCollection.whereField("nick", isEqualTo: nick).getDocuments { (querySnapshot, error) in
-            if let error = error {
-                print("Błąd podczas sprawdzania unikalności nicku: \(error.localizedDescription)")
-                completion(false)
-                return
-            }
-            
-            if let documents = querySnapshot?.documents, !documents.isEmpty {
-                // Nick jest już w użyciu
-                completion(false)
-            } else {
-                // Nick jest unikalny
-                completion(true)
-            }
-        }
-    }
     
     var body: some View {
         ZStack {
@@ -387,9 +346,9 @@ struct RegisterView: View {
                     
                     //MARK: - RegisterButton
                     Button {
-                        isEmailUnique(login) { isUniqueEmail in
+                        viewModel.isEmailUnique(login) { isUniqueEmail in
                             if isUniqueEmail {
-                                isNickUnique(nick) { isUniqueNick in
+                                viewModel.isNickUnique(nick) { isUniqueNick in
                                     if isUniqueNick {
                                         viewModel.signUp(email: login, password: password, name: name, nick: nick, age: age, pin: pin)
                                     } else {
