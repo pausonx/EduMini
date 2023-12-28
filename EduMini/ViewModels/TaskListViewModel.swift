@@ -10,13 +10,13 @@ import Combine
 
 class TaskListViewModel: ObservableObject {
     
-    @Published var taskRepository = TaskRepository()
+    @Published var taskVM = TaskViewModel()
     @Published var taskCellViewModels = [TaskCellViewModel]()
     
     private var cancellables = Set<AnyCancellable>()
     
     init(){
-        taskRepository.$tasks
+        taskVM.$tasks
             .map { tasks in
                 tasks.map { task in
                     TaskCellViewModel(task: task)
@@ -27,15 +27,15 @@ class TaskListViewModel: ObservableObject {
     }
     
     func addTask(task: Task) {
-        taskRepository.addTask(task)
+        taskVM.addTask(task)
     }
     
     func updateTask(task: Task) {
-        taskRepository.updateTask(task)
+        taskVM.updateTask(task)
     }
     
     func deleteTask(task: Task) {
-        taskRepository.deleteTask(task)
+        taskVM.deleteTask(task)
     }
     
 }

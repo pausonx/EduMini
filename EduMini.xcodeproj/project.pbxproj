@@ -44,10 +44,9 @@
 		D06543D12AC4071A00072EBA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06543D02AC4071A00072EBA /* AppDelegate.swift */; };
 		D06543D32AC4088600072EBA /* UserProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06543D22AC4088600072EBA /* UserProfileViewModel.swift */; };
 		D06543D52AC4089600072EBA /* ParentalControlViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06543D42AC4089600072EBA /* ParentalControlViewModel.swift */; };
-		D06543D72AC408A200072EBA /* GameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06543D62AC408A200072EBA /* GameViewModel.swift */; };
-		D06543D92AC424EC00072EBA /* FirebaseRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06543D82AC424EC00072EBA /* FirebaseRepository.swift */; };
+		D06543D92AC424EC00072EBA /* UserSettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06543D82AC424EC00072EBA /* UserSettingViewModel.swift */; };
 		D06543DB2AC4433500072EBA /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06543DA2AC4433500072EBA /* Task.swift */; };
-		D06543DD2AC4491200072EBA /* TaskRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06543DC2AC4491200072EBA /* TaskRepository.swift */; };
+		D06543DD2AC4491200072EBA /* TaskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06543DC2AC4491200072EBA /* TaskViewModel.swift */; };
 		D06543DF2AC44B6200072EBA /* TaskListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06543DE2AC44B6200072EBA /* TaskListViewModel.swift */; };
 		D06543E12AC44B7000072EBA /* TaskCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D06543E02AC44B7000072EBA /* TaskCellViewModel.swift */; };
 		D06543E42AC4553900072EBA /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D06543E32AC4553900072EBA /* FirebaseFirestoreSwift */; };
@@ -140,10 +139,9 @@
 		D06543D02AC4071A00072EBA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D06543D22AC4088600072EBA /* UserProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewModel.swift; sourceTree = "<group>"; };
 		D06543D42AC4089600072EBA /* ParentalControlViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentalControlViewModel.swift; sourceTree = "<group>"; };
-		D06543D62AC408A200072EBA /* GameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModel.swift; sourceTree = "<group>"; };
-		D06543D82AC424EC00072EBA /* FirebaseRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseRepository.swift; sourceTree = "<group>"; };
+		D06543D82AC424EC00072EBA /* UserSettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettingViewModel.swift; sourceTree = "<group>"; };
 		D06543DA2AC4433500072EBA /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
-		D06543DC2AC4491200072EBA /* TaskRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskRepository.swift; sourceTree = "<group>"; };
+		D06543DC2AC4491200072EBA /* TaskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewModel.swift; sourceTree = "<group>"; };
 		D06543DE2AC44B6200072EBA /* TaskListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListViewModel.swift; sourceTree = "<group>"; };
 		D06543E02AC44B7000072EBA /* TaskCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCellViewModel.swift; sourceTree = "<group>"; };
 		D0661A072AD4028A00D21759 /* ChatMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessage.swift; sourceTree = "<group>"; };
@@ -255,7 +253,6 @@
 				D06757A12AA9B8B800FDA559 /* Info.plist */,
 				D04CD39D2A80E6D10051296E /* Views */,
 				D04CD39A2A80E5420051296E /* Models */,
-				D04CD3972A80E3FA0051296E /* Repositories */,
 				D04CD3812A80D4370051296E /* GoogleService-Info.plist */,
 				D04CD35B2A80D33E0051296E /* Assets.xcassets */,
 				D04CD35D2A80D33E0051296E /* Preview Content */,
@@ -286,16 +283,6 @@
 				D04CD3742A80D33E0051296E /* EduMiniUITestsLaunchTests.swift */,
 			);
 			path = EduMiniUITests;
-			sourceTree = "<group>";
-		};
-		D04CD3972A80E3FA0051296E /* Repositories */ = {
-			isa = PBXGroup;
-			children = (
-				D04CD3982A80E40F0051296E /* FirebaseManager.swift */,
-				D06543D82AC424EC00072EBA /* FirebaseRepository.swift */,
-				D06543DC2AC4491200072EBA /* TaskRepository.swift */,
-			);
-			path = Repositories;
 			sourceTree = "<group>";
 		};
 		D04CD39A2A80E5420051296E /* Models */ = {
@@ -359,6 +346,7 @@
 		D06543CE2AC402E000072EBA /* App */ = {
 			isa = PBXGroup;
 			children = (
+				D04CD3982A80E40F0051296E /* FirebaseManager.swift */,
 				D04CD3572A80D33D0051296E /* SceneDelegate.swift */,
 				D06543D02AC4071A00072EBA /* AppDelegate.swift */,
 			);
@@ -371,7 +359,6 @@
 				D04CD3AB2A80F3250051296E /* AppViewModel.swift */,
 				D06543D22AC4088600072EBA /* UserProfileViewModel.swift */,
 				D06543D42AC4089600072EBA /* ParentalControlViewModel.swift */,
-				D06543D62AC408A200072EBA /* GameViewModel.swift */,
 				D06543DE2AC44B6200072EBA /* TaskListViewModel.swift */,
 				D06543E02AC44B7000072EBA /* TaskCellViewModel.swift */,
 				D0661A0D2AD403CA00D21759 /* MainMessagesViewModel.swift */,
@@ -379,6 +366,8 @@
 				D03749962AD5627700EAE96A /* FlashcardViewModel.swift */,
 				D06199432AF13FDB00A90444 /* QuestionViewModel.swift */,
 				D0F9BDCB2B036C90003F6996 /* RankViewModel.swift */,
+				D06543D82AC424EC00072EBA /* UserSettingViewModel.swift */,
+				D06543DC2AC4491200072EBA /* TaskViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -612,8 +601,7 @@
 				D0E4DD9D2A88C1C80039BAE9 /* ChatView.swift in Sources */,
 				D0F9D8B42AF3A87F00225BF5 /* OnlyQuestionView.swift in Sources */,
 				D04CD3AC2A80F3250051296E /* AppViewModel.swift in Sources */,
-				D06543DD2AC4491200072EBA /* TaskRepository.swift in Sources */,
-				D06543D72AC408A200072EBA /* GameViewModel.swift in Sources */,
+				D06543DD2AC4491200072EBA /* TaskViewModel.swift in Sources */,
 				D0661A102AD4041700D21759 /* ChatLogViewModel.swift in Sources */,
 				D0661A132AD404BB00D21759 /* MessageView.swift in Sources */,
 				D0D3E2422B0E06AE00BFA116 /* AddNewQuestion.swift in Sources */,
@@ -650,7 +638,7 @@
 				D04CD3582A80D33D0051296E /* SceneDelegate.swift in Sources */,
 				D0E4DD9B2A88C0BC0039BAE9 /* TaskListView.swift in Sources */,
 				D038BCE52AF8EEFB00F54EBD /* FlashcardListView.swift in Sources */,
-				D06543D92AC424EC00072EBA /* FirebaseRepository.swift in Sources */,
+				D06543D92AC424EC00072EBA /* UserSettingViewModel.swift in Sources */,
 				D0661A172AD4069600D21759 /* ChatLogView.swift in Sources */,
 				D04CD3A82A80E8E80051296E /* TextFieldHint.swift in Sources */,
 				D0E4DDA92A88E3B60039BAE9 /* PINCheck.swift in Sources */,

@@ -10,7 +10,7 @@ import Combine
 
 class TaskCellViewModel: ObservableObject, Identifiable {
     
-    @Published var taskRepository = TaskRepository()
+    @Published var taskVM = TaskViewModel()
     @Published var task: Task
     
     var id = ""
@@ -39,7 +39,7 @@ class TaskCellViewModel: ObservableObject, Identifiable {
             .dropFirst()
             .debounce(for: 0.8, scheduler: RunLoop.main)
             .sink { task in
-                self.taskRepository.updateTask(task)
+                self.taskVM.updateTask(task)
             }
             .store(in: &cancellables)
     }
@@ -49,7 +49,7 @@ class TaskCellViewModel: ObservableObject, Identifiable {
         // Opóźnienie usunięcia zadania o 2.5 sekundy
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
             if task.completed {
-                self.taskRepository.deleteTask(task)
+                self.taskVM.deleteTask(task)
             }
         }
     }

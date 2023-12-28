@@ -8,8 +8,8 @@
 import Firebase
 import FirebaseFirestore
 
-class FirebaseRepository: ObservableObject {
-    static let shared = FirebaseRepository()
+class UserSettingViewModel: ObservableObject {
+    static let shared = UserSettingViewModel()
 
     @Published var currentUser: AppUser?
 

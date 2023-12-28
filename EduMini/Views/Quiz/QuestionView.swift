@@ -16,7 +16,7 @@ struct QuestionView: View {
     @StateObject var data = QuestionViewModel()
     @Environment(\.presentationMode) var present
 
-    @StateObject private var firebaseRepository = FirebaseRepository.shared
+    @StateObject private var userSettingVM = UserSettingViewModel.shared
 
     var body: some View {
         ZStack{
@@ -150,7 +150,7 @@ struct QuestionView: View {
 
     private func updatePointsForCurrentUser() {
         let totalPoints = correct
-        firebaseRepository.updatePoints(totalPoints) { error in
+        userSettingVM.updatePoints(totalPoints) { error in
             if let error = error {
                 print("Failed to update points: \(error)")
             } else {

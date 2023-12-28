@@ -9,7 +9,7 @@ import Foundation
 import FirebaseFirestore
 import FirebaseAuth
 
-class TaskRepository: ObservableObject {
+class TaskViewModel: ObservableObject {
     
     let db = Firestore.firestore()
     

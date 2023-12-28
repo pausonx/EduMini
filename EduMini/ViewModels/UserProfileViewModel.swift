@@ -14,7 +14,7 @@ class UserProfileViewModel: ObservableObject {
     @Published var users = [AppUser]()
     @Published var errorMessage = ""
     
-    private let firebaseRepository = FirebaseRepository.shared
+    private let userSettingVM = UserSettingViewModel.shared
     
     init() {
         fetchCurrentUser(settings: nil)

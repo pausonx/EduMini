@@ -13,10 +13,10 @@ class ParentalControlViewModel: ObservableObject {
     @Published var users = [AppUser]()
     @Published var errorMessage = ""
     
-    private let firebaseRepository = FirebaseRepository.shared
+    private let userSettingVM = UserSettingViewModel.shared
     
     func saveEmailSetting(_ isActive: Bool) {
-        firebaseRepository.saveSetting("emailVisible", isActive: isActive) { error in
+        userSettingVM.saveSetting("emailVisible", isActive: isActive) { error in
             if let error = error {
                 self.errorMessage = "Error saving email setting: \(error)"
                 print("Error saving email setting: \(error)")
@@ -27,7 +27,7 @@ class ParentalControlViewModel: ObservableObject {
     }
     
     func saveAgeSetting(_ isActive: Bool) {
-        firebaseRepository.saveSetting("ageVisible", isActive: isActive) { error in
+        userSettingVM.saveSetting("ageVisible", isActive: isActive) { error in
             if let error = error {
                 self.errorMessage = "Error saving age setting: \(error)"
                 print("Error saving age setting: \(error)")
@@ -38,7 +38,7 @@ class ParentalControlViewModel: ObservableObject {
     }
     
     func updateName(_ name: String) {
-        firebaseRepository.updateUserData("name", dataValue: name) { error in
+        userSettingVM.updateUserData("name", dataValue: name) { error in
             if let error = error {
                 self.errorMessage = "Error updating name: \(error)"
                 print("Error updating name: \(error)")
@@ -49,7 +49,7 @@ class ParentalControlViewModel: ObservableObject {
     }
     
     func updateAge(_ age: String) {
-        firebaseRepository.updateUserData("age", dataValue: age) { error in
+        userSettingVM.updateUserData("age", dataValue: age) { error in
             if let error = error {
                 self.errorMessage = "Error updating age: \(error)"
                 print("Error updating age: \(error)")
