@@ -361,13 +361,13 @@
 				D06543D42AC4089600072EBA /* ParentalControlViewModel.swift */,
 				D06543DE2AC44B6200072EBA /* TaskListViewModel.swift */,
 				D06543E02AC44B7000072EBA /* TaskCellViewModel.swift */,
+				D06543DC2AC4491200072EBA /* TaskViewModel.swift */,
 				D0661A0D2AD403CA00D21759 /* MainMessagesViewModel.swift */,
 				D0661A0F2AD4041700D21759 /* ChatLogViewModel.swift */,
 				D03749962AD5627700EAE96A /* FlashcardViewModel.swift */,
 				D06199432AF13FDB00A90444 /* QuestionViewModel.swift */,
 				D0F9BDCB2B036C90003F6996 /* RankViewModel.swift */,
 				D06543D82AC424EC00072EBA /* UserSettingViewModel.swift */,
-				D06543DC2AC4491200072EBA /* TaskViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";

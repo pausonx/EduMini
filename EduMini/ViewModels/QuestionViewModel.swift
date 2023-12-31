@@ -75,7 +75,7 @@ class QuestionViewModel: ObservableObject {
                             question.id = document.documentID
                             return question
                         } catch {
-                            print("Błąd przetwarzania danych: \(error)")
+                            print("Error loading data: \(error)")
                             return nil
                         }
                     }
@@ -98,7 +98,7 @@ class QuestionViewModel: ObservableObject {
                 "userId": userId
             ]) { error in
                 if let error = error {
-                    print("Error saving flashcard: \(error)")
+                    print("Error saving question: \(error)")
                 }
             }
         }

@@ -219,10 +219,7 @@ struct ParentalControl: View {
                             }
                         }
                     }
-                    
-                    //                    VStack {
-                    /// Możliwe do dorobienia zmiana adresu email, ale do rostrzygnięcia czy nie narobi problemów z logowaniem itd.
-                    //                    }
+
                 }
                 .listStyle(SidebarListStyle())
             }

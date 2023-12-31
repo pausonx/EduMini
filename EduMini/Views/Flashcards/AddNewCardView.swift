@@ -16,6 +16,7 @@ struct AddNewCardView: View {
     @State var answer = ""
     @State var topic = ""
     @State var fliping: Bool = false
+    @State var hint = false
     
     var body: some View {
         VStack(spacing: 10){
@@ -56,10 +57,19 @@ struct AddNewCardView: View {
 
             }
             .padding()
-            
+
+            Text(hint ? "Uzupełnij wszystkie pola!" : "")
+                .foregroundColor(Color.red)
+                .font(Font.custom("BalsamiqSans-Regular", size: UIScreen.main.bounds.width * 0.03))
+
             Button {
-                flashcardVM.addFlashcard(topic: topic, question: question, answer: answer, fliping: fliping)
-                showAddView = false
+                if(!topic.isEmpty && !question.isEmpty && !answer.isEmpty){
+                    flashcardVM.addFlashcard(topic: topic, question: question, answer: answer, fliping: fliping)
+                    showAddView = false
+                }
+                else{
+                    hint = true
+                }
             } label: {
                 Text("Dodaj")
                     .foregroundColor(.white)

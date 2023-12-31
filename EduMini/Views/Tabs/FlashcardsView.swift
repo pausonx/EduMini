@@ -57,7 +57,7 @@ struct FlashcardsView: View {
                     .sheet(isPresented: $showAddView){
                         AddNewCardView(showAddView: $showAddView)
                             .environmentObject(flashcardVM)
-                            .presentationDetents([.fraction(0.45)])
+                            .presentationDetents([.fraction(0.5)])
                             .presentationDragIndicator(.visible)
                     }
                     .indexViewStyle(.page(backgroundDisplayMode: .always))

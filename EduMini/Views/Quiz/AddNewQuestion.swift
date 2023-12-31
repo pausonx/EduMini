@@ -17,6 +17,7 @@ struct AddNewQuestion: View {
     @State private var optionC = ""
     @State private var optionD = ""
     @State private var isQuestionAdded = false
+    @State private var hint = false
 
     @ObservedObject var questionViewModel = QuestionViewModel()
 
@@ -52,6 +53,10 @@ struct AddNewQuestion: View {
                         HStack{
                             Text(isQuestionAdded ? "Dodano pytanie" : "Dodaj pytanie")
                                 .foregroundColor(isQuestionAdded ? Color.green : Color.primary)
+                            Spacer()
+                            Text(hint ? "Uzupełnij wszystkie pola!" : "")
+                                .foregroundColor(Color.red)
+                                .font(Font.custom("BalsamiqSans-Regular", size: UIScreen.main.bounds.width * 0.03))
                         }
                     }
                     .onChange(of: isQuestionAdded) { _, x in
@@ -59,6 +64,7 @@ struct AddNewQuestion: View {
                             clearForm()
                         }
                     }
+                    
                 }
             }
         }
@@ -67,6 +73,7 @@ struct AddNewQuestion: View {
     func addQuestion() {
         if (question.isEmpty || answer.isEmpty || optionA.isEmpty || optionB.isEmpty || optionC.isEmpty || optionD.isEmpty || level.isEmpty) {
             print("Uzupełnij wszystkie pola!")
+            hint = true
         } else {
             questionViewModel.addQuestion(set: set, question: question, answer: answer, level: level, a: optionA, b: optionB, c: optionC, d: optionD)
             isQuestionAdded = true
